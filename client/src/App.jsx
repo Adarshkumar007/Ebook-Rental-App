@@ -1,11 +1,12 @@
 import React from 'react';
+import Header from './Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div>
-      <h1>Welcome to My Ebook Rental App</h1>
-      <p>This is a paragraph of text in the app.</p>
-    </div>
+  <Header>
+    
+  </Header>
   );
 }
 
