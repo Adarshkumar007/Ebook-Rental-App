@@ -5,6 +5,7 @@ export const getHome=(req, res) =>{
     res.send('this works!');
 };
 
+
 export const signUp=async (req, res) => {
     const { username, email, password } = req.body;
 
