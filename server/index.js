@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({limit:"30mb",extented:true}));
 app.use(cors());
 app.use('',router);
 
-const CONNECTION_URL="mongodb+srv://ganesh:bhuchi@miniproject.jnymzdi.mongodb.net/"
+const CONNECTION_URL = "mongodb+srv://ganesh:bhuchi@miniproject.jnymzdi.mongodb.net/ebook";
 const PORT =process.env.PORT|| 5000;
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
