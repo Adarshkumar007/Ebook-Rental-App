@@ -49,6 +49,7 @@ return(
     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
     <button className="btn btn-outline-success" type="submit">Search</button>
   </form>
+  
   <ul className="navbar-nav me-5 mb-2">
     {/* <li className="nav-item">
       <a className="nav-link active" aria-current="page" href="/">Home</a>
