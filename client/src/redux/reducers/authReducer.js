@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT } from '../actions/types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -10,7 +10,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-    case SIGNUP_SUCCESS:
+      console.log(action.payload.token);
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
@@ -18,6 +18,16 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         isLoading: false,
         error:null,
+        activeModal: null,
+      };
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: false,
+        isLoading: false,
+        error:null,
+        activeModal: 'login',
       };
     case LOGIN_FAILURE:
     case SIGNUP_FAILURE:
@@ -40,6 +50,11 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated:false,
         isLoading:false,
         token:null,
+      };
+    case SET_ACTIVE_MODAL:
+      return {
+        ...state,
+        activeModal: action.payload
       };
     default:
       return state;

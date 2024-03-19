@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import Login from './Login';
 import Signup from './Signup';
-import { clearError } from '../redux/actions/authActions';
+import { clearError, setActiveModal } from '../redux/actions/authActions';
 import { logout } from '../redux/actions/authActions';
 
 
@@ -15,18 +15,18 @@ import { Col, Container, Modal, Row ,Button } from 'react-bootstrap';
 
 
 const NavbarComponent = () => {
-  const [activeModal, setActiveModal] = useState(null);
+  const activeModal = useSelector(state => state.auth.activeModal);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   console.log(isAuthenticated);
   const handleShowModal = (modalName) => {
-    setActiveModal(modalName);
+    dispatch(setActiveModal(modalName));
   };
   const handlelogout=()=>{
     dispatch(logout());
   }
   const handleCloseModal = () => {
-    setActiveModal(null);
+    dispatch(setActiveModal(null));
     dispatch(clearError());
   };
 
