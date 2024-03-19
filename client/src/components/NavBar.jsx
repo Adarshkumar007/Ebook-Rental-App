@@ -11,6 +11,16 @@ import './NavBar.css';
 import logo from'./images/logo.png';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { CgProfile } from "react-icons/cg";
+import { FaUserPlus } from "react-icons/fa6";
+import { FaUserXmark } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
+import { IoLibrary } from "react-icons/io5";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { BsShop } from "react-icons/bs";
+import { BsCart4 } from "react-icons/bs";
+import { CiMenuKebab } from "react-icons/ci";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { BiSupport } from "react-icons/bi";
 import { Col, Container, Modal, Row ,Button } from 'react-bootstrap';
 
 
@@ -50,7 +60,7 @@ return(
     <button className="btn btn-outline-success" type="submit">Search</button>
   </form>
   
-  <ul className="navbar-nav me-5 mb-2">
+  <ul className="navbar-nav me-5">
     {/* <li className="nav-item">
       <a className="nav-link active" aria-current="page" href="/">Home</a>
     </li>
@@ -58,23 +68,76 @@ return(
       <a className="nav-link" href="#">Link</a>
     </li> */}
     <li className="nav-item dropdown ">
-      <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <CgProfile className="account-pic"/>
-      </a>
+    <a className="nav-link dropdown-toggle d-flex lg-justify-content-center "  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >
+      <CgProfile className="account-pic" />
+      { !isAuthenticated &&
+      
+      <span className='navi-items' onClick={() => handleShowModal('login')}>Login</span>
+      }
+      { isAuthenticated &&
+      <span className='navi-items'>MyName</span>
+  
+      }
+       </a>
+      
+      
       <ul className="dropdown-menu">
       { !isAuthenticated && <>
-        <li><a className="dropdown-item pointer" onClick={() => handleShowModal('login')}>SignIn</a></li>
-        <li><a className="dropdown-item pointer" onClick={() => handleShowModal('signup')}>SignUp</a></li>
+        {/* <li><a className="dropdown-item pointer" onClick={() => handleShowModal('login')}><FaUserLock className="account-pic" id='list-pics'/><span className='account-options'>LogIn</span></a></li>
+        <li><hr className="dropdown-divider"/></li> */}
+        <li ><a className="dropdown-item pointer" onClick={() => handleShowModal('signup')}><FaUserPlus className="account-pic" id='list-pics'/><span className='account-options'>SignUp</span></a></li>
         </>
       }
       {
         isAuthenticated &&
-        <li><a className="dropdown-item pointer" onClick={handlelogout}>Logout</a></li>
-      }
+        <>
+        <li><a className="dropdown-item pointer" >< FaUserCircle className="account-pic" id='list-pics'/><span className='account-options'>My Profie</span></a></li>
+        <li><a className="dropdown-item pointer" ><CiDeliveryTruck className="account-pic" id='list-pics'/><span className='account-options'>Orders</span></a></li>
+        <li><a className="dropdown-item pointer" ><IoLibrary className="account-pic" id='list-pics'/><span className='account-options'>Library</span></a></li>
+
         <li><hr className="dropdown-divider"/></li>
-        <li><a className="dropdown-item" href="#">Something else here</a></li>
+        <li><a className="dropdown-item pointer" onClick={handlelogout}><FaUserXmark className="account-pic" id='list-pics'/><span className='account-options'>Logout</span></a></li>
+        
+        </>
+      }
+        
       </ul>
     </li>
+    <li className="nav-item">
+      <a className="nav-link d-flex lg-justify-content-center" href="#"><BsCart4 className="account-pic"/><span className='navi-items'>Cart</span></a>
+    </li>
+
+    {/* <li className="nav-item">
+      <a className="nav-link d-flex lg-justify-content-center" href="#"><BsShop className="account-pic"/><span className='navi-items'>Become a Seller</span></a>
+    </li> */}
+
+    <li className="nav-item dropdown">
+  <a className="nav-link dropdown-toggle d-flex lg-justify-content-center" href="#" role="button" aria-expanded="false" data-bs-toggle="dropdown">
+    <CiMenuKebab className="account-pic" />
+    <span className='navi-items'>More</span>
+  </a>
+  <ul className="dropdown-menu dropdown-menu-end">
+    <li>
+      <a className="dropdown-item pointer">
+        <BsShop className="account-pic" id='list-pics'/>
+        <span className='account-options'>Be a Seller</span>
+      </a>
+    </li>
+    <li>
+      <a className="dropdown-item pointer">
+        <BiSupport className="account-pic" id='list-pics'/>
+        <span className='account-options'>24x7 Help</span>
+      </a>
+    </li>
+    <li>
+      <a className="dropdown-item pointer">
+        <IoIosNotificationsOutline className="account-pic" id='list-pics'/>
+        <span className='account-options'>Notifications</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
   </ul>
 </div>
 
