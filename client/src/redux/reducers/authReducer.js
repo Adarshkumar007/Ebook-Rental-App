@@ -1,8 +1,8 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR } from '../actions/types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isAuthenticated: localStorage.getItem('token')?true:false,
   isLoading: false,
   user: null,
 };
@@ -29,11 +29,18 @@ const authReducer = (state = initialState, action) => {
         isLoading: false,
         error:action.payload,
       };
-      case CLEAR_ERROR:
-        return {
-          ...state,
-          error: null, 
-        };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null, 
+      };
+    case LOGOUT:
+      return{
+        ...state,
+        isAuthenticated:false,
+        isLoading:false,
+        token:null,
+      };
     default:
       return state;
   } 

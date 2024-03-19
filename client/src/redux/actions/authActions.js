@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT } from './types';
 
 // Login Action
 export const login = (email, password) => async (dispatch) => {
@@ -31,9 +31,19 @@ export const signup = (username, email, password) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: SIGNUP_FAILURE,
+      payload:err.response.data.message,
     });
   }
 };
+export const logout=()=>async(dispatch)=>{
+  try {
+    dispatch({
+      type:LOGOUT,
+    })
+  } catch (error) {
+    
+  }
+}
 export const clearError = () => ({
   type: CLEAR_ERROR,
 });

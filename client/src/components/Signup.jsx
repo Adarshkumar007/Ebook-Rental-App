@@ -6,7 +6,6 @@ import { signup } from '../redux/actions/authActions';
 const Signup = () => {
   const dispatch = useDispatch();
   const error = useSelector(state => state.auth.error)|| "";
-  console.log(error);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
