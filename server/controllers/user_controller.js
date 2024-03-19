@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import {User} from '../models/User.js'
 import jwt from 'jsonwebtoken';
+import { sendEmail } from './OTPController.js';
 export const getHome=(req, res) =>{
     res.send('this works!');
 };
@@ -40,4 +41,22 @@ export const logIn = async (req, res) => {
       console.error(err);
       res.status(500).json({ message: 'Login failed' });
     }
+  };
+
+  export const sendotp = async (req, res) => {
+    const otp = Math.floor(Math.random() * 10000);
+     sendEmail(
+      req.body.email,
+      'Reset Password OTP',
+      `Your OTP is: ${otp} `,
+      `<p>Your OTP is: <b> ${otp}</b></p>`,
+      (error, info) => {
+        console.log("ddf",error);
+        if (error) {
+          res.status(401).json({ message: 'Failed to send OTP' });
+        } else {
+          res.status(200).json({ message: 'success', email: req.body.email });
+        }
+      }
+    );
   };

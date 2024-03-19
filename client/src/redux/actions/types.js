@@ -5,3 +5,5 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
+export const OTP_SENT_SUCCESS = "OTP_SENT_SUCCESS";
+export const OTP_SENT_FAIL = "OTP_SENT_FAIL";
