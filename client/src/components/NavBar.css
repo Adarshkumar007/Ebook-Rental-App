@@ -1,0 +1,39 @@
+:root {
+  --primary-color: #000d42;
+}
+.bg-body-tertiary{
+ 
+  background-color : #ffffff !important;
+}
+.custom-rounded{
+   border-bottom-left-radius:20px;
+   border-bottom-right-radius:20px;
+}
+
+.form-control{
+  border: var(--bs-border-width) solid var(--primary-color);
+  width: 70%;
+}
+.title{
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary-color) !important;
+}
+.main-logo{
+  width: 50px;
+  height: 50px 
+}
+.pointer{
+  cursor:pointer;
+}
+.account-pic{
+  width: 30px;
+  height: 30px;
+  color: var(--primary-color) !important;
+}
+
+@media (min-width: 992px){
+.search-bar{
+  width: 60%;
+}
+}
