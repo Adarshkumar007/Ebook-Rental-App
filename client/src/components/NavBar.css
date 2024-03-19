@@ -1,6 +1,17 @@
 :root {
   --primary-color: #000d42;
+  --option-font-size:15px;
+
+  /* navigation list  */
+
+  --list-font:16px;
+  --list-weight:600;
+  --list-margin:auto 2px;
+
+  --hover-color:#777777
+
 }
+
 .bg-body-tertiary{
  
   background-color : #ffffff !important;
@@ -26,14 +37,65 @@
 .pointer{
   cursor:pointer;
 }
+#list-pics{
+  width: 20px;
+  height: 20px;
+  margin-right: 12px !important;
+  margin-bottom: 5px;
+}
 .account-pic{
   width: 30px;
   height: 30px;
   color: var(--primary-color) !important;
 }
+.account-options{
+font-size: var(--option-font-size);
+color: var(--primary-color);
+}
+
+/* //navigation list   */
+.navi-items{
+font-size: var(--list-font);
+font-weight: var(--list-weight);
+margin: var(--list-margin);
+color: var(--primary-color);
+}
+.account-options:hover,.navi-items:hover{
+  color:var(--hover-color)
+}
+
+
 
 @media (min-width: 992px){
-.search-bar{
-  width: 60%;
+  .search-bar{
+    width: 60%;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  }
+
+  .navbar-expand-lg .navbar-nav {
+    gap: 30px;
 }
-}
+
+  .nav-link.dropdown-toggle::after {
+    display: none; /* Hide the dropdown arrow */
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0; /* Initially position on the right side */
+  }
+  
+  .dropdown-toggle-wrapper:hover .dropdown-menu {
+    display: block;
+    left: 0; /* Position on the left side when hovered */
+    right: auto; /* Reset right property */
+  }
+  
+  
+  
