@@ -45,11 +45,11 @@ const authReducer = (state = initialState, action) => {
         error: null, 
       };
     case LOGOUT:
+      localStorage.removeItem('token');
       return{
         ...state,
         isAuthenticated:false,
         isLoading:false,
-        token:null,
       };
     case SET_ACTIVE_MODAL:
       return {
