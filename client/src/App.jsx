@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComponent from './components/NavBar';
 
 const App = () => {
-  
   return (
     <Provider store={store}>
       <NavbarComponent></NavbarComponent>

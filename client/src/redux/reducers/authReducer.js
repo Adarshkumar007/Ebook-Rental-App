@@ -11,7 +11,6 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
-      console.log("Slogin");
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
@@ -31,10 +30,9 @@ const authReducer = (state = initialState, action) => {
         error:action.payload,
       };
       case CLEAR_ERROR:
-
         return {
           ...state,
-          error: null, // Clear the error
+          error: null, 
         };
     default:
       return state;

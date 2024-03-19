@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { signup } from '../redux/actions/authActions';
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const error = useSelector(state => state.auth.error)|| "";
+  console.log(error);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +18,7 @@ const Signup = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {error && <div className="error">{error}</div>} 
       <Form.Group controlId="name">
         <Form.Label>Name</Form.Label>
         <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />

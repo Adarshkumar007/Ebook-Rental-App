@@ -6,7 +6,7 @@ import { login } from '../redux/actions/authActions';
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-  const error = useSelector(state => state.auth.error)|| "";
+  const error = useSelector(state => state.auth.error) || "";
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -20,7 +20,7 @@ const Login = () => {
       <Form.Group controlId="email">
         <Form.Label>Email Address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </Form.Group>
+      </Form.Group> 
 
       <Form.Group controlId="password">
         <Form.Label>Password</Form.Label>
