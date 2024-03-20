@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { signup } from '../redux/actions/authActions';
 
-const Signup = () => {
+const Signup = ({userType}) => {
   const dispatch = useDispatch();
   const error = useSelector(state => state.auth.error)|| "";
   const [name, setName] = useState('');
@@ -12,7 +12,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup(name, email, password));
+    dispatch(signup(name, email, password,userType));
   };
 
   return (

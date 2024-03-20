@@ -23,20 +23,28 @@ import { useNavigate } from 'react-router-dom';
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
+  const activeModalSeller=useSelector((state) => state.sellerauth.activeModal);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const username = useSelector((state) => state.auth.username);
+  const isSellerAuthenticated = useSelector((state) => state.sellerauth.isAuthenticated);
+  console.log("xyz",isAuthenticated);
+
   const userType=useSelector((state)=>state.setUserType.USER_TYPE);
+  const authUsername = useSelector((state) => state.auth.username);
+  console.log(authUsername);
+  const sellerUsername = useSelector((state) => state.sellerauth.username);
+  const username = userType === "user" ? authUsername : sellerUsername;
+
   const navigate = useNavigate();
-  console.log(isAuthenticated);
+  console.log("hello",(userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated));
   const handleShowModal = (modalName) => {
-    dispatch(setActiveModal(modalName));
+    dispatch(setActiveModal(modalName,userType));
   };
   const handlelogout = () => {
     dispatch(logout());
   };
   const handleCloseModal = () => {
-    dispatch(setActiveModal(null));
+    dispatch(setActiveModal(null,userType));
     dispatch(clearError());
     dispatch(setOTPError())
   };
@@ -104,7 +112,7 @@ const NavbarComponent = () => {
                   aria-expanded="false"
                 >
                   <CgProfile className="account-pic" />
-                  {!isAuthenticated && (
+                  {((userType==="user"&&!isAuthenticated)||(userType==="seller"&&!isSellerAuthenticated)) && (
                     <span
                       className="navi-items"
                       onClick={() => handleShowModal("login")}
@@ -112,13 +120,13 @@ const NavbarComponent = () => {
                       Login
                     </span>
                   )}
-                  {isAuthenticated && (
+                  {((userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated)) && (
                     <span className="navi-items">{username}</span>
                   )}
                 </a>
 
                 <ul className="dropdown-menu">
-                  {!isAuthenticated && (
+                  {((userType==="user"&&!isAuthenticated)||(userType==="seller"&&!isSellerAuthenticated)) && (
                     <>
                       {/* <li><a className="dropdown-item pointer" onClick={() => handleShowModal('login')}><FaUserLock className="account-pic" id='list-pics'/><span className='account-options'>LogIn</span></a></li>
         <li><hr className="dropdown-divider"/></li> */}
@@ -133,7 +141,7 @@ const NavbarComponent = () => {
                       </li>
                     </>
                   )}
-                  {isAuthenticated && (
+                  { ((userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated)) && (
                     <>
                       <li>
                         <a className="dropdown-item pointer">
@@ -176,7 +184,7 @@ const NavbarComponent = () => {
                   )}
                 </ul>
               </li>
-              { userType==="user" && <li className="nav-item">
+              { userType && <li className="nav-item">
                 <a
                   className="nav-link d-flex lg-justify-content-center"
                   href="#"
@@ -233,13 +241,13 @@ const NavbarComponent = () => {
       <Container>
         <Row>
           <Col>
-            {activeModal === "login" && (
+            {((activeModal === "login"&&userType==="user")||(activeModalSeller==="login"&&userType==="seller") )&& (
               <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Login />
+                  <Login userType={userType}/>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleCloseModal}>
@@ -248,13 +256,13 @@ const NavbarComponent = () => {
                 </Modal.Footer>
               </Modal>
             )}
-            {activeModal === "signup" && (
+            {((activeModal === "signup"&&userType==="user")||(activeModalSeller==="signup"&&userType==="seller") )&& (
               <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Signup />
+                  <Signup userType={userType}/>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleCloseModal}>

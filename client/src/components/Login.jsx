@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { login } from '../redux/actions/authActions';
 import { sendOTP } from '../redux/actions/sendOTPAction';
 import OTPForm from './OTPForm';
-const Login = () => {
+const Login = ({userType}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ const Login = () => {
     if (isForgotPassword) {
       dispatch(sendOTP(email));
     } else {
-      dispatch(login(email, password));
+      dispatch(login(email, password,userType));
     }
   };
 
