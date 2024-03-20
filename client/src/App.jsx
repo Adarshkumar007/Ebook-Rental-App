@@ -11,8 +11,7 @@ const App = () => {
     console.log("user");
 },[]);
   return (
-<<<<<<< Updated upstream
-    <Provider store={store}>
+    
       <div className="d-flex flex-column min-vh-100">
         <NavbarComponent />
         <div className="flex-grow-1">
@@ -20,12 +19,7 @@ const App = () => {
         </div>
         <FooterComponent />
       </div>
-    </Provider>
-=======
-    
-      <NavbarComponent></NavbarComponent>
-    
->>>>>>> Stashed changes
+   
   );
 };
 
