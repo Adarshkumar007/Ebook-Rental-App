@@ -46,7 +46,7 @@ const NavbarComponent = () => {
         className="shadow-lg navbar navbar-expand-lg bg-body-tertiary custom-rounded"
         style={{ fontFamily: '"DM Sans", sans-serif' }}
       >
-        <div className="container-fluid ">
+        <div className="container">
           <a className="navbar-brand" href="/">
             <img src={logo} alt="" className="navbar-brand mb-4 main-logo" />
 
@@ -223,6 +223,7 @@ const NavbarComponent = () => {
             </ul>
           </div>
         </div>
+        
       </nav>
       <Container>
         <Row>

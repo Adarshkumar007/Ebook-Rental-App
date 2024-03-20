@@ -36,7 +36,8 @@
   border: 2px solid var(--primary-color);
 }
 .title {
-  font-size: 28px;
+  padding-top: 8px;
+  font-size: 25px;
   font-weight: bold;
   color: var(--primary-color) !important;
 }
