@@ -1,0 +1,41 @@
+:root {
+    --list-hover-color: #85d320;
+    --option-font-size: 15px;
+  
+    /* navigation list  */
+  
+    --list-font: 16px;
+    --list-weight: 600;
+    --list-margin: auto 2px;
+    --list-color:#b2afaf;
+  
+    --hover-color: #777777;
+  }
+.footer-flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.footer-options{
+    display: flex;
+    gap:6px;
+    
+}
+.footer-icon{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+     color: #f2d44a;
+}
+.footer-flex-title{
+  font-size:12px;
+  font-weight: var(--list-weight);
+  color: var(--list-color);
+  margin: auto;
+}
+.footer-flex-title:hover{
+   color: var( --list-hover-color);
+}
+a{
+    text-decoration: none;
+}
