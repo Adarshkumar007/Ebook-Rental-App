@@ -8,12 +8,6 @@ import store from './redux/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-<<<<<<< Updated upstream
-  
-    <App />
-  </React.StrictMode>,
-)
-=======
   <Provider store={store}>
     <Router>
       <Routes>
@@ -24,4 +18,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </Provider>
 </React.StrictMode>
 );
->>>>>>> Stashed changes
