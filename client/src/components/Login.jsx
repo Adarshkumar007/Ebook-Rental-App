@@ -12,6 +12,7 @@ const Login = () => {
   const error = useSelector(state => state.auth.error) || "";
   const OTPerror = useSelector(state => state.sendOTP.error) || false;
   const otpSent = useSelector(state => state.sendOTP.otpSent)||"";
+
   console.log("df",error,"sd",otpSent);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,7 +74,7 @@ const Login = () => {
     </Form> 
     }
     <>{
-      otpSent&& <OTPForm></OTPForm>
+      otpSent&& <OTPForm setIsForgotPassword={setIsForgotPassword}></OTPForm>
     }
     
     </>

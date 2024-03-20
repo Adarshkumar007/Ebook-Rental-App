@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import {User} from '../models/User.js'
+import {Otp, User} from '../models/User.js'
 import jwt from 'jsonwebtoken';
 import { sendEmail } from './OTPController.js';
 export const getHome=(req, res) =>{
@@ -34,7 +34,6 @@ export const logIn = async (req, res) => {
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-  
       const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
       return res.status(200).json({ message: 'Login successful', token });
     } catch (err) {
@@ -60,3 +59,18 @@ export const logIn = async (req, res) => {
       }
     );
   };
+export const newPasswordController=async(req,res)=>{
+  
+  const {email,newPassword}=req.body;
+  console.log("hello");
+  try {
+    const updatedUser = await Otp.findOneAndUpdate(
+      { email: email },
+      { password: newPassword },
+      { new: true }
+    );
+    res.json({ message: 'Password Updated' });
+  } catch (error) {
+    res.status(500).json({ message: 'Password update failed' });
+  }
+}

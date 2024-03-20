@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
+import { Otp } from '../models/User.js';
 
-// Create a transporter object using SMTP transport
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -9,25 +9,37 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Function to send an email
 export const sendEmail = (to, subject, text, html, callback) => {
-    let mailOptions = {
-      from: '"Rent Readers" <project.pixcom2024@gmail.com>',
-      to: to,
-      subject: subject,
-      text: text,
-      html: html
-    };
-  
-    // Send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-        callback(error, null); // Return error to callback
-      } else {
-        console.log('Email sent:', info.response);
-        callback(null, info); // Return info to callback
-      }
-    });
+  let otp = Math.floor(1000 + Math.random() * 9000).toString(); // Generate a 4-digit OTP
+  let mailOptions = {
+    from: '"Rent Readers" <project.pixcom2024@gmail.com>',
+    to: to,
+    subject: subject,
+    text: text,
+    html: html
   };
-  
+
+  transporter.sendMail(mailOptions, async (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      callback(error, null); // Return error to callback
+    } else {
+      console.log('Email sent:', info.response);
+      const newOTP = new Otp({ email: to, otp: otp });
+      await newOTP.save();
+      callback(null, info); // Return info to callback
+    }
+  });
+};
+
+export const validateOTP = async (req, res) => {
+    const { email, otp } = req.body;
+    const savedOTP = await Otp.findOne({ email, otp });
+    if (savedOTP) {
+      // OTP is valid
+      res.json({ message: 'OTP verified successfully' });
+    } else {
+      // OTP is invalid
+      res.status(400).json({ message: 'Invalid OTP' });
+    }
+  };

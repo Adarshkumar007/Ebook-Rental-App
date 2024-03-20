@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OTP_SENT_FAIL, OTP_SENT_SUCCESS, SET_OTP_ERROR } from "./types";
+import { OTP_SENT_FAIL, OTP_SENT_SUCCESS, PASSWORD_UPADTED, SET_OTP_ERROR } from "./types";
 
 export const sendOTP=(email)=>async(dispatch)=>{
     try {
@@ -20,5 +20,10 @@ export const sendOTP=(email)=>async(dispatch)=>{
 export const setOTPError =()=>(dispatch)=>{
   dispatch({
     type:SET_OTP_ERROR,
+  })
+}
+export const setNewLogin=()=>(dispatch)=>{
+  dispatch({
+    type:PASSWORD_UPADTED,
   })
 }
