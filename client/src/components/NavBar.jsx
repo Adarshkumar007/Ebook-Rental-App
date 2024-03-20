@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import Signup from "./Signup";
-import { clearError, setActiveModal } from "../redux/actions/authActions";
+import { clearError, setActiveModal, setUserTypeAction } from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,23 +10,24 @@ import "./NavBar.css";
 import logo from "./images/logo.png";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { CgProfile } from "react-icons/cg";
-import { FaUserPlus } from "react-icons/fa6";
-import { FaUserXmark } from "react-icons/fa6";
+import { FaUserPlus ,FaUserXmark} from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { BsShop } from "react-icons/bs";
-import { BsCart4 } from "react-icons/bs";
-import { CiMenuKebab } from "react-icons/ci";
+import { CiDeliveryTruck ,CiMenuKebab} from "react-icons/ci";
+import { BsShop,BsCart4} from "react-icons/bs";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { Col, Container, Modal, Row, Button } from "react-bootstrap";
 import { setOTPError } from "../redux/actions/sendOTPAction";
+import { useNavigate } from 'react-router-dom';
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const username = useSelector((state) => state.auth.username);
+  const userType=useSelector((state)=>state.setUserType.USER_TYPE);
+  const navigate = useNavigate();
   console.log(isAuthenticated);
   const handleShowModal = (modalName) => {
     dispatch(setActiveModal(modalName));
@@ -40,6 +41,10 @@ const NavbarComponent = () => {
     dispatch(setOTPError())
   };
 
+  const hanbleSellerAC=()=>{
+    dispatch(setUserTypeAction("seller"));
+    navigate('/seller');
+  }
   return (
     <>
       <nav
@@ -108,7 +113,7 @@ const NavbarComponent = () => {
                     </span>
                   )}
                   {isAuthenticated && (
-                    <span className="navi-items">MyName</span>
+                    <span className="navi-items">{username}</span>
                   )}
                 </a>
 
@@ -171,7 +176,7 @@ const NavbarComponent = () => {
                   )}
                 </ul>
               </li>
-              <li className="nav-item">
+              { userType==="user" && <li className="nav-item">
                 <a
                   className="nav-link d-flex lg-justify-content-center"
                   href="#"
@@ -180,7 +185,7 @@ const NavbarComponent = () => {
                   <span className="navi-items">Cart</span>
                 </a>
               </li>
-
+}
               {/* <li className="nav-item">
       <a className="nav-link d-flex lg-justify-content-center" href="#"><BsShop className="account-pic"/><span className='navi-items'>Become a Seller</span></a>
     </li> */}
@@ -198,7 +203,7 @@ const NavbarComponent = () => {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <a className="dropdown-item pointer">
+                    <a className="dropdown-item pointer" onClick={hanbleSellerAC}>
                       <BsShop className="account-pic" id="list-pics" />
                       <span className="account-options">Be a Seller</span>
                     </a>

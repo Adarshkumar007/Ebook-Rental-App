@@ -35,7 +35,7 @@ export const logIn = async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
       const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
-      return res.status(200).json({ message: 'Login successful', token });
+      return res.status(200).json({ message: 'Login successful', token, username:user.username });
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Login failed' });
@@ -49,6 +49,7 @@ export const logIn = async (req, res) => {
       'Reset Password OTP',
       `Your OTP is: ${otp} `,
       `<p>Your OTP is: <b> ${otp}</b></p>`,
+      otp,
       (error, info) => {
         console.log("ddf",error);
         if (error) {

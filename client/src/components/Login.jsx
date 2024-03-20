@@ -76,7 +76,6 @@ const Login = () => {
     <>{
       otpSent&& <OTPForm setIsForgotPassword={setIsForgotPassword}></OTPForm>
     }
-    
     </>
     </>
   );

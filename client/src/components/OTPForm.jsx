@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewLogin } from '../redux/actions/sendOTPAction';
+import { sendOTP, setNewLogin } from '../redux/actions/sendOTPAction';
 
 const OTPForm = ( {setIsForgotPassword}) => {
   const [otp, setOTP] = useState('');
@@ -45,6 +45,11 @@ const OTPForm = ( {setIsForgotPassword}) => {
       setError('Failed to reset password. Please try again.');
     }
   }
+  const handleResendOTP =async(e)=>{
+    e.preventDefault();
+    console.log("resend");
+    dispatch(sendOTP(email));
+  }
   return (
     <>
     {!isValidOTP && <Form  onSubmit={handleSubmit}>
@@ -61,6 +66,9 @@ const OTPForm = ( {setIsForgotPassword}) => {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      <button  className="btn btn-secondary" onClick={handleResendOTP}>
+        Re-send OTP
+      </button>
     </Form>
     }
     {

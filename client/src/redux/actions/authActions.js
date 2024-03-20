@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE } from './types';
 
 // Login Action
 export const login = (email, password) => async (dispatch) => {
@@ -82,3 +82,9 @@ export const clearError = () => async(dispatch)=>{
   })
   
 };
+export const setUserTypeAction=(usertype)=>(dispatch)=>{
+  dispatch({
+    type:SET_USER_TYPE,
+    usertype:usertype,
+  })
+}

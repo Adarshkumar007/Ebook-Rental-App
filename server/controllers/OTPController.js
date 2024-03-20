@@ -9,8 +9,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export const sendEmail = (to, subject, text, html, callback) => {
-  let otp = Math.floor(1000 + Math.random() * 9000).toString(); // Generate a 4-digit OTP
+export const sendEmail = (to, subject, text, html,otp, callback) => {
   let mailOptions = {
     from: '"Rent Readers" <project.pixcom2024@gmail.com>',
     to: to,

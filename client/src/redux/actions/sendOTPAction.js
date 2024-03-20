@@ -3,7 +3,7 @@ import { OTP_SENT_FAIL, OTP_SENT_SUCCESS, PASSWORD_UPADTED, SET_OTP_ERROR } from
 
 export const sendOTP=(email)=>async(dispatch)=>{
     try {
-      
+      console.log("hello");
       const res =await axios.post("http://localhost:5000/api/sendotp",{email});
       dispatch({
         type:OTP_SENT_SUCCESS,
