@@ -9,9 +9,8 @@ const OTPForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/verifyotp', { otp });
-      console.log(response.data);
-      // Handle success, maybe redirect to another page
+      const res = await axios.post('http://localhost:5000/api/verifyotp', { otp });
+      
     } catch (error) {
       console.error('Error validating OTP:', error);
       setError('Failed to validate OTP. Please try again.');

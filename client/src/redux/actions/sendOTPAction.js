@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OTP_SENT_FAIL, OTP_SENT_SUCCESS } from "./types";
+import { OTP_SENT_FAIL, OTP_SENT_SUCCESS, SET_OTP_ERROR } from "./types";
 
 export const sendOTP=(email)=>async(dispatch)=>{
     try {
@@ -16,3 +16,9 @@ export const sendOTP=(email)=>async(dispatch)=>{
         })
     }
   };
+
+export const setOTPError =()=>(dispatch)=>{
+  dispatch({
+    type:SET_OTP_ERROR,
+  })
+}

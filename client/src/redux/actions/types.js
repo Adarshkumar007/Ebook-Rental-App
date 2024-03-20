@@ -7,3 +7,4 @@ export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const OTP_SENT_SUCCESS = "OTP_SENT_SUCCESS";
 export const OTP_SENT_FAIL = "OTP_SENT_FAIL";
+export const SET_OTP_ERROR = "SET_OTP_ERROR";

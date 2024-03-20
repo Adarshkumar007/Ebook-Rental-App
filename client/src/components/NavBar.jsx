@@ -21,6 +21,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { Col, Container, Modal, Row, Button } from "react-bootstrap";
+import { setOTPError } from "../redux/actions/sendOTPAction";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -36,6 +37,7 @@ const NavbarComponent = () => {
   const handleCloseModal = () => {
     dispatch(setActiveModal(null));
     dispatch(clearError());
+    dispatch(setOTPError())
   };
 
   return (

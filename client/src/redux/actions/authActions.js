@@ -12,11 +12,29 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    console.log(err);
-    dispatch({
-      type: LOGIN_FAILURE,
-      payload:err.response.data.message,
-    });
+    if (err.response) {
+      // Handle response errors
+      console.error('Response status:', err.response.status);
+      console.error('Response data:', err.response.data);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: err.response.data.message,
+      });
+    } else if (err.request) {
+      // Handle network errors
+      console.error('No response received:', err.request);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: 'Network error: Unable to connect to the server.',
+      });
+    } else {
+      // Handle other errors
+      console.error('Error:', err.message);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: 'An error occurred.',
+      });
+    }
   }
 };
 
@@ -58,6 +76,9 @@ export const setActiveModal = (modalName) =>async(dispatch)=> {
     })
   }
 };
-export const clearError = () => ({
-  type: CLEAR_ERROR,
-});
+export const clearError = () => async(dispatch)=>{
+  dispatch({
+    type: CLEAR_ERROR,
+  })
+  
+};

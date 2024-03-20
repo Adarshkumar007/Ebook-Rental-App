@@ -9,7 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const error = useSelector(state => state.sendOTP.error) || false;
+  const error = useSelector(state => state.auth.error) || "";
+  const OTPerror = useSelector(state => state.sendOTP.error) || false;
   const otpSent = useSelector(state => state.sendOTP.otpSent)||"";
   console.log("df",error,"sd",otpSent);
   const handleSubmit = (e) => {
@@ -24,8 +25,10 @@ const Login = () => {
   return (
     <>
     {!otpSent && <Form onSubmit={handleSubmit}>
+    {!isForgotPassword&&error && <div className="error">{error}
 
-      {error && <div className="error">Failed to send OTP
+</div>}
+      {isForgotPassword&&OTPerror && <div className="error">Failed to send OTP
 
       </div>}
       {isForgotPassword && !otpSent && (

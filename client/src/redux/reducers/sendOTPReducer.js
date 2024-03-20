@@ -1,4 +1,4 @@
-import {OTP_SENT_FAIL, OTP_SENT_SUCCESS, } from '../actions/types';
+import {OTP_SENT_FAIL, OTP_SENT_SUCCESS, SET_OTP_ERROR, } from '../actions/types';
 const initialState={
     email:null,
     otpSent:"",
@@ -21,6 +21,13 @@ const sendOTPReducer = (state = initialState, action) => {
                 email:null,
                 otpSent:false,
                 error:true,
+            }
+        case SET_OTP_ERROR:
+            return {
+                ...state,
+                email:null,
+                otpSent:"",
+                error:false,
             }
         default:
             return state;
