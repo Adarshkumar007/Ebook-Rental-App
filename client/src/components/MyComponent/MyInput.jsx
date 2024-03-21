@@ -14,7 +14,7 @@ const MyInput = ({ type, placeholder, value, onChange,label }) => {
         value={value}
         onChange={onChange}
         style={{
-          fontFamily: '"DM Sans", sans-serif',fontSize: "14px"
+          fontFamily: '"DM Sans", sans-serif',fontSize: "15px",
         }}
       />
     </>
