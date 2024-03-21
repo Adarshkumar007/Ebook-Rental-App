@@ -7,6 +7,9 @@ import OTPForm from "./OTPForm";
 
 import MyInput from "./MyComponent/MyInput";
 import MyButton from "./MyComponent/MyButton";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
+import "./Login.css";
 
 const Login = ({ userType }) => {
   const dispatch = useDispatch();
@@ -41,17 +44,16 @@ const Login = ({ userType }) => {
             <div className="error">Failed to send OTP</div>
           )}
           {isForgotPassword && !otpSent && (
-             
             <Form.Group controlId="email">
               <div style={{ marginBottom: "20px" }}>
-              <MyInput
-                type="email"
-                label="Email Address"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} // Update email state
-              />
-            </div>
+                <MyInput
+                  type="email"
+                  label="Email Address"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} // Update email state
+                />
+              </div>
               {/* <Form.Label>Email Address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} /> */}
             </Form.Group>
@@ -62,15 +64,15 @@ const Login = ({ userType }) => {
           {!isForgotPassword && (
             <>
               <Form.Group controlId="email">
-              <div style={{ marginBottom: "20px" }}>
-                <MyInput
-                  type="email"
-                  label="Email Address"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Update email state
-                />
-                  </div>
+                <div style={{ marginBottom: "20px" }}>
+                  <MyInput
+                    type="email"
+                    label="Email Address"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} // Update email state
+                  />
+                </div>
                 {/* <Form.Label>Email Address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} /> */}
               </Form.Group>
@@ -98,23 +100,30 @@ const Login = ({ userType }) => {
               {/* <Button variant="primary" type="submit">
                
                </Button> */}
-              <Button variant="link" onClick={() => setIsForgotPassword(true)}>
+              <Button variant="link" onClick={() => setIsForgotPassword(true)} className="signin-signup-nav-link">
                 Forgot Password?
               </Button>
             </>
           )}
 
           {isForgotPassword && !otpSent && (
-            <MyButton myval="Send OTP" type="submit"  marginTop={20} />
+            <MyButton myval="Send OTP" type="submit" marginTop={20} />
 
             // <Button variant="primary" type="submit">
             //   Send OTP
             // </Button>
           )}
           {isForgotPassword && (
-            <Button variant="link" onClick={() => setIsForgotPassword(false)}>
-              Back to Login
-            </Button>
+            <>
+              <Button
+                variant="link"
+                onClick={() => setIsForgotPassword(false)}
+                className="signin-signup-nav-link"
+              >
+                <AiOutlineArrowLeft className="pl-2" />
+                Back to Login
+              </Button>
+            </>
           )}
         </Form>
       )}
