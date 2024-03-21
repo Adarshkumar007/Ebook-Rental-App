@@ -8,7 +8,7 @@ import OTPForm from "./OTPForm";
 import MyInput from "./MyComponent/MyInput";
 import MyButton from "./MyComponent/MyButton";
 
-const Login = ({userType}) => {
+const Login = ({ userType }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,8 +17,6 @@ const Login = ({userType}) => {
   const OTPerror = useSelector((state) => state.sendOTP.error) || false;
   const otpSent = useSelector((state) => state.sendOTP.otpSent) || "";
 
- 
-
   console.log("df", error, "sd", otpSent);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +24,7 @@ const Login = ({userType}) => {
       console.log(email);
       dispatch(sendOTP(email));
     } else {
-      dispatch(login(email, password,userType));
+      dispatch(login(email, password, userType));
     }
   };
 
@@ -34,12 +32,18 @@ const Login = ({userType}) => {
     <>
       {!otpSent && (
         <Form onSubmit={handleSubmit}>
-          {!isForgotPassword && error && <div className="error">{error}</div>}
+          {!isForgotPassword && error && (
+            <div className="error" style={{ color: "red" }}>
+              {error}
+            </div>
+          )}
           {isForgotPassword && OTPerror && (
             <div className="error">Failed to send OTP</div>
           )}
           {isForgotPassword && !otpSent && (
+             
             <Form.Group controlId="email">
+              <div style={{ marginBottom: "20px" }}>
               <MyInput
                 type="email"
                 label="Email Address"
@@ -47,7 +51,7 @@ const Login = ({userType}) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} // Update email state
               />
-
+            </div>
               {/* <Form.Label>Email Address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} /> */}
             </Form.Group>
@@ -58,6 +62,7 @@ const Login = ({userType}) => {
           {!isForgotPassword && (
             <>
               <Form.Group controlId="email">
+              <div style={{ marginBottom: "20px" }}>
                 <MyInput
                   type="email"
                   label="Email Address"
@@ -65,6 +70,7 @@ const Login = ({userType}) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)} // Update email state
                 />
+                  </div>
                 {/* <Form.Label>Email Address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} /> */}
               </Form.Group>
@@ -97,10 +103,13 @@ const Login = ({userType}) => {
               </Button>
             </>
           )}
+
           {isForgotPassword && !otpSent && (
-            <Button variant="primary" type="submit">
-              Send OTP
-            </Button>
+            <MyButton myval="Send OTP" type="submit"  marginTop={20} />
+
+            // <Button variant="primary" type="submit">
+            //   Send OTP
+            // </Button>
           )}
           {isForgotPassword && (
             <Button variant="link" onClick={() => setIsForgotPassword(false)}>
