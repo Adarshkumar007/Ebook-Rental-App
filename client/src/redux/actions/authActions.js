@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER, SELLER_LOGOUT } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER, SELLER_LOGOUT, SELLER_SIGNUP_SUCCESS, SELLER_SIGNUP_FAILURE } from './types';
 
 // Login Action
 export const login = (email, password,userType) => async (dispatch) => {
@@ -90,12 +90,12 @@ export const signup = (username, email, password,userType) => async (dispatch) =
     try {
       const res = await axios.post(url, { username, email, password });
       dispatch({
-        type: SIGNUP_SUCCESS,
+        type: SELLER_SIGNUP_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       dispatch({
-        type: SIGNUP_FAILURE,
+        type: SELLER_SIGNUP_FAILURE,
         payload:err.response.data.message,
       });
     }

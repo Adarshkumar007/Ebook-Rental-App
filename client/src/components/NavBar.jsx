@@ -4,11 +4,11 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { clearError, setActiveModal, setUserTypeAction } from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 import logo from "./images/logo.png";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import { CgProfile } from "react-icons/cg";
 import { FaUserPlus ,FaUserXmark} from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
@@ -210,12 +210,12 @@ const NavbarComponent = () => {
                   <span className="navi-items">More</span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
+                  {userType==="user"&&<li>
                     <a className="dropdown-item pointer" onClick={hanbleSellerAC}>
                       <BsShop className="account-pic" id="list-pics" />
                       <span className="account-options">Be a Seller</span>
                     </a>
-                  </li>
+                  </li>}
                   <li>
                     <a className="dropdown-item pointer">
                       <BiSupport className="account-pic" id="list-pics" />
