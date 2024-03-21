@@ -131,7 +131,7 @@ const NavbarComponent = () => {
                     isDropdownOpen ? "dropdown-menu-end show" : ""
                   }`}
                 >
-                  {!isAuthenticated && (
+                  {((userType==="user"&&!isAuthenticated)||(userType==="seller"&&!isSellerAuthenticated))  && (
                     <>
                       <li>
                         <a
@@ -218,14 +218,14 @@ const NavbarComponent = () => {
                   <span className="navi-items">More</span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end">
-                  {/* {userType==="user"&& */}
+                  {userType==="user" && 
                   <li>
                     <a className="dropdown-item pointer" onClick={handleSellerAC}>
                       <BsShop className="account-pic" id="list-pics" />
                       <span className="account-options">Be a Seller</span>
                     </a>
                   </li>
-                  
+}
                   <li>
                     <a className="dropdown-item pointer">
                       <BiSupport className="account-pic" id="list-pics" />
