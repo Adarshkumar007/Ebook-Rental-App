@@ -12,11 +12,9 @@ const  Seller =()=>{
     
     return (  
         <div className="d-flex flex-column min-vh-100">
-        <NavbarComponent />
         <div className="flex-grow-1">
-          {/* Your main content goes here */}
+          
         </div>
-        <FooterComponent />
       </div>
     )
 }
