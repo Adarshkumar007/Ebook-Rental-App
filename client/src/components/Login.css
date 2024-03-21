@@ -1,0 +1,11 @@
+/*for navigation links*/
+.signin-signup-nav-link{
+    text-decoration:none !important;
+    color: var(--primary-color) !important;
+    font-Weight:var(--list-weight) !important;
+
+  }
+
+  .signin-signup-nav-link:hover{
+    color:#85d320 !important;
+  }
