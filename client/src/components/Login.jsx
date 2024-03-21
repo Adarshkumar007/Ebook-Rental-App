@@ -10,6 +10,7 @@ import MyButton from "./MyComponent/MyButton";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import "./Login.css";
+import { SET_OTP_ERROR } from "../redux/actions/types";
 
 const Login = ({ userType }) => {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ const Login = ({ userType }) => {
   const [password, setPassword] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const error = useSelector((state) => state.auth.error) || "";
-  const OTPerror = useSelector((state) => state.sendOTP.error) || false;
+  const OTPerror = useSelector((state) => state.sendOTP.error) || "";
   const otpSent = useSelector((state) => state.sendOTP.otpSent) || "";
 
-  console.log("df", error, "sd", otpSent);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isForgotPassword) {
@@ -41,7 +42,7 @@ const Login = ({ userType }) => {
             </div>
           )}
           {isForgotPassword && OTPerror && (
-            <div className="error">Failed to send OTP</div>
+            <div className="error">{OTPerror}</div>
           )}
           {isForgotPassword && !otpSent && (
             <Form.Group controlId="email">
@@ -114,16 +115,16 @@ const Login = ({ userType }) => {
             // </Button>
           )}
           {isForgotPassword && (
-            <>
-              <Button
-                variant="link"
-                onClick={() => setIsForgotPassword(false)}
-                className="signin-signup-nav-link"
-              >
-                <AiOutlineArrowLeft className="pl-2" />
+         
+            <Button variant="link" className="signin-signup-nav-link"  onClick={() => {
+              setIsForgotPassword(false);
+              dispatch({
+                type:SET_OTP_ERROR,
+              })
+            }}>
+              <AiOutlineArrowLeft className="pl-2" />
                 Back to Login
-              </Button>
-            </>
+            </Button>
           )}
         </Form>
       )}

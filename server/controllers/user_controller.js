@@ -82,6 +82,12 @@ export const logIn = async (req, res) => {
     }
   };
   export const sendotp = async (req, res) => {
+    const email=req.body.email;
+    const user = await User.findOne({ email });
+    
+    if(!user){
+      return res.status(401).json({ message: 'Invalid Email' });
+    }
     const otp = Math.floor(Math.random() * 10000);
      sendEmail(
       req.body.email,

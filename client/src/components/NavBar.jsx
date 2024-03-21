@@ -8,7 +8,7 @@ import {
   setUserTypeAction,
 } from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 import logo from "./images/logo.png";
@@ -66,8 +66,7 @@ const NavbarComponent = () => {
     navigate("/seller");
   };
   const handleProfile = () => {
-    dispatch(setUserTypeAction("seller"));
-    navigate("/profile");
+    navigate("/userprofile");
   };
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
