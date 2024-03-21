@@ -20,7 +20,7 @@ const sendOTPReducer = (state = initialState, action) => {
                 ...state,
                 email:null,
                 otpSent:false,
-                error:true,
+                error:action.error,
             }
         case SET_OTP_ERROR:
             return {

@@ -12,7 +12,7 @@ export const sendOTP=(email)=>async(dispatch)=>{
     } catch (error) {
         dispatch({
             type:OTP_SENT_FAIL,
-            email:null,
+            error:error.response.data.message,
         })
     }
   };

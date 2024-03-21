@@ -7,6 +7,7 @@ import OTPForm from "./OTPForm";
 
 import MyInput from "./MyComponent/MyInput";
 import MyButton from "./MyComponent/MyButton";
+import { SET_OTP_ERROR } from "../redux/actions/types";
 
 const Login = ({ userType }) => {
   const dispatch = useDispatch();
@@ -14,10 +15,10 @@ const Login = ({ userType }) => {
   const [password, setPassword] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const error = useSelector((state) => state.auth.error) || "";
-  const OTPerror = useSelector((state) => state.sendOTP.error) || false;
+  const OTPerror = useSelector((state) => state.sendOTP.error) || "";
   const otpSent = useSelector((state) => state.sendOTP.otpSent) || "";
 
-  console.log("df", error, "sd", otpSent);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isForgotPassword) {
@@ -38,7 +39,7 @@ const Login = ({ userType }) => {
             </div>
           )}
           {isForgotPassword && OTPerror && (
-            <div className="error">Failed to send OTP</div>
+            <div className="error">{OTPerror}</div>
           )}
           {isForgotPassword && !otpSent && (
              
@@ -112,7 +113,12 @@ const Login = ({ userType }) => {
             // </Button>
           )}
           {isForgotPassword && (
-            <Button variant="link" onClick={() => setIsForgotPassword(false)}>
+            <Button variant="link" onClick={() => {
+              setIsForgotPassword(false);
+              dispatch({
+                type:SET_OTP_ERROR,
+              })
+            }}>
               Back to Login
             </Button>
           )}
