@@ -1,4 +1,4 @@
-import { SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER } from "../actions/types";
+import { SELLER_LOGIN_SUCCESS, SELLER_LOGOUT, SET_ACTIVE_MODAL_SELLER } from "../actions/types";
 
 const initialState = {
     token: localStorage.getItem('sellertoken'),
@@ -27,6 +27,14 @@ const sellerAuthReducer = (state = initialState, action) => {
             return {
               ...state,
               activeModal: action.payload,
+            };
+          case SELLER_LOGOUT:
+            localStorage.removeItem('sellertoken');
+            localStorage.removeItem('sellername');
+            return{
+              ...state,
+              isAuthenticated:false,
+              isLoading:false,
             };
           default:
              return state;

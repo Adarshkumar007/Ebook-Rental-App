@@ -27,8 +27,6 @@ const NavbarComponent = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isSellerAuthenticated = useSelector((state) => state.sellerauth.isAuthenticated);
-  console.log("xyz",isAuthenticated);
-
   const userType=useSelector((state)=>state.setUserType.USER_TYPE);
   const authUsername = useSelector((state) => state.auth.username);
   console.log(authUsername);
@@ -36,12 +34,11 @@ const NavbarComponent = () => {
   const username = userType === "user" ? authUsername : sellerUsername;
 
   const navigate = useNavigate();
-  console.log("hello",(userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated));
   const handleShowModal = (modalName) => {
     dispatch(setActiveModal(modalName,userType));
   };
   const handlelogout = () => {
-    dispatch(logout());
+    dispatch(logout(userType));
   };
   const handleCloseModal = () => {
     dispatch(setActiveModal(null,userType));
@@ -152,6 +149,8 @@ const NavbarComponent = () => {
                           <span className="account-options">My Profie</span>
                         </a>
                       </li>
+                      { userType==="user"&&
+                      <>
                       <li>
                         <a className="dropdown-item pointer">
                           <CiDeliveryTruck
@@ -161,13 +160,14 @@ const NavbarComponent = () => {
                           <span className="account-options">Orders</span>
                         </a>
                       </li>
-                      <li>
+                        <li>
                         <a className="dropdown-item pointer">
                           <IoLibrary className="account-pic" id="list-pics" />
                           <span className="account-options">Library</span>
                         </a>
                       </li>
-
+                      </>
+}       
                       <li>
                         <hr className="dropdown-divider" />
                       </li>

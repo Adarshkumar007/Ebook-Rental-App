@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER, SELLER_LOGOUT } from './types';
 
 // Login Action
 export const login = (email, password,userType) => async (dispatch) => {
@@ -118,13 +118,24 @@ export const signup = (username, email, password,userType) => async (dispatch) =
   
 };
 
-export const logout=()=>async(dispatch)=>{
-  try {
-    dispatch({
-      type:LOGOUT,
-    })
-  } catch (error) {
-    
+export const logout=(userType)=>async(dispatch)=>{
+  if(userType==="user"){
+    try {
+      dispatch({
+        type:LOGOUT,
+      })
+    } catch (error) {
+      
+    }
+  }
+  else{
+    try {
+      dispatch({
+        type:SELLER_LOGOUT,
+      })
+    } catch (error) {
+      
+    }
   }
 }
 export const setActiveModal = (modalName,userType) =>async(dispatch)=> {
