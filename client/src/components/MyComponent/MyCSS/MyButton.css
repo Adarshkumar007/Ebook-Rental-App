@@ -1,0 +1,25 @@
+:root {
+    --primary-color: #000d42;
+    --option-font-size: 15px;
+    
+  
+    /* navigation list  */
+  
+    --list-font: 16px;
+    --list-weight: 600;
+    --list-margin: auto 2px;
+  
+    --hover-color: #777777;
+  }
+.btn-border {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: var(--list-font);
+    font-weight: var(--list-weight);
+  }
+
+  .btn-border:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+  }
