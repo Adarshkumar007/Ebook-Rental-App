@@ -65,6 +65,10 @@ const NavbarComponent = () => {
     dispatch(setUserTypeAction("seller"));
     navigate("/seller");
   };
+  const handleProfile = () => {
+    dispatch(setUserTypeAction("seller"));
+    navigate("/profile");
+  };
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -156,7 +160,7 @@ const NavbarComponent = () => {
                     (userType === "seller" && isSellerAuthenticated)) && (
                     <>
                       <li>
-                        <a className="dropdown-item pointer">
+                        <a className="dropdown-item pointer" onClick={handleProfile}>
                           <FaUserCircle
                             className="account-pic"
                             id="list-pics"
@@ -202,7 +206,7 @@ const NavbarComponent = () => {
                   )}
                 </ul>
               </li>
-              {userType && (
+              {userType==="user" && (
                 <li className="nav-item">
                   <a
                     className="nav-link d-flex lg-justify-content-center"

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, sellerSignUp } from '../controllers/user_controller.js';
+import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, sellerSignUp, authenticateToken, userProfile } from '../controllers/user_controller.js';
 import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 
@@ -15,4 +15,6 @@ router.post('/api/sellerlogin', sellerLogIn);
 router.post('/api/sendotp',sendotp);
 router.post('/api/verifyotp',validateOTP);
 router.post('/api/resetpassword',newPasswordController);
+router.get('/profile', authenticateToken, userProfile);
+
 export default router;

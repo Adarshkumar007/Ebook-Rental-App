@@ -11,6 +11,7 @@ const OTPForm = ( {setIsForgotPassword}) => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isValidOTP,setisValidOTP]=useState(false);
+  const userType = useSelector((state) => state.setUserType.USER_TYPE);
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const OTPForm = ( {setIsForgotPassword}) => {
     }
     try { 
       console.log(email,newPassword);
-      const res = await axios.post('http://localhost:5000/api/resetpassword', { email, newPassword });
+      const res = await axios.post('http://localhost:5000/api/resetpassword', { email, newPassword ,userType });
       setIsForgotPassword(false);
       dispatch(setNewLogin());
       console.log(res.data.message);
