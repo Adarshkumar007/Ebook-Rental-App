@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import Signup from "./Signup";
-import { clearError, setActiveModal, setUserTypeAction } from "../redux/actions/authActions";
+import {
+  clearError,
+  setActiveModal,
+  setUserTypeAction,
+} from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 import logo from "./images/logo.png";
@@ -28,11 +32,15 @@ import MyButton from "./MyComponent/MyButton";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
-  const activeModalSeller=useSelector((state) => state.sellerauth.activeModal);
+  const activeModalSeller = useSelector(
+    (state) => state.sellerauth.activeModal
+  );
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const isSellerAuthenticated = useSelector((state) => state.sellerauth.isAuthenticated);
-  const userType=useSelector((state)=>state.setUserType.USER_TYPE);
+  const isSellerAuthenticated = useSelector(
+    (state) => state.sellerauth.isAuthenticated
+  );
+  const userType = useSelector((state) => state.setUserType.USER_TYPE);
   const authUsername = useSelector((state) => state.auth.username);
   console.log(authUsername);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
@@ -43,20 +51,20 @@ const NavbarComponent = () => {
 
   console.log(isAuthenticated);
   const handleShowModal = (modalName) => {
-    dispatch(setActiveModal(modalName,userType));
+    dispatch(setActiveModal(modalName, userType));
   };
   const handlelogout = () => {
     dispatch(logout(userType));
   };
   const handleCloseModal = () => {
-    dispatch(setActiveModal(null,userType));
+    dispatch(setActiveModal(null, userType));
     dispatch(clearError());
     dispatch(setOTPError());
   };
-  const handleSellerAC=()=>{
+  const handleSellerAC = () => {
     dispatch(setUserTypeAction("seller"));
-    navigate('/seller');
-  }
+    navigate("/seller");
+  };
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -95,9 +103,7 @@ const NavbarComponent = () => {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <MyButton myval="Search"/>
-                  
-             
+              <MyButton myval="Search" />
             </form>
 
             <ul className="navbar-nav me-5">
@@ -113,7 +119,8 @@ const NavbarComponent = () => {
                   onClick={handleProfileClick}
                 >
                   <CgProfile className="account-pic" />
-                  {((userType==="user"&&!isAuthenticated)||(userType==="seller"&&!isSellerAuthenticated)) && (
+                  {((userType === "user" && !isAuthenticated) ||
+                    (userType === "seller" && !isSellerAuthenticated)) && (
                     <span
                       className="navi-items"
                       onClick={() => handleShowModal("login")}
@@ -121,11 +128,12 @@ const NavbarComponent = () => {
                       Login
                     </span>
                   )}
-                  {((userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated)) && (
+                  {((userType === "user" && isAuthenticated) ||
+                    (userType === "seller" && isSellerAuthenticated)) && (
                     <span className="navi-items">{username}</span>
                   )}
                 </a>
-                
+
                 <ul
                   className={`dropdown-menu ${
                     isDropdownOpen ? "dropdown-menu-end show" : ""
@@ -138,16 +146,14 @@ const NavbarComponent = () => {
                           className="dropdown-item pointer"
                           onClick={() => handleShowModal("signup")}
                         >
-                          <FaUserPlus
-                            className="account-pic"
-                            id="list-pics"
-                          />
+                          <FaUserPlus className="account-pic" id="list-pics" />
                           <span className="account-options">SignUp</span>
                         </a>
                       </li>
                     </>
                   )}
-                  { ((userType==="user"&&isAuthenticated)||(userType==="seller"&&isSellerAuthenticated)) && 
+                  {((userType === "user" && isAuthenticated) ||
+                    (userType === "seller" && isSellerAuthenticated)) && (
                     <>
                       <li>
                         <a className="dropdown-item pointer">
@@ -158,25 +164,28 @@ const NavbarComponent = () => {
                           <span className="account-options">My Profie</span>
                         </a>
                       </li>
-                      { userType==="user"&&
-                      <>
-                      <li>
-                        <a className="dropdown-item pointer">
-                          <CiDeliveryTruck
-                            className="account-pic"
-                            id="list-pics"
-                          />
-                          <span className="account-options">Orders</span>
-                        </a>
-                      </li>
-                        <li>
-                        <a className="dropdown-item pointer">
-                          <IoLibrary className="account-pic" id="list-pics" />
-                          <span className="account-options">Library</span>
-                        </a>
-                      </li>
-                      </>
-}       
+                      {userType === "user" && (
+                        <>
+                          <li>
+                            <a className="dropdown-item pointer">
+                              <CiDeliveryTruck
+                                className="account-pic"
+                                id="list-pics"
+                              />
+                              <span className="account-options">Orders</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="dropdown-item pointer">
+                              <IoLibrary
+                                className="account-pic"
+                                id="list-pics"
+                              />
+                              <span className="account-options">Library</span>
+                            </a>
+                          </li>
+                        </>
+                      )}
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -185,27 +194,25 @@ const NavbarComponent = () => {
                           className="dropdown-item pointer"
                           onClick={handlelogout}
                         >
-                          <FaUserXmark
-                            className="account-pic"
-                            id="list-pics"
-                          />
+                          <FaUserXmark className="account-pic" id="list-pics" />
                           <span className="account-options">Logout</span>
                         </a>
                       </li>
                     </>
-                  }
+                  )}
                 </ul>
               </li>
-              { userType && <li className="nav-item">
-                <a
-                  className="nav-link d-flex lg-justify-content-center"
-                  href="#"
-                >
-                  <BsCart4 className="account-pic" />
-                  <span className="navi-items">Cart</span>
-                </a>
-              </li>
-}
+              {userType && (
+                <li className="nav-item">
+                  <a
+                    className="nav-link d-flex lg-justify-content-center"
+                    href="#"
+                  >
+                    <BsCart4 className="account-pic" />
+                    <span className="navi-items">Cart</span>
+                  </a>
+                </li>
+              )}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle d-flex lg-justify-content-center"
@@ -220,7 +227,10 @@ const NavbarComponent = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   {userType==="user" && 
                   <li>
-                    <a className="dropdown-item pointer" onClick={handleSellerAC}>
+                    <a
+                      className="dropdown-item pointer"
+                      onClick={handleSellerAC}
+                    >
                       <BsShop className="account-pic" id="list-pics" />
                       <span className="account-options">Be a Seller</span>
                     </a>
@@ -241,41 +251,40 @@ const NavbarComponent = () => {
                       <span className="account-options">Notifications</span>
                     </a>
                   </li>
-                
-            
+                </ul>
+              </li>
             </ul>
-          </li>
-          </ul>
           </div>
         </div>
-        
       </nav>
       <Container>
         <Row>
           <Col>
-            {((activeModal === "login"&&userType==="user")||(activeModalSeller==="login"&&userType==="seller") )&& 
+            {((activeModal === "login" && userType === "user") ||
+              (activeModalSeller === "login" && userType === "seller")) && (
               <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Login userType={userType}/>
+                  <Login userType={userType} />
                 </Modal.Body>
                 <Modal.Footer>
-                <MyButton myval="Close" onClick={handleCloseModal} />
+                  <MyButton myval="Close" onClick={handleCloseModal} />
                   {/* <Button variant="secondary" onClick={handleCloseModal}>
                     Close
                   </Button> */}
                 </Modal.Footer>
               </Modal>
-            }
-            {((activeModal === "signup"&&userType==="user")||(activeModalSeller==="signup"&&userType==="seller") )&& (
+            )}
+            {((activeModal === "signup" && userType === "user") ||
+              (activeModalSeller === "signup" && userType === "seller")) && (
               <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Sign Up</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Signup userType={userType}/>
+                  <Signup userType={userType} />
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
