@@ -15,6 +15,7 @@ function AddEBookForm() {
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState('');
   const [error, setError] = useState('');
+  const [message,setMessage]=useState('');
   const navigate = useNavigate();
   const dispatch=useDispatch();
 
@@ -44,16 +45,20 @@ function AddEBookForm() {
     formData.append('author', author);
     formData.append('description', description);
     formData.append('file', file);
-    formData.append('image',image)
+    formData.append('image',image);
 
     try {
-      const response = await axios.post('http://localhost:5000/add-ebook', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
+      const response = await axios.post('http://localhost:5000/publish', formData, {
+      params: {
+        userType: userType
+      },
+      headers: {
+        'Authorization': `Bearer ${userType==="seller"?localStorage.getItem('sellertoken'):localStorage.getItem('token')}`
+      }
+    });
+
       console.log(response.data);
+      setMessage(response.data);
     } catch (error) {
       console.error('Error adding e-book:', error.response ? error.response.data : error.message);
       setError(error.message);
@@ -72,6 +77,7 @@ function AddEBookForm() {
       <h2>Add E-Book</h2>
       <form onSubmit={handleSubmit}>
         <h4>{error}</h4>
+        <>{message}</>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title:</label>
           <input type="text" className="form-control" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -85,21 +91,22 @@ function AddEBookForm() {
           <textarea className="form-control" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className="mb-3">
-          <label htmlFor="file" className="form-label">Book Image:</label>
-          <div className="input-group">
-            <input type="text" className="form-control" value={fileName} readOnly />
-            <input type="file" className="form-control-file d-none" id="file" accept=".png,.svg" onChange={handleFileChange} />
-            <label htmlFor="file" className="input-group-text">Browse</label>
-          </div>
-        </div>
-        <div className="mb-3">  
-          <label htmlFor="file" className="form-label">File:</label>
-          <div className="input-group">
-            <input type="text" className="form-control" value={imageName} readOnly />
-            <input type="file" className="form-control-file d-none" id="file" onChange={handleFileChange} />
-            <label htmlFor="file" className="input-group-text">Browse</label>
-          </div>
-        </div>
+  <label htmlFor="image" className="form-label">Book Image:</label>
+  <div className="input-group">
+    <input type="text" className="form-control" value={imageName} readOnly />
+    <input type="file" className="form-control-file d-none" id="image" accept=".png,.svg" onChange={handleImageChange} />
+    <label htmlFor="image" className="input-group-text">Browse</label>
+  </div>
+</div>
+<div className="mb-3">  
+  <label htmlFor="file" className="form-label">File:</label>
+  <div className="input-group">
+    <input type="text" className="form-control" value={fileName} readOnly />
+    <input type="file" className="form-control-file d-none" id="file" onChange={handleFileChange} />
+    <label htmlFor="file" className="input-group-text">Browse</label>
+  </div>
+</div>
+
         <button type="submit" className="btn btn-primary">Add E-Book</button>
       </form>
     </div>
