@@ -119,6 +119,7 @@ export const signup = (username, email, password,userType) => async (dispatch) =
 };
 
 export const logout=(userType)=>async(dispatch)=>{
+  console.log("user..",userType);
   if(userType==="user"){
     try {
       dispatch({

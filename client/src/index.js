@@ -8,16 +8,17 @@ import store from './redux/store';
 import NavbarComponent from './components/NavBar';
 import FooterComponent from './components/Footer';
 import UserProfile from './components/UserProfile';
+import AddEBookForm from './components/Publish';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   <Provider store={store}>
-  
     <Router>
     <NavbarComponent />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/publish" element={<AddEBookForm />} />
         <Route path="/seller" element={<SellerPage />} />
       </Routes>
       <FooterComponent />

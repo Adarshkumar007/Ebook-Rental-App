@@ -73,6 +73,9 @@ const NavbarComponent = () => {
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  const handlePublish=()=>{
+    navigate("/publish");
+  }
 
   return (
     <>
@@ -194,7 +197,7 @@ const NavbarComponent = () => {
                       {userType === "seller" && 
                       <>
                           <li>
-                            <a className="dropdown-item pointer">
+                            <a className="dropdown-item pointer" onClick={handlePublish}>
                               <CiDeliveryTruck
                                 className="account-pic"
                                 id="list-pics"
