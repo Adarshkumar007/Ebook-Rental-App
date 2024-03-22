@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserTypeAction } from './redux/actions/authActions';
+import Swipper from './components/Swipper';
+import { Container } from 'react-bootstrap';
 
 const App = () => {
   // const navigate = useNavigate();
@@ -17,7 +19,9 @@ const App = () => {
     
     <div className="d-flex flex-column min-vh-100">
     <div className="flex-grow-1">
-      
+      <Container>
+        <Swipper/>
+      </Container>
     </div>
   </div>
    
