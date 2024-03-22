@@ -132,20 +132,27 @@ export const newPasswordController=async(req,res)=>{
 }
 export const userProfile=async(req,res)=>{
   const userId = req.user.userId;
-  console.log(userId);
+  const userType=req.query.userType;
+  console.log(userId,req.params);
   if (!ObjectId.isValid(userId)) {
     res.status(400).json({ error: 'Invalid user ID' });
     return;
   }
-
+  let user;
   try {
-    const user = await User.findById(userId, 'username email');
-
+    console.log(userType);
+    if(userType==="user"){
+      
+    user = await User.findById(userId, 'username email');
+    }
+    else{
+     user = await Seller.findById(userId, 'username email');  
+    }
     if (!user) {
       res.status(404).json({ error: 'User not found' });
       return;
     }
-    console.log(user);
+    console.log("hello",user);
     res.json({ username: user.username, email: user.email });
   } catch (err) {
     console.error('Error finding user:', err);
@@ -154,6 +161,7 @@ export const userProfile=async(req,res)=>{
 }
 export const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
+  
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401); // Unauthorized
 

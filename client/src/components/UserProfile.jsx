@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function UserProfile() {
+function UserProfile({userType}) {
   const [profile, setProfile] = useState(null);
-
+    console.log(userType);
   useEffect(() => {
     // Fetch user profile
     axios.get('http://localhost:5000/profile', {
+        params: {
+            userType: userType
+          },
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming the token is stored in local storage
+        'Authorization': `Bearer ${userType==="seller"?localStorage.getItem('sellertoken'):localStorage.getItem('token')}` // Assuming the token is stored in local storage
       }
     })
     .then(response =>{ 

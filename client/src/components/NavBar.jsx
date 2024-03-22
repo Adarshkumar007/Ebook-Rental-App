@@ -29,12 +29,14 @@ import { Col, Container, Modal, Row, Button } from "react-bootstrap";
 import { setOTPError } from "../redux/actions/sendOTPAction";
 
 import MyButton from "./MyComponent/MyButton";
+import UserProfile from "./UserProfile";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
   const activeModalSeller = useSelector(
     (state) => state.sellerauth.activeModal
   );
+  console.log("heiii",activeModal,activeModalSeller);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isSellerAuthenticated = useSelector(
@@ -42,7 +44,7 @@ const NavbarComponent = () => {
   );
   const userType = useSelector((state) => state.setUserType.USER_TYPE);
   const authUsername = useSelector((state) => state.auth.username);
-  console.log(authUsername);
+  console.log("hey",userType);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
   const username = userType === "user" ? authUsername : sellerUsername;
 
@@ -66,7 +68,7 @@ const NavbarComponent = () => {
     navigate("/seller");
   };
   const handleProfile = () => {
-    navigate("/userprofile");
+    dispatch(setActiveModal("profile", userType));
   };
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -189,6 +191,28 @@ const NavbarComponent = () => {
                           </li>
                         </>
                       )}
+                      {userType === "seller" && 
+                      <>
+                          <li>
+                            <a className="dropdown-item pointer">
+                              <CiDeliveryTruck
+                                className="account-pic"
+                                id="list-pics"
+                              />
+                              <span className="account-options">Publish</span>
+                            </a>
+                          </li>
+                          <li>
+                          <a className="dropdown-item pointer">
+                            <CiDeliveryTruck
+                              className="account-pic"
+                              id="list-pics"
+                            />
+                            <span className="account-options">Collections</span>
+                          </a>
+                        </li>
+                        </>
+                      }
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -300,6 +324,29 @@ const NavbarComponent = () => {
           </Col>
         </Row>
       </Container>
+      { ((activeModal ==="profile")||(activeModalSeller==="profile")) &&
+        <Container>
+          <Row>
+            <Col>
+            <Modal show={true} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <UserProfile userType={userType}/>
+                </Modal.Body>
+                <Modal.Footer>
+                  <MyButton myval="Close" onClick={handleCloseModal} />
+                  {/* <Button variant="secondary" onClick={handleCloseModal}>
+                    Close
+                  </Button> */}
+                </Modal.Footer>
+              </Modal>
+            </Col>
+          </Row>
+        </Container>
+      }
+      
     </>
   );
 };
