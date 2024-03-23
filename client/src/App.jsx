@@ -6,6 +6,7 @@ import { setUserTypeAction } from './redux/actions/authActions';
 import Swipper from './components/Swipper';
 import { Container } from 'react-bootstrap';
 
+
 const App = () => {
   // const navigate = useNavigate();
   // const dispatch=useDispatch();
@@ -17,9 +18,13 @@ const App = () => {
   
   return (
     
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column ">
     <div className="flex-grow-1">
       <Container>
+        <Swipper/>
+        <Swipper/>
+        <Swipper/>
+        <Swipper/>
         <Swipper/>
       </Container>
     </div>
