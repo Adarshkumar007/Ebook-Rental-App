@@ -19,4 +19,6 @@ router.post('/api/verifyotp',validateOTP);
 router.post('/api/resetpassword',newPasswordController);
 router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCount: 1 }, { name: 'image', maxCount: 1 }]) , eBookPublish);
 router.get('/profile', authenticateToken, userProfile);
+router.get('/orders', authenticateToken);
+
 export default router;

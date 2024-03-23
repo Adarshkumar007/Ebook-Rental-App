@@ -9,7 +9,7 @@ const accountReducer = (state = initialState, action) => {
             console.log("reached");
             return ({
                 ...state,
-                USER_TYPE:"seller"
+                USER_TYPE:action.usertype,
             });
         default:
             return state;

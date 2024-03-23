@@ -76,7 +76,9 @@ const NavbarComponent = () => {
   const handlePublish=()=>{
     navigate("/publish");
   }
-
+  const handleOrders=()=>{
+    navigate("/orders");
+  }
   return (
     <>
       <nav
@@ -175,7 +177,7 @@ const NavbarComponent = () => {
                       {userType === "user" && (
                         <>
                           <li>
-                            <a className="dropdown-item pointer">
+                            <a className="dropdown-item pointer" onClick={handleOrders}>
                               <CiDeliveryTruck
                                 className="account-pic"
                                 id="list-pics"
