@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Cards from "./MyComponent/Card";
+import MoreInfo from "./MyComponent/MoreInfo";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import './Swipper.css'
 import Slider from "react-slick";
 
 const Swipper = () => {
@@ -78,11 +79,14 @@ const Swipper = () => {
 
   return (
     <>
+    <h4 className="sider-cat">Category Name</h4>
+    
     <Slider {...settings} >
       {imageUrls.map((imageUrl, index) => (
         <Cards key={index} image={imageUrl} />
       ))}
       </Slider>
+      <MoreInfo />
     </>
   );
 };
