@@ -25,11 +25,14 @@ import { BsCart4 } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
+import { FaBookMedical } from "react-icons/fa";
+import { SiBookstack } from "react-icons/si";
 import { Col, Container, Modal, Row, Button } from "react-bootstrap";
 import { setOTPError } from "../redux/actions/sendOTPAction";
 
 import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
+import SuccessButton from "./MyComponent/SuccessButton";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -200,19 +203,17 @@ const NavbarComponent = () => {
                       <>
                           <li>
                             <a className="dropdown-item pointer" onClick={handlePublish}>
-                              <CiDeliveryTruck
-                                className="account-pic"
-                                id="list-pics"
-                              />
+                            <FaBookMedical className="account-pic"
+                                id="list-pics" />
                               <span className="account-options">Publish</span>
                             </a>
                           </li>
                           <li>
                           <a className="dropdown-item pointer">
-                            <CiDeliveryTruck
-                              className="account-pic"
-                              id="list-pics"
-                            />
+                          <SiBookstack 
+                          className="account-pic"
+                          id="list-pics"
+                          />
                             <span className="account-options">Collections</span>
                           </a>
                         </li>
@@ -341,6 +342,7 @@ const NavbarComponent = () => {
                   <UserProfile userType={userType}/>
                 </Modal.Body>
                 <Modal.Footer>
+                <SuccessButton myval="Save" onClick={handleCloseModal} style={{ backgroundColor: "green" }} />
                   <MyButton myval="Close" onClick={handleCloseModal} />
                   {/* <Button variant="secondary" onClick={handleCloseModal}>
                     Close

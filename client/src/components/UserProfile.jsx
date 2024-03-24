@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProfileImage from './MyComponent/ProfileImage';
+import ProfileInput from './MyComponent/ProfileInput';
 
 function UserProfile({userType}) {
   const [profile, setProfile] = useState(null);
@@ -27,9 +29,11 @@ function UserProfile({userType}) {
 
   return (
     <div>
-      <h1>User Profile</h1>
-      <p>Username: {profile.username}</p>
-      <p>Email: {profile.email}</p>
+      <ProfileImage/>
+      <ProfileInput value={profile.username} type="text" label="Username" />
+      <ProfileInput value={profile.email} type="email" label="Email" />
+      {/* <p>Username: {profile.username}</p>
+      <p>Email: {profile.email}</p> */}
     </div>
   );
 }
