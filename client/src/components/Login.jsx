@@ -7,6 +7,7 @@ import OTPForm from "./OTPForm";
 
 import MyInput from "./MyComponent/MyInput";
 import MyButton from "./MyComponent/MyButton";
+import SuccessButton from "./MyComponent/SuccessButton";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import "./Login.css";
@@ -97,7 +98,9 @@ const Login = ({ userType }) => {
                 /> */}
               </Form.Group>
 
-              <MyButton myval="Login" type="submit" />
+
+              <SuccessButton myval="Login" type="submit" />
+              {/* <MyButton myval="Login" type="submit" /> */}
               {/* <Button variant="primary" type="submit">
                
                </Button> */}
@@ -108,7 +111,8 @@ const Login = ({ userType }) => {
           )}
 
           {isForgotPassword && !otpSent && (
-            <MyButton myval="Send OTP" type="submit" marginTop={20} />
+              <SuccessButton myval="Send OTP"type="submit" marginTop={20}/>
+            // <MyButton myval="Send OTP" type="submit" marginTop={20} />
 
             // <Button variant="primary" type="submit">
             //   Send OTP

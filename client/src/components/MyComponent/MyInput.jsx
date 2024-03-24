@@ -10,7 +10,7 @@ const MyInput = ({ type, placeholder, value, onChange,label }) => {
       </Form.Label>
       <Form.Control
         type={type}
-        placeholder={placeholder} // Removed space between curly braces and placeholder
+        placeholder={placeholder} 
         value={value}
         onChange={onChange}
         style={{
