@@ -83,12 +83,21 @@ export const login = (email, password,userType) => async (dispatch) => {
 };
 
 // Sign Up Action
-export const signup = (username, email, password,userType) => async (dispatch) => {
+export const signup = (username, email, password, address, pin, phone, profile_image, userType) => async (dispatch) => {
   let url;
+  const formData = new FormData();
+formData.append('username', username);
+formData.append('email', email);
+formData.append('password', password);
+formData.append('address', address);
+formData.append('pin', pin);
+formData.append('phone', phone);
+formData.append('profile_image', profile_image); // Assuming profileImageFile is a File object containing the selected file
+
   if(userType==="seller"){
     url="http://localhost:5000/api/sellersignup";
     try {
-      const res = await axios.post(url, { username, email, password });
+      const res = await axios.post(url, formData);
       dispatch({
         type: SELLER_SIGNUP_SUCCESS,
         payload: res.data,
@@ -102,8 +111,16 @@ export const signup = (username, email, password,userType) => async (dispatch) =
  }
  else{
     url="http://localhost:5000/api/signup";
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('address', address);
+    formData.append('pin', pin);
+    formData.append('phone', phone);
+    formData.append('profile_image', profile_image);
     try {
-      const res = await axios.post(url, { username, email, password });
+      const res = await axios.post(url, formData);
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: res.data,

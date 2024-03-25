@@ -9,8 +9,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 router.get('/', getHome);
 
-router.post('/api/signup', signUp);
-router.post('/api/sellersignup', sellerSignUp);
+router.post('/api/signup',upload.fields([{ name: 'profile_image', maxCount: 1 }]), signUp);
+router.post('/api/sellersignup',upload.fields([{ name: 'profile_image', maxCount: 1 }]), sellerSignUp);
 
 router.post('/api/login', logIn);
 router.post('/api/sellerlogin', sellerLogIn);

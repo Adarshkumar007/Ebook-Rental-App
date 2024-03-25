@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { Container } from "react-bootstrap";
 import { BsPersonSquare } from "react-icons/bs";
 
-const ProfileImage = () => {
+const ProfileImage = ({image,handleSetFile}) => {
   const fileInputRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrc, setImageSrc] = useState(image)||null;
 
   const handleImageUpload = () => {
     fileInputRef.current.click();
@@ -15,6 +15,7 @@ const ProfileImage = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setImageSrc(imageUrl);
+      handleSetFile(file);
     }
   };
 

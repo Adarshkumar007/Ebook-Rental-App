@@ -11,6 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    
     // Dispatch your action here
     dispatch(setUserTypeAction('user'));
   }, []);
@@ -19,7 +20,7 @@ const App = () => {
     <div className="d-flex flex-column ">
     <div className="flex-grow-1">
       <Container>
-        <Swipper/>
+        <Swipper />
         <Swipper/>
         <Swipper/>
         <Swipper/>

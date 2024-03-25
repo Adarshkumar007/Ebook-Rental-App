@@ -29,9 +29,10 @@ function UserProfile({userType}) {
 
   return (
     <div>
-      <ProfileImage/>
+      <ProfileImage image={profile.profile_image}/>
       <ProfileInput value={profile.username} type="text" label="Username" />
       <ProfileInput value={profile.email} type="email" label="Email" />
+
       {/* <p>Username: {profile.username}</p>
       <p>Email: {profile.email}</p> */}
     </div>

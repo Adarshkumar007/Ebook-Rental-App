@@ -1,5 +1,5 @@
 
-const SuccessButton = ({ myval ,onClick, backgroundColor}) => {
+const   SuccessButton = ({ myval ,onClick, backgroundColor}) => {
   return (
     <button
       className="btn btn-success "

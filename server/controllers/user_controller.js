@@ -11,11 +11,15 @@ export const getHome=(req, res) =>{
 
 
 export const signUp = async (req, res) => {
-  const { username, email, password } = req.body;
+  const {username, email, password, address, pin, phone } = req.body;
   console.log(req.body);
+  const profile_image = req.files['profile_image'][0];
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, address, pin, phone, password: hashedPassword,profile_image: {
+      data: profile_image.buffer,
+      contentType: profile_image.mimetype
+    } });
     await newUser.save();
     res.json({ message: 'User created successfully' });
   } catch (err) {
@@ -25,11 +29,15 @@ export const signUp = async (req, res) => {
 };
 
 export const sellerSignUp = async (req, res) => {
-  const { username, email, password } = req.body;
-  console.log(req.body);
+  const { username, email, address, pin, phone, password } = req.body;
+  console.log(req.files);
+  const profile_image = req.files['profile_image'][0];
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new Seller({ username, email, password: hashedPassword });
+    const newUser = new Seller({ username, email, address, pin, phone, password: hashedPassword,profile_image: {
+      data: profile_image.buffer,
+      contentType: profile_image.mimetype
+    } });
     await newUser.save();
     res.json({ message: 'User created successfully' });
   } catch (err) {
@@ -74,7 +82,9 @@ export const logIn = async (req, res) => {
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
+     
       const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
+      console.log(user.username);
       return res.status(200).json({ message: 'Login successful', token, username:user.username });
     } catch (err) {
       console.error(err);
@@ -83,11 +93,21 @@ export const logIn = async (req, res) => {
   };
   export const sendotp = async (req, res) => {
     const email=req.body.email;
-    const user = await User.findOne({ email });
-    
+    const isSignUp=req.body.isSignUp;
+    const userType=req.body.userType;
+    console.log("hiiihello",isSignUp);
+    if(!isSignUp){
+      let user;
+      if(userType==="user"){
+         user = await User.findOne({ email });
+      }else{
+        user = await Seller.findOne({ email });
+      }
+    console.log("hiiiii");
     if(!user){
       return res.status(401).json({ message: 'Invalid Email' });
     }
+  }
     const otp = Math.floor(Math.random() * 10000);
      sendEmail(
       req.body.email,
@@ -133,7 +153,7 @@ export const newPasswordController=async(req,res)=>{
 export const userProfile=async(req,res)=>{
   const userId = req.user.userId;
   const userType=req.query.userType;
-  console.log(userId,req.params);
+  console.log(userId);
   if (!ObjectId.isValid(userId)) {
     res.status(400).json({ error: 'Invalid user ID' });
     return;
@@ -143,17 +163,19 @@ export const userProfile=async(req,res)=>{
     console.log(userType);
     if(userType==="user"){
       
-    user = await User.findById(userId, 'username email');
+    user = await User.findById(userId);
     }
     else{
-     user = await Seller.findById(userId, 'username email');  
+     user = await Seller.findById(userId);  
     }
     if (!user) {
       res.status(404).json({ error: 'User not found' });
       return;
     }
     console.log("hello",user);
-    res.json({ username: user.username, email: user.email });
+    const imageBase64 = Buffer.from(user.profile_image.data).toString('base64');
+    const imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
+    res.json({ username: user.username, email: user.email ,profile_image:imageSrc });
   } catch (err) {
     console.error('Error finding user:', err);
     res.status(500).json({ error: 'Internal server error' });

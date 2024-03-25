@@ -27,7 +27,7 @@ const Login = ({ userType }) => {
     e.preventDefault();
     if (isForgotPassword) {
       console.log(email);
-      dispatch(sendOTP(email));
+      dispatch(sendOTP(email,userType));
     } else {
       dispatch(login(email, password, userType));
     }
