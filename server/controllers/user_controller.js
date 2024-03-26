@@ -13,7 +13,7 @@ export const getHome=(req, res) =>{
 export const signUp = async (req, res) => {
   const {username, email, password, address, pin, phone } = req.body;
   console.log(req.body);
-  const profile_image = req.files['profile_image'][0];
+  const profile_image = req.files['profile_image'] ? req.files['profile_image'][0] : "";
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, address, pin, phone, password: hashedPassword,profile_image: {
@@ -31,7 +31,7 @@ export const signUp = async (req, res) => {
 export const sellerSignUp = async (req, res) => {
   const { username, email, address, pin, phone, password } = req.body;
   console.log(req.files);
-  const profile_image = req.files['profile_image'][0];
+  const profile_image = req.files['profile_image'] ? req.files['profile_image'][0] : "";
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new Seller({ username, email, address, pin, phone, password: hashedPassword,profile_image: {
@@ -47,7 +47,6 @@ export const sellerSignUp = async (req, res) => {
 };
 
 export const logIn = async (req, res) => {
-  console.log("asds",req.body);
     const { email, password } = req.body;
     console.log(email,password);
     try {
@@ -134,8 +133,7 @@ export const newPasswordController=async(req,res)=>{
     if(userType==="user"){
     const updatedUser = await User.findOneAndUpdate(
       { email: email },
-      { password: hashedPassword },
-      { new: true }
+      { password: hashedPassword }
     );
     }
     else{
@@ -172,10 +170,13 @@ export const userProfile=async(req,res)=>{
       res.status(404).json({ error: 'User not found' });
       return;
     }
-    console.log("hello",user);
+    let imageSrc;
+    if(user.profile_image.data){
     const imageBase64 = Buffer.from(user.profile_image.data).toString('base64');
-    const imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
-    res.json({ username: user.username, email: user.email ,profile_image:imageSrc });
+    imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
+    }
+    res.json({ username: user.username, email: user.email ,address:user.address,pin:user.pin,phone:user.phone,profile_image:user.profile_image.data?imageSrc:false });
+
   } catch (err) {
     console.error('Error finding user:', err);
     res.status(500).json({ error: 'Internal server error' });
@@ -194,3 +195,38 @@ export const authenticateToken = (req, res, next) => {
     next(); 
   });
 };
+
+export const profileUpdate = async (req,res) => {
+  try{
+  const {username, email, address, pin, phone ,userType } = req.body;
+  const profile_image = req.files['profile_image'] ? req.files['profile_image'][0] : "";
+  let newData;
+  if(profile_image!==""){
+   newData={username, email, address, pin, phone ,profile_image: {
+    data: profile_image.buffer,
+    contentType: profile_image.mimetype
+  } };
+} else{
+  newData={username, email, address, pin, phone };
+}
+  if(userType==="user"){
+    console.log("update",newData);
+    const updatedUser = await User.findOneAndUpdate(
+      { email: email },
+      { $set: newData }
+    );
+  } else{
+    const updatedUser = await Seller.findOneAndUpdate(
+      { username: username },
+      { $set: newData },
+      { new: true }
+    );
+  }
+  res.status(200).json({ message: 'Update success' });
+}
+catch (error){
+  console.log(error)
+  res.status(500).json({ error: 'Update failed' });
+
+}
+} 

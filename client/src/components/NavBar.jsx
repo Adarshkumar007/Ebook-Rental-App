@@ -342,7 +342,6 @@ const NavbarComponent = () => {
                   <UserProfile userType={userType}/>
                 </Modal.Body>
                 <Modal.Footer>
-                <SuccessButton myval="Save" onClick={handleCloseModal} style={{ backgroundColor: "green" }} />
                   <MyButton myval="Close" onClick={handleCloseModal} />
                   {/* <Button variant="secondary" onClick={handleCloseModal}>
                     Close

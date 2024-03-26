@@ -3,18 +3,14 @@ import { BiEdit } from "react-icons/bi";
 import { Form, Button } from "react-bootstrap";
 import { BiSave } from "react-icons/bi";
 
-const ProfileInput = ({ value, type, label }) => {
+const ProfileInput = ({ value, type, label ,handleInput}) => {
   const [editMode, setEditMode] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
 
   const handleEdit = () => {
     setEditMode(true);
   };
 
   const handleSave = () => {
-    // Save the edited value
-    // For demonstration purposes, I'm just logging the value here
-    console.log("Edited Value:", editedValue);
     setEditMode(false);
   };
 
@@ -27,10 +23,10 @@ const ProfileInput = ({ value, type, label }) => {
       }}>
         <Form.Control
           type={type}
-          value={editedValue}
+          value={value}
           placeholder={label}
           readOnly={!editMode}
-          onChange={(e) => setEditedValue(e.target.value)}
+          onChange={(e)=>handleInput(e.target.value)}
           style={{
             fontFamily: '"DM Sans", sans-serif',
             fontSize: "15px",
