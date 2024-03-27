@@ -10,12 +10,12 @@ export const eBookPublish=async(req,res)=>{
           description: req.body.description,
           category:req.body.category,
           bookImage: {
-            data: req.files['file'][0].buffer,
-            contentType: req.files['file'][0].mimetype
-          },
-          bookFile: {
             data: req.files['image'][0].buffer,
             contentType: req.files['image'][0].mimetype
+          },
+          bookFile: {
+            data: req.files['file'][0].buffer,
+            contentType: req.files['file'][0].mimetype
           }
         });
     

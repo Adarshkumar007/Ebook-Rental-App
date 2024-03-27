@@ -4,6 +4,7 @@ import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
 import { eBookPublish } from '../controllers/eBookPublish.js';
+import eBookPreImage from '../controllers/eBookUser.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -21,4 +22,5 @@ router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCo
 router.get('/profile', authenticateToken, userProfile);
 router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
+router.get('/home',eBookPreImage);
 export default router;

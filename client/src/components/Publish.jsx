@@ -75,11 +75,14 @@ function AddEBookForm() {
 
       console.log(response.data);
       setMessage(response.data);
+      setError("");
     } catch (error) {
       console.error(
         "Error adding e-book:",
         error.response ? error.response.data : error.message
       );
+      setMessage("");
+
       setError(error.message);
       if (error.response && error.response.status === 401) {
         // Handle unauthorized error (e.g., redirect to login page)
@@ -122,6 +125,7 @@ function AddEBookForm() {
       >
         <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error}</div></h4>
          <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "green"}}>{message}</div></h4>
+        
         <div className="mb-3">
           <Form.Group controlId="title">
             <div
@@ -209,7 +213,7 @@ function AddEBookForm() {
               type="file"
               className="form-control-file d-none"
               id="image"
-              accept=".png,.svg"
+              accept=".png,.svg,.jpg,.jpeg"
               onChange={handleImageChange}
             />
             <label htmlFor="image" className="input-group-text">

@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './Swipper.css'
 import Slider from "react-slick";
 
-const Swipper = () => {
+const Swipper = ({ebook}) => {
 
     const settings = {
         className: "center",
@@ -65,16 +65,7 @@ const Swipper = () => {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    const importImages = async () => {
-      const images = [];
-      for (let i = 1; i <= 12; i++) {
-        const image = await import(`../components/images/image${i}.jpg`);
-        images.push(image.default); // Adding the default property of the imported module
-      }
-      setImageUrls(images);
-    };
-
-    importImages();
+    
   }, []);
 
   return (
@@ -82,8 +73,9 @@ const Swipper = () => {
     <h4 className="sider-cat">Category Name</h4>
     
     <Slider {...settings} >
-      {imageUrls.map((imageUrl, index) => (
-        <Cards key={index} image={imageUrl} />
+      
+      {ebook.map(({_id, imageSrc}) => (
+        <Cards key={_id} image={imageSrc} />
       ))}
       </Slider>
       <MoreInfo />
