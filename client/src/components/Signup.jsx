@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { signup } from "../redux/actions/authActions";
 
 import MyInput from "./MyComponent/MyInput";
@@ -46,7 +46,7 @@ const Signup = ({ userType }) => {
     <Form onSubmit={handleSubmit}>
      
       <ProfileImage  handleSetFile={handleSetFile}/>
-      {error && <div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center"}}>{error}</div>}
+      {error && <div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error}</div>}
       <Form.Group controlId="name">
         <div style={{ marginBottom: "20px" ,display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
           <MyInput

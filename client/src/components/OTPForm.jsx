@@ -4,6 +4,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOTP, setNewLogin } from '../redux/actions/sendOTPAction';
 
+import SuccessButton from './MyComponent/SuccessButton';
+import MyInput from './MyComponent/MyInput';
+
 const OTPForm = ( {setIsForgotPassword}) => {
   const [otp, setOTP] = useState('');
   const [error, setError] = useState('');
@@ -54,8 +57,20 @@ const OTPForm = ( {setIsForgotPassword}) => {
   return (
     <>
     {!isValidOTP && <Form  onSubmit={handleSubmit}>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form.Group controlId="otp">
+      {error && <Alert variant="danger"><div className="error" style={{ color: "red" }}>{error}</div></Alert>}
+      
+      <Form.Group controlId="password">
+        <div style={{  marginBottom: "20px" }}>
+          <MyInput
+            type="text"
+            label="Enter OTP"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={(e) => setOTP(e.target.value)}
+          />
+        </div>
+      </Form.Group>
+      {/* <Form.Group controlId="otp">
         <Form.Label>Enter OTP</Form.Label>
         <Form.Control
           type="text"
@@ -63,39 +78,44 @@ const OTPForm = ( {setIsForgotPassword}) => {
           value={otp}
           onChange={(e) => setOTP(e.target.value)}
         />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-      <button  className="btn btn-secondary" onClick={handleResendOTP}>
+      </Form.Group> */}
+      <div style={{ display:"flex",gap:"5px"}}>
+      <SuccessButton myval="Submit" type="submit" />
+
+      <button  className="btn btn-secondary" onClick={handleResendOTP } style={{ border:'1px solid #000d42'}}>
         Re-send OTP
       </button>
+      </div>
     </Form>
     }
     {
       isValidOTP && <Form onSubmit={handleNewPasswordSubmit}>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form.Group controlId="newPassword">
-        <Form.Label>New Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Enter new password"
-          value={newPassword}
+      {error && <Alert variant="danger"><div className="error" style={{ color: "red" }}>{error}</div></Alert>}
+      <Form.Group controlId="password">
+        <div style={{  marginBottom: "20px" }}>
+          <MyInput
+           type="password"
+            label="New Password"
+            placeholder="Enter new password"
+            value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-        />
+          />
+        </div>
       </Form.Group>
-      <Form.Group controlId="confirmPassword">
-        <Form.Label>Confirm Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Confirm new password"
+
+      <Form.Group controlId="password">
+        <div style={{  marginBottom: "20px" }}>
+          <MyInput
+           type="password"
+            label="Confirm Password"
+            placeholder="Confirm new password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+          />
+        </div>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Reset Password
-      </Button>
+      
+      <SuccessButton myval="Reset Password" type="submit" />
     </Form>
     }
     </>
