@@ -43,7 +43,7 @@ const Login = ({ userType }) => {
             </div>
           )}
           {isForgotPassword && OTPerror && (
-            <div className="error">{OTPerror}</div>
+            <div className="error"><div className="error" style={{ color: "red" }}>{OTPerror}</div></div>
           )}
           {isForgotPassword && !otpSent && (
             <Form.Group controlId="email">
