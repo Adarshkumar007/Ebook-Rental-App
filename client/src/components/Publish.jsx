@@ -22,6 +22,8 @@ function AddEBookForm() {
   const [imageName, setImageName] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [category, handleSetCategory] = useState(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,7 +34,7 @@ function AddEBookForm() {
       navigate("/seller");
     }
   }, []);
-
+  
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -51,6 +53,7 @@ function AddEBookForm() {
     formData.append("description", description);
     formData.append("file", file);
     formData.append("image", image);
+    formData.append("category",category);
 
     try {
       const response = await axios.post(
@@ -268,8 +271,8 @@ function AddEBookForm() {
                 }}
               >
                 <Category
-                // value={category}
-                // onChange={(e) => setCategory(e.target.value)}
+                value={category}
+                handleSetCategory={handleSetCategory}
                 style={{width:"70%"}}
                 />
               </div>

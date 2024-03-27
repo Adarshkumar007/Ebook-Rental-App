@@ -8,11 +8,12 @@ export const eBookPublish=async(req,res)=>{
           publisherId:req.user.userId,
           publisherName: req.body.author,
           description: req.body.description,
+          category:req.body.category,
           bookImage: {
             data: req.files['file'][0].buffer,
             contentType: req.files['file'][0].mimetype
           },
-          bookfile: {
+          bookFile: {
             data: req.files['image'][0].buffer,
             contentType: req.files['image'][0].mimetype
           }

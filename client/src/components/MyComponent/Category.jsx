@@ -1,13 +1,13 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// { category, onChange}
-const Category = () => {
+// { category, }
+const Category = ({value,handleSetCategory}) => {
   return (
     <>
       <Form.Select
-        // value={category}
-        // onChange={(e) => setCategory(e.target.value)}
+        value={value}
+        onChange={(e) => handleSetCategory(e.target.value)}
 
         style={{
           fontFamily: '"DM Sans", sans-serif',

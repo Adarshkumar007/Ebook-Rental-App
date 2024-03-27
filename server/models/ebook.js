@@ -18,14 +18,30 @@ const ebookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  category:{
+    type: String,
+    required: true
+  },
   bookImage: {
-    data: Buffer,
-    contentType: String
+    data: {
+      type: Buffer,
+      required: true
+    },
+    contentType: {
+      type: String,
+      required: true
+    }
   },
   bookFile: {
-    data: Buffer,
-    contentType: String
-  },
+    data: {
+      type: Buffer,
+      required: true
+    },
+    contentType: {
+      type: String,
+      required: true
+    }
+  }
   // Other required items
 }, { timestamps: true });
 
