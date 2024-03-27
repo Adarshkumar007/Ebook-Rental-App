@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProfileImage from './MyComponent/ProfileImage';
 import ProfileInput from './MyComponent/ProfileInput';
 import SuccessButton from './MyComponent/SuccessButton';
+import ProfileInputEmail from './MyComponent/ProfileInputEmail';
 
 function UserProfile({userType}) {
   const [profile, setProfile] = useState(null);
@@ -32,7 +33,7 @@ function UserProfile({userType}) {
   if (!profile) {
     return (
       <>
-        {error ? <h3>{error.message}</h3> : <div>Loading...</div>}
+        {error ? <h3><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error.message}</div></h3> : <div>Loading...</div>}
       </>
     );
   }
@@ -108,15 +109,21 @@ function UserProfile({userType}) {
 
   return (
     <div>
-      {error && <div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center"}}>{error}</div>}
+      {error && <div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color:"green"}}>{error}</div>}
       <ProfileImage image={profile.profile_image?profile.profile_image:""} handleSetFile={handleSetFile}/>
+
+      <ProfileInputEmail value={profile.email} type="email" handleInput={handleSetEmail} label="Email" />
       <ProfileInput value={profile.username} type="text" handleInput={handleSetUsername} label="Username" />
-      <ProfileInput value={profile.email} type="email" handleInput={handleSetEmail} label="Email" />
       <ProfileInput value={profile.address} type="text" handleInput={handleSetAddress} label="Address" />
       <ProfileInput value={profile.pin} type="text" handleInput={handleSetPin} label="Pin" />
       <ProfileInput value={profile.phone} type="tel" handleInput={handleSetPhone} label="phone" />
+      <div style={{
+       display:'flex',
+       margin:"10px",
+       justifyContent:'center',
+       alignItems:'center'}}>
       <SuccessButton myval="Save" onClick={handleProfileClick} style={{ backgroundColor: "green" }} />
-
+      </div>
       {/* <p>Username: {profile.username}</p>
       <p>Email: {profile.email}</p> */}
     </div>

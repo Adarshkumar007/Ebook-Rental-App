@@ -120,8 +120,8 @@ function AddEBookForm() {
           paddingBottom: "10px",
         }}
       >
-        <h4>{error}</h4>
-        <>{message}</>
+        <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error}</div></h4>
+         <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "green"}}>{message}</div></h4>
         <div className="mb-3">
           <Form.Group controlId="title">
             <div

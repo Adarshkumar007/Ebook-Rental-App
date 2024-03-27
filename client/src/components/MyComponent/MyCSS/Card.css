@@ -1,36 +1,52 @@
 .card {
-    display: inline-block; /* Ensure that the card takes only the space it needs */
-    perspective: 1000px; /* Add perspective for 3D effect */
-    transition: transform 0.5s; /* Add transition for smooth animation */
+    display: inline-block;
+    perspective: 1000px;
+    transition: transform 0.5s;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer; /* Set cursor to pointer when hovering over the card */
 }
 
 .card:hover {
-    transform: scale(1.1); /* Apply zoom in effect on hover */
-   
+    transform: scale(1.1);
+}
+
+.card:hover .card-img {
+    transform: rotateY(10deg);
+}
+
+.card:active {
+    cursor: grab; /* Change cursor to grab when card is clicked and held */
+}
+
+.card:active .card-img {
+    cursor: grabbing; /* Change cursor to grabbing when card is clicked and held */
 }
 
 .card-img {
     height: 15rem;
     width: 10rem;
-    transition: transform 0.5s; /* Add transition for smooth animation */
+    transition: transform 0.5s;
 }
+
 @media screen and (max-width:500px) and (min-width:438px) {
     .card-img {
         height: 12rem;
         width: 7rem;
     }
-    
 }
 
-@media screen and (max-width:405px) and (min-width:302px){
+@media screen and (max-width:405px) and (min-width:302px) {
     .card-img {
         height: 12rem;
         width: 7rem;
     }
-    
 }
 
-.card:hover .card-img {
-    transform: rotateY(10deg); /* Apply 3D rotation on image on hover */
+.sider-cat {
+    color: var(--primary-color) !important;
+    font-size: 20px !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 700 !important;
+    margin-top: 0.75rem;
+    margin-bottom: auto;
 }
