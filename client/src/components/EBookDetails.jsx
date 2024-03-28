@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cards from "./MyComponent/Card";
 import PdfViewer from "./MyComponent/PdfViewer";
+import { Document, Page } from 'react-pdf';
 
 const EBookDetails = () => {
     const { key } = useParams();
@@ -27,7 +28,17 @@ const EBookDetails = () => {
         <h3>{ebook.category}</h3>
         <Cards  key ={1} image={ebook.imageSrc}/>
         <div>
-        <PdfViewer pdfUrl={ebook.fileSrc} />
+        <Document
+        file={ebook.fileSrc}
+        
+      >
+        <Page
+          pageNumber={1}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+        />
+      </Document>
+        {/* <PdfViewer pdfUrl={ebook.fileSrc} /> */}
         </div>
         </div>
     ); 

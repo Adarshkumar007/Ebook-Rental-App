@@ -11,7 +11,7 @@ const Cards = ({ cardkey, image }) => {
         
     }
     return (
-        <div id={cardkey} onClick={handleEbook} className="card my-3 my-md-4 mx-4">
+        <div id={cardkey} onDoubleClick={handleEbook} className="card my-3 my-md-4 mx-4">
             <img  src={image} className="card-img" alt="Card image" />
         </div>
     );
