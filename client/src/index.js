@@ -9,6 +9,7 @@ import NavbarComponent from './components/NavBar';
 import FooterComponent from './components/Footer';
 import AddEBookForm from './components/Publish';
 import Orders from './components/Order';
+import EBookDetails from './components/EBookDetails';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/orders" element={<Orders />} />
         <Route path="/publish" element={<AddEBookForm />} />
         <Route path="/seller" element={<SellerPage />} />
+        <Route path="/ebook/:key" element={<EBookDetails />} />
       </Routes>
       <FooterComponent />
     </Router>

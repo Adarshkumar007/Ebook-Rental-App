@@ -8,7 +8,7 @@ import './Swipper.css'
 import Slider from "react-slick";
 
 const Swipper = ({ebook}) => {
-
+  console.log(ebook);
     const settings = {
         className: "center",
         infinite: true,
@@ -62,11 +62,6 @@ const Swipper = ({ebook}) => {
         }
       };
 
-  const [imageUrls, setImageUrls] = useState([]);
-
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <>
@@ -75,7 +70,7 @@ const Swipper = ({ebook}) => {
     <Slider {...settings} >
       
       {ebook.map(({_id, imageSrc}) => (
-        <Cards key={_id} image={imageSrc} />
+        <Cards cardkey={_id} image={imageSrc} />
       ))}
       </Slider>
       <MoreInfo />

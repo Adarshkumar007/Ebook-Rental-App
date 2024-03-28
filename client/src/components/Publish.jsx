@@ -22,7 +22,7 @@ function AddEBookForm() {
   const [imageName, setImageName] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [category, handleSetCategory] = useState(null);
+  const [category, handleSetCategory] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

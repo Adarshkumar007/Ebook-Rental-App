@@ -14,14 +14,7 @@ const App = () => {
   dispatch(setUserTypeAction("user"));
   useEffect(() => {
     // Fetch user profile
-    axios.get('http://localhost:5000/home', {
-        params: {
-            userType: "user"
-          },
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming the token is stored in local storage
-      }
-    })
+    axios.get('http://localhost:5000/home')
     .then(response =>{ 
         console.log("xc",response.data);
         setEbook(response.data);

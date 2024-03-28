@@ -1,10 +1,18 @@
 import "bootstrap/dist/css/bootstrap.css";
 import './MyCSS/Card.css'
+import { useNavigate } from 'react-router-dom';
 
-const Cards = ({ key, image }) => {
+
+const Cards = ({ cardkey, image }) => {
+    const navigate = useNavigate();
+    const handleEbook = () =>{
+        console.log("key",cardkey);
+        navigate(`/ebook/${cardkey}`);
+        
+    }
     return (
-        <div className="card my-3 my-md-4 mx-4">
-            <img id={key} src={image} className="card-img" alt="Card image" />
+        <div id={cardkey} onClick={handleEbook} className="card my-3 my-md-4 mx-4">
+            <img  src={image} className="card-img" alt="Card image" />
         </div>
     );
 };

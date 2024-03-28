@@ -1,7 +1,6 @@
 import { eBook } from "../models/ebook.js";
 
 export const eBookPublish=async(req,res)=>{
-    console.log(req.files['file'][0].buffer);
     try {
         const newBook = new eBook({
           title: req.body.title,
