@@ -6,8 +6,11 @@ import { setUserTypeAction } from './redux/actions/authActions';
 import Swipper from './components/Swipper';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-
-
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 const App = () => {
   const [ebook ,setEbook]=useState([]);
   const dispatch = useDispatch();
