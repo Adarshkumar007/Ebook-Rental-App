@@ -1,4 +1,5 @@
 import { eBook } from "../models/ebook.js";
+import * as pdfjs from "pdfjs-dist/build/pdf.js";
 
 export const eBookPreImage=async (req, res) => {
     try {
@@ -20,23 +21,46 @@ export const eBookPreImage=async (req, res) => {
   
   export const eBookDisplay= async(req, res) => {
     const key = req.query.key; // Get the 'key' query parameter
+    try {
     const ebook = await eBook.findById(key);
+    if(ebook){
     const imageBase64 = Buffer.from(ebook.bookImage.data).toString('base64');
     const imageSrc = `data:${ebook.bookImage.contentType};base64,${imageBase64}`;
     const fileBase64 = Buffer.from(ebook.bookFile.data).toString('base64');
-    const fileSrc = `data:${ebook.bookFile.contentType};base64,${fileBase64}`;
-    const eBookObj={
-      title:ebook.title,
-      publisherName:ebook.publisherName,
-      category:ebook.category,
-      imageSrc:imageSrc,  
-      fileSrc:fileSrc,
-      description:ebook.description
-
-    }
-    if (eBookObj) {
-        res.json(eBookObj); 
-    } else {
+     const fileSrc = `data:${ebook.bookFile.contentType};base64,${fileBase64}`;
+    const pdfBuffer =ebook.bookFile.data;
+    const pageNumbers = [1, 2, 3];
+    
+      const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
+      const eBookObj = {
+          title: ebook.title,
+          publisherName: ebook.publisherName,
+          category: ebook.category,
+          imageSrc: imageSrc,
+          pages: pages,
+          description: ebook.description
+      };
+      res.json(eBookObj);
+      }
+      else {
         res.status(404).json({ error: 'Ebook not found' });
     }
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to extract pages from PDF' });
+  }
+  
+    
 };
+async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {
+  const pdf = await pdfjs.getDocument({ data: pdfBuffer }).promise;
+  const pagesData = [];
+  for (const pageNumber of pageNumbers) {
+    if (pageNumber <= pdf.numPages) {
+      const page = await pdf.getPage(pageNumber);
+      const pageData = await page.getTextContent();
+      pagesData.push(pageData);
+    }
+  }
+  return pagesData;
+}

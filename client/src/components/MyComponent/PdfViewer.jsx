@@ -15,15 +15,16 @@ function PdfViewer({ pdfUrl }) {
         file={pdfUrl}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page
-          pageNumber={pageNumber}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-        />
+        {Array.from(new Array(numPages), (el, index) => (
+          <Page
+            key={`page_${index + 1}`}
+            pageNumber={index + 1}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        ))}
       </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+
     </div>
   );
 }
