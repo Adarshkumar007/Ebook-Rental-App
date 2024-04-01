@@ -11,7 +11,7 @@ function UserProfile({userType}) {
     console.log(userType);
   useEffect(() => {
     // Fetch user profile
-    axios.get('http://localhost:5000/profile', {
+    axios.get('https://ebook-rental-app.onrender.com/profile', {
         params: {
             userType: userType
           },
