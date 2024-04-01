@@ -6,7 +6,7 @@ import SellerPage from './components/SellerPage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import NavbarComponent from './components/NavBar';
-import FooterComponent from './components/Footer';
+import FooterComponent from './components/FooterComponent';
 import AddEBookForm from './components/Publish';
 import Orders from './components/Order';
 import EBookDetails from './components/EBookDetails';
