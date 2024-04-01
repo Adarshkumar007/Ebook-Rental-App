@@ -22,7 +22,7 @@ router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCo
 router.get('/profile', authenticateToken, userProfile);
 router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
-router.get('/home',eBookPreImage);
+router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
 
 export default router;

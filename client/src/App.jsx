@@ -15,7 +15,7 @@ const App = () => {
   const [ebook ,setEbook]=useState([]);
   const dispatch = useDispatch();
   dispatch(setUserTypeAction("user"));
-let url="https://ebook-rental-app-1.onrender.com/home";
+let url="https://ebook-rental-app-1.onrender.com/api/home";
 // let url="http://localhost:5000/home";
 
   useEffect(() => {
