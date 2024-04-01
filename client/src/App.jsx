@@ -6,21 +6,15 @@ import { setUserTypeAction } from './redux/actions/authActions';
 import Swipper from './components/Swipper';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-import { pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
+
+
 const App = () => {
   const [ebook ,setEbook]=useState([]);
   const dispatch = useDispatch();
   dispatch(setUserTypeAction("user"));
-let url="https://ebook-rental-app-1.onrender.com/api/home";
-// let url="http://localhost:5000/home";
-
   useEffect(() => {
     // Fetch user profile
-    axios.get(url)
+    axios.get('https://ebook-rental-app.onrender.com/home')
     .then(response =>{ 
         console.log("xc",response.data);
         setEbook(response.data);
