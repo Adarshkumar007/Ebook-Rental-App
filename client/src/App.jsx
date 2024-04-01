@@ -15,9 +15,12 @@ const App = () => {
   const [ebook ,setEbook]=useState([]);
   const dispatch = useDispatch();
   dispatch(setUserTypeAction("user"));
+let url="https://ebook-rental-app-1.onrender.com/home";
+// let url="http://localhost:5000/home";
+
   useEffect(() => {
     // Fetch user profile
-    axios.get('https://ebook-rental-app-1.onrender.com/home')
+    axios.get(url)
     .then(response =>{ 
         console.log("xc",response.data);
         setEbook(response.data);
