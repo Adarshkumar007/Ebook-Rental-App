@@ -5,10 +5,10 @@ import cors from 'cors';
 import  router from "./routes/auth.js";
 const app = express();
 
-app.use(bodyParser.json({limit:"30mb",extented:true}));
-app.use(bodyParser.urlencoded({limit:"30mb",extented:true}));
+app.use(bodyParser.json({limit:"30mb",extended:true}));
+app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors({
-  origin: 'https://ebook-rental-app-git-main-k-n-ganeshs-projects.vercel.app'
+  origin: '*'
 }));
 app.use('',router);
 
