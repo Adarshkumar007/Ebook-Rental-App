@@ -89,7 +89,7 @@ function UserProfile({userType}) {
   if (profile.profile_image instanceof File) {
     formData.append('profile_image', profile.profile_image); 
   }
-      url="http://localhost:5000/profileupdate";
+      url="https://ebook-rental-app.onrender.com/profileupdate";
       try {
         const res = await axios.post(url, formData, {
           headers: {
