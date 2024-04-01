@@ -1,16 +1,18 @@
 import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER, SELLER_LOGOUT, SELLER_SIGNUP_SUCCESS, SELLER_SIGNUP_FAILURE } from './types';
 
+var url="https://ebook-rental-app.onrender.com"
+// var url="http://localhost:5000"
 // Login Action
 export const login = (email, password,userType) => async (dispatch) => {
-  let url;
+  
   console.log("user type:",userType);
   if(userType==="seller"){
-     url="http://localhost:5000/api/sellerlogin";
+     let route=url+"/api/sellerlogin";
      try {
       console.log(url);
       console.log(email,password);
-      const res = await axios.post(url, { email, password });
+      const res = await axios.post(route, { email, password });
       console.log(res.data);
       dispatch({
         type: SELLER_LOGIN_SUCCESS,
@@ -43,11 +45,11 @@ export const login = (email, password,userType) => async (dispatch) => {
     }
   }
   else{
-     url="http://localhost:5000/api/login";
+    route=url+"/api/login";
      try {
       console.log(url);
       console.log(email,password);
-      const res = await axios.post(url, { email, password });
+      const res = await axios.post(route, { email, password });
       console.log(res.data);
       dispatch({
         type: LOGIN_SUCCESS,
@@ -84,7 +86,7 @@ export const login = (email, password,userType) => async (dispatch) => {
 
 // Sign Up Action
 export const signup = (username, email, password, address, pin, phone, profile_image, userType) => async (dispatch) => {
-  let url;
+  
   const formData = new FormData();
 formData.append('username', username);
 formData.append('email', email);
@@ -95,9 +97,9 @@ formData.append('phone', phone);
 formData.append('profile_image', profile_image); // Assuming profileImageFile is a File object containing the selected file
 
   if(userType==="seller"){
-    url="http://localhost:5000/api/sellersignup";
+    let route=url+"/api/sellersignup";
     try {
-      const res = await axios.post(url, formData);
+      const res = await axios.post(route, formData);
       dispatch({
         type: SELLER_SIGNUP_SUCCESS,
         payload: res.data,
@@ -110,7 +112,7 @@ formData.append('profile_image', profile_image); // Assuming profileImageFile is
     }
  }
  else{
-    url="http://localhost:5000/api/signup";
+  route=url+"/api/signup";
     const formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
@@ -120,7 +122,7 @@ formData.append('profile_image', profile_image); // Assuming profileImageFile is
     formData.append('phone', phone);
     formData.append('profile_image', profile_image);
     try {
-      const res = await axios.post(url, formData);
+      const res = await axios.post(route, formData);
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: res.data,
