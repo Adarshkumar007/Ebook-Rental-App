@@ -17,7 +17,7 @@ const App = () => {
   dispatch(setUserTypeAction("user"));
   useEffect(() => {
     // Fetch user profile
-    axios.get('http://localhost:5000/home')
+    axios.get('https://ebook-rental-app-1.onrender.com/home')
     .then(response =>{ 
         console.log("xc",response.data);
         setEbook(response.data);
