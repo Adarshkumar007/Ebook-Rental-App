@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE,CLEAR_ERROR, LOGOUT, SET_ACTIVE_MODAL, SET_USER_TYPE, SELLER_LOGIN_SUCCESS, SET_ACTIVE_MODAL_SELLER, SELLER_LOGOUT, SELLER_SIGNUP_SUCCESS, SELLER_SIGNUP_FAILURE } from './types';
 
-var url="https://ebook-rental-app.onrender.com"
-// var url="http://localhost:5000"
+import {url} from '../../url'; 
 // Login Action
 export const login = (email, password,userType) => async (dispatch) => {
   

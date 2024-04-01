@@ -1,7 +1,6 @@
 import axios from "axios";
 import { OTP_SENT_FAIL, OTP_SENT_SUCCESS, PASSWORD_UPADTED, SET_OTP_ERROR } from "./types";
-var url="https://ebook-rental-app.onrender.com"
-// var url="http://localhost:5000"
+import {url} from '../../url';
 export const sendOTP=(email ,userType)=>async(dispatch)=>{
     try {
       console.log("hello");

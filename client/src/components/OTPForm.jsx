@@ -6,7 +6,7 @@ import { sendOTP, setNewLogin } from '../redux/actions/sendOTPAction';
 
 import SuccessButton from './MyComponent/SuccessButton';
 import MyInput from './MyComponent/MyInput';
-
+import {url} from '../url';
 const OTPForm = ( {setIsForgotPassword}) => {
   const [otp, setOTP] = useState('');
   const [error, setError] = useState('');
@@ -19,7 +19,7 @@ const OTPForm = ( {setIsForgotPassword}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/verifyotp', {email, otp });
+      const res = await axios.post(url+'/api/verifyotp', {email, otp });
       console.log(res.data.message);
       setisValidOTP(true);
       setError("");

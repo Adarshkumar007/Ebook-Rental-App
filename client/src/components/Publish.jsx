@@ -8,6 +8,7 @@ import MyInput from "./MyComponent/MyInput";
 import MyTextArea from "./MyComponent/MyTextArea";
 import SuccessButton from "./MyComponent/SuccessButton";
 import Category from "./MyComponent/Category";
+import {url} from '../../src/url'; 
 function AddEBookForm() {
   const isSellerAuthenticated = useSelector(
     (state) => state.sellerauth.isAuthenticated
@@ -57,7 +58,7 @@ function AddEBookForm() {
 
     try {
       const response = await axios.post(
-        "https://ebook-rental-app.onrender.com/publish",
+        url+"/publish",
         formData,
         {
           params: {

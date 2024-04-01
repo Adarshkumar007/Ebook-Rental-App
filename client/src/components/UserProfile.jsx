@@ -4,6 +4,7 @@ import ProfileImage from './MyComponent/ProfileImage';
 import ProfileInput from './MyComponent/ProfileInput';
 import SuccessButton from './MyComponent/SuccessButton';
 import ProfileInputEmail from './MyComponent/ProfileInputEmail';
+import {url} from '../../src/url'; 
 
 function UserProfile({userType}) {
   const [profile, setProfile] = useState(null);
@@ -11,7 +12,7 @@ function UserProfile({userType}) {
     console.log(userType);
   useEffect(() => {
     // Fetch user profile
-    axios.get('https://ebook-rental-app.onrender.com/profile', {
+    axios.get(url+'/profile', {
         params: {
             userType: userType
           },
@@ -89,9 +90,8 @@ function UserProfile({userType}) {
   if (profile.profile_image instanceof File) {
     formData.append('profile_image', profile.profile_image); 
   }
-      url="https://ebook-rental-app.onrender.com/profileupdate";
       try {
-        const res = await axios.post(url, formData, {
+        const res = await axios.post(url+'/profileupdate', formData, {
           headers: {
             'Authorization': `Bearer ${userType==="seller" ? localStorage.getItem('sellertoken') : localStorage.getItem('token')}`
           }

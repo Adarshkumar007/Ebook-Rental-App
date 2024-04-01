@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import {url} from '../url'
 function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     // Fetch user's past orders from the backend API
-    axios.get('http://localhost:5000/orders', {
+    axios.get(url+'/orders', {
       
         headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming the token is stored in local storage

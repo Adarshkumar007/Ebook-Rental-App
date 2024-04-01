@@ -6,14 +6,14 @@ import PdfViewer from "./MyComponent/PdfViewer";
 import { Document, Page } from 'react-pdf';
 import { Col, Container, Modal, Row } from "react-bootstrap";
 import MyButton from "./MyComponent/MyButton";
-
+import {url} from '../url';
 const EBookDetails = () => {
     const { key } = useParams();
     const [ebook ,setEbook] = useState([]);
     const [ispdfView ,handleCloseModal] = useState(false);
         useEffect(() => {
         // Fetch ebook details
-        axios.get(`http://localhost:5000/ebook?key=${key}`)
+        axios.get(url+`/ebook?key=${key}`)
             .then(response => {
             
                 setEbook(response.data);
