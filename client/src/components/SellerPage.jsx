@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
-import NavbarComponent from "./NavBar";
 import { useEffect } from "react";
 import { setUserTypeAction } from "../redux/actions/authActions";
-import FooterComponent from "./Footer";
+
 
 const  Seller =()=>{
     const dispatch=useDispatch();

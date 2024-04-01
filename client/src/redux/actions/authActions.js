@@ -45,7 +45,7 @@ export const login = (email, password,userType) => async (dispatch) => {
     }
   }
   else{
-    route=url+"/api/login";
+    let route=url+"/api/login";
      try {
       console.log(url);
       console.log(email,password);
@@ -112,7 +112,7 @@ formData.append('profile_image', profile_image); // Assuming profileImageFile is
     }
  }
  else{
-  route=url+"/api/signup";
+  let route=url+"/api/signup";
     const formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
