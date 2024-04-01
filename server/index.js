@@ -7,7 +7,9 @@ const app = express();
 
 app.use(bodyParser.json({limit:"30mb",extented:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extented:true}));
-app.use(cors());
+app.use(cors({
+  origin: 'https://ebook-rental-app-git-main-k-n-ganeshs-projects.vercel.app'
+}));
 app.use('',router);
 
 const CONNECTION_URL = "mongodb+srv://ganesh:bhuchi@miniproject.jnymzdi.mongodb.net/ebook";
