@@ -54,7 +54,7 @@ export const eBookPreImage= async (req, res) => {
     }
   } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to extract pages from PDF' });
+      res.status(500).json({ error: error });
   }
   
     
