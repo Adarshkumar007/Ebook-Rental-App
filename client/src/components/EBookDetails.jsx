@@ -10,6 +10,7 @@ const EBookDetails = () => {
     const { key } = useParams();
     const [ebook ,setEbook] = useState([]);
     const [ispdfView ,handleCloseModal] = useState(false);
+    console.log("url",url);
         useEffect(() => {
         // Fetch ebook details
         axios.get(url+`/ebook?key=${key}`)
