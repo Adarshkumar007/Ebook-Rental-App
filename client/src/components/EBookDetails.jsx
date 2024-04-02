@@ -2,11 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cards from "./MyComponent/Card";
+<<<<<<< Updated upstream
 import PdfViewer from "./MyComponent/PdfViewer";
 import { Document, Page } from 'react-pdf';
 import { Col, Container, Modal, Row } from "react-bootstrap";
 import MyButton from "./MyComponent/MyButton";
 import {url} from '../url';
+=======
+// import PdfViewer from "./MyComponent/PdfViewer";
+import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
+import { Container } from "react-bootstrap";
+
+>>>>>>> Stashed changes
 const EBookDetails = () => {
     const { key } = useParams();
     const [ebook ,setEbook] = useState([]);
@@ -28,10 +35,18 @@ const EBookDetails = () => {
 
     return (
         <div>
-        <h1>{ebook.title}</h1>
+            <Container>
+        <BookDetailsContainer 
+        image={ebook.imageSrc} 
+        title={ebook.title} 
+        publisher={ebook.publisherName}
+        category={ebook.category}
+        description={ebook.description}/>
+        {/* <h1>{ebook.title}</h1>
         <h3>{ebook.publisherName}</h3>
         <h3>{ebook.category}</h3>
         <Cards  key ={1} image={ebook.imageSrc}/>
+<<<<<<< Updated upstream
         <button onClick={handleCloseModal}></button>
         { ispdfView &&
             <Container>
@@ -65,6 +80,13 @@ const EBookDetails = () => {
 }
           </div>
         
+=======
+        <div>
+       
+        </div> */}
+        </Container>
+        </div>
+>>>>>>> Stashed changes
     ); 
 };
 
