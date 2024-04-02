@@ -1,5 +1,6 @@
 import { eBook } from "../models/ebook.js";
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/build/pdf.js';
+import pkg from 'pdfjs-dist/build/pdf.js';
+const { getDocument, GlobalWorkerOptions } = pkg;
 
 export const eBookPreImage=async (req, res) => {
     try {
