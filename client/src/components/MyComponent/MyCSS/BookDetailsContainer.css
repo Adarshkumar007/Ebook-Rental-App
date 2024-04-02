@@ -1,0 +1,34 @@
+.invidual-book-details{
+    display:flex;
+    margin:20px;
+    gap:10px;
+}
+.right-container{
+    display: flex;
+    flex-Direction: column;
+    gap: 1px;
+    font-Family: "DM Sans", sans-serif;
+    color: #000d42;
+    height: 30rem;
+    overflow-y: scroll;
+}
+@media screen and (min-width: 767px){
+    .right-container{
+        width:60rem;
+    } 
+}
+
+@media screen and (max-width: 767px) {
+    .invidual-book-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        
+    }
+    .right-container{
+        height: auto;
+        overflow-y: none;
+    }
+
+}
