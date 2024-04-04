@@ -3,7 +3,7 @@ import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, se
 import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
-import { eBookPublish } from '../controllers/eBookPublish.js';
+import { eBookCollection, eBookPublish } from '../controllers/eBookPublish.js';
 import {eBookDisplay, eBookPreImage} from '../controllers/eBookUser.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -24,5 +24,6 @@ router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
+router.get('/collection',authenticateToken,eBookCollection);
 
 export default router;

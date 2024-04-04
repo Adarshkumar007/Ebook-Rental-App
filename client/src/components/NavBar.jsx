@@ -82,6 +82,9 @@ const NavbarComponent = () => {
   const handleOrders=()=>{
     navigate("/orders");
   }
+  const handleCollection=()=>{
+    navigate("/collection")
+  }
   return (
     <>
       <nav
@@ -209,7 +212,7 @@ const NavbarComponent = () => {
                             </a>
                           </li>
                           <li>
-                          <a className="dropdown-item pointer">
+                          <a className="dropdown-item pointer" onClick={handleCollection}>
                           <SiBookstack 
                           className="account-pic"
                           id="list-pics"

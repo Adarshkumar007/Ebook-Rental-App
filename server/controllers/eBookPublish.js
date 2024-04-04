@@ -26,3 +26,22 @@ export const eBookPublish=async(req,res)=>{
       }
 
 }
+export const eBookCollection = async (req, res) => {
+  try {
+    const userId = req.body.user;
+    const books = await eBook.find({ userId: userId });
+    if (books.length > 0) {
+      const updatedEbook = books.map(item => {
+        const imageBase64 = Buffer.from(item.bookImage.data).toString('base64');
+        const imageSrc = `data:${item.bookImage.contentType};base64,${imageBase64}`;
+        return { _id: item._id, imageSrc: imageSrc ,title:item.title };
+      });
+      return res.status(200).send({ books: updatedEbook });
+    } else {
+      return res.status(404).send({ message: "Books not found" });
+    }
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    return res.status(500).send({ message: "Error fetching books" });
+  }
+};

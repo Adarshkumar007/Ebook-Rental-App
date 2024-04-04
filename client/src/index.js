@@ -10,6 +10,7 @@ import FooterComponent from './components/FooterComponent';
 import AddEBookForm from './components/Publish';
 import Orders from './components/Order';
 import EBookDetails from './components/EBookDetails';
+<<<<<<< Updated upstream
 import './styles.css'; // Import your custom CSS file
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -32,4 +33,25 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </Router>
     </Provider>
   </React.StrictMode>
+=======
+import Collection from './components/Collection';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+  <Provider store={store}>
+    <Router>
+    <NavbarComponent />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/publish" element={<AddEBookForm />} />
+        <Route path="/seller" element={<SellerPage />} />
+        <Route path="/ebook/:key" element={<EBookDetails />} />
+        <Route path="/collection" element={<Collection/>}/>
+      </Routes>
+      <FooterComponent />
+    </Router>
+  </Provider>
+</React.StrictMode>
+>>>>>>> Stashed changes
 );
