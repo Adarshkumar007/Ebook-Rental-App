@@ -34,8 +34,8 @@ const EBookDetails = () => {
         title={ebook.title} 
         publisher={ebook.publisherName}
         category={ebook.category}
-        description={ebook.description}/>
-        
+        description={ebook.description}
+        onclick={()=>handleCloseModal(true)}/>
         { ispdfView &&
             <Container>
             <Row>
