@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../MyComponent/MyCSS/BookDetailsLeft.css';
 import './MyCSS/BookDetailsContainer.css'
 
-const BookDetailsRight = ({ title, publisher, category, description , onclick}) => {
+const BookDetailsRight = ({ title, publisher, category, description ,onClick}) => {
     const [showScroll, setShowScroll] = useState(false);
 
 
@@ -25,7 +25,7 @@ const BookDetailsRight = ({ title, publisher, category, description , onclick}) 
                 {publisher}
             </h6>
             <div style={{display:'flex',gap:'10px',marginBottom: "20px"}}>
-            <button type="button" class="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={onclick}>Preview</button>
+            <button type="button" class="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={onClick}>Preview</button>
             <button type="button" class="btn btn-danger" style={{width:'6rem',border: "2px solid #000d42"}}>Subscribe</button>
             </div>
             <span style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>

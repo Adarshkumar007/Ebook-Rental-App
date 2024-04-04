@@ -7,36 +7,36 @@ import {url} from '../url';
 import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
 
 const EBookDetails = () => {
-    const { key } = useParams();
-    const [ebook ,setEbook] = useState([]);
-    const [ispdfView ,handleCloseModal] = useState(false);
-    console.log("url",url);
-        useEffect(() => {
-        // Fetch ebook details
-        axios.get(url+`/ebook?key=${key}`)
-            .then(response => {
-            
-                setEbook(response.data);
-                console.log("res",response.data);
+  const { key } = useParams();
+  const [ebook, setEbook] = useState([]);
+  const [ispdfView, handleCloseModal] = useState(false);
+  useEffect(() => {
+    // Fetch ebook details
+    axios
+      .get(url + `/ebook?key=${key}`)
+      .then((response) => {
+        setEbook(response.data);
+        console.log("res", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching ebook details:", error);
+      });
+  }, [key]);
+  console.log("res1", ebook.pages);
 
-            })
-            .catch(error => {
-                console.error('Error fetching ebook details:', error);
-            });
-    }, [key]);  
-    console.log("res1",ebook.pages);
+  return (
+    <div>
+      <Container>
+        <BookDetailsContainer
+          image={ebook.imageSrc}
+          title={ebook.title}
+          publisher={ebook.publisherName}
+          category={ebook.category}
+          description={ebook.description}
+          onClick={()=>handleCloseModal(true)} 
+        />
 
-    return (
-        <div>
-            <Container>
-        <BookDetailsContainer 
-        image={ebook.imageSrc} 
-        title={ebook.title} 
-        publisher={ebook.publisherName}
-        category={ebook.category}
-        description={ebook.description}
-        onclick={()=>handleCloseModal(true)}/>
-        { ispdfView &&
+{ ispdfView &&
             <Container>
             <Row>
               <Col>
@@ -69,8 +69,8 @@ const EBookDetails = () => {
         
         
         </Container>
-        </div>
-    ); 
+        </div>
+  );
 };
 
 export default EBookDetails;
