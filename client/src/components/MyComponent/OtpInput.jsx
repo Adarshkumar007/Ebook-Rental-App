@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SuccessButton from "./SuccessButton";
 import { Container, Form } from "react-bootstrap";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SELLER_SIGNUP_FAILURE, SIGNUP_FAILURE } from "../../redux/actions/types";
 
 const OtpInput = ({ type, placeholder, value, onChange, email,handleVarifcation }) => {

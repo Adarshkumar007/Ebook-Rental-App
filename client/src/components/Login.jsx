@@ -6,7 +6,6 @@ import { sendOTP } from "../redux/actions/sendOTPAction";
 import OTPForm from "./OTPForm";
 
 import MyInput from "./MyComponent/MyInput";
-import MyButton from "./MyComponent/MyButton";
 import SuccessButton from "./MyComponent/SuccessButton";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
