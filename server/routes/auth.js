@@ -18,7 +18,7 @@ router.post('/api/sellerlogin', sellerLogIn);
 router.post('/api/sendotp',sendotp);
 router.post('/api/verifyotp',validateOTP);
 router.post('/api/resetpassword',newPasswordController);
-router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCount: 1 }, { name: 'image', maxCount: 1 }]) , eBookPublish);
+router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCount: 1 },{ name: 'prefile', maxCount: 1 }, { name: 'image', maxCount: 1 }]) , eBookPublish);
 router.get('/profile', authenticateToken, userProfile);
 router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);

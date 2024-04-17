@@ -27,18 +27,18 @@ export const eBookPreImage=async (req, res) => {
     if(ebook){
     const imageBase64 = Buffer.from(ebook.bookImage.data).toString('base64');
     const imageSrc = `data:${ebook.bookImage.contentType};base64,${imageBase64}`;
-    const fileBase64 = Buffer.from(ebook.bookFile.data).toString('base64');
-     const fileSrc = `data:${ebook.bookFile.contentType};base64,${fileBase64}`;
-    const pdfBuffer =ebook.bookFile.data;
-    const pageNumbers = [1, 2, 3];
+    const fileBase64 = Buffer.from(ebook.preFile.data).toString('base64');
+     const fileSrc = `data:${ebook.preFile.contentType};base64,${fileBase64}`;
+    //const pdfBuffer =ebook.bookFile.data;
+    //const pageNumbers = [1, 2, 3];
     
-      const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
+      // const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
       const eBookObj = {
           title: ebook.title,
           publisherName: ebook.publisherName,
           category: ebook.category,
           imageSrc: imageSrc,
-          pages: pages,
+          pages: fileSrc,
           description: ebook.description
       };
       res.json(eBookObj);
@@ -53,17 +53,17 @@ export const eBookPreImage=async (req, res) => {
   
     
 };
-GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
+// GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
-async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {
-  const pdf = await getDocument({ data: pdfBuffer }).promise;
-  const pagesData = [];
-  for (const pageNumber of pageNumbers) {
-    if (pageNumber <= pdf.numPages) {
-      const page = await pdf.getPage(pageNumber);
-      const pageData = await page.getTextContent();
-      pagesData.push(pageData);
-    }
-  }
-  return pagesData;
-}
+// async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {
+//   const pdf = await getDocument({ data: pdfBuffer }).promise;
+//   const pagesData = [];
+//   for (const pageNumber of pageNumbers) {
+//     if (pageNumber <= pdf.numPages) {
+//       const page = await pdf.getPage(pageNumber);
+//       const pageData = await page.getTextContent();
+//       pagesData.push(pageData);
+//     }
+//   }
+//   return pagesData;
+// }

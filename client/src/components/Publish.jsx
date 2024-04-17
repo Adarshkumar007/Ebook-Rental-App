@@ -21,6 +21,8 @@ function AddEBookForm() {
   const [fileName, setFileName] = useState("");
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState("");
+  const [preFile, setPreFile] = useState(null);
+  const [preFileName, setPreFileName] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [category, handleSetCategory] = useState("");
@@ -40,6 +42,10 @@ function AddEBookForm() {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
+  const handlePreFileChange = (e) => {
+    setPreFile(e.target.files[0]);
+    setPreFileName(e.target.files[0].name);
+  };
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
     setImageName(e.target.files[0].name);
@@ -53,6 +59,7 @@ function AddEBookForm() {
     formData.append("author", author);
     formData.append("description", description);
     formData.append("file", file);
+    formData.append("prefile", preFile);
     formData.append("image", image);
     formData.append("category",category);
 
@@ -222,7 +229,40 @@ function AddEBookForm() {
             </label>
           </div>
         </div>
+        <div
+          className="mb-3"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            className="input-group"
+            style={{
+              width: "70%",
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Pre-View File"
+              className="form-control"
+              value={preFileName}
+              readOnly
+            />
 
+            <input
+              type="file"
+              className="form-control-file d-none"
+              id="previewFile"
+              accept=".pdf"
+              onChange={handlePreFileChange}
+            />
+            <label htmlFor="previewFile" className="input-group-text">
+              Browse
+            </label>
+          </div>
+        </div>
         <div
           className="mb-3"
           style={{
@@ -248,6 +288,7 @@ function AddEBookForm() {
               type="file"
               className="form-control-file d-none"
               id="file"
+              accept=".pdf"
               onChange={handleFileChange}
             />
             <label htmlFor="file" className="input-group-text">

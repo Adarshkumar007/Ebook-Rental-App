@@ -5,6 +5,7 @@ import { Col, Container, Modal, Row } from "react-bootstrap";
 import MyButton from "./MyComponent/MyButton";
 import {url} from '../url';
 import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
+import PdfViewer from "./MyComponent/PdfViewer";
 
 const EBookDetails = () => {
   const { key } = useParams();
@@ -16,13 +17,11 @@ const EBookDetails = () => {
       .get(url + `/ebook?key=${key}`)
       .then((response) => {
         setEbook(response.data);
-        console.log("res", response.data);
       })
       .catch((error) => {
         console.error("Error fetching ebook details:", error);
       });
   }, [key]);
-  console.log("res1", ebook.pages);
 
   return (
     <div>
@@ -40,28 +39,24 @@ const EBookDetails = () => {
             <Container>
             <Row>
               <Col>
-              <Modal show={true} onHide={()=> handleCloseModal(false)}>
+               <Modal show={true} onHide={()=> handleCloseModal(false)}>
                   <Modal.Header closeButton>
                     <Modal.Title>Preview</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                  {   <div>
-            {ebook.pages.map((page, index) => (
-                <div key={index} className="page">
-                    {page.items.map((item, itemIndex) => (
-                        <span key={itemIndex}>{item.str}</span>
-                    ))}
-                </div>
-            ))}
-        </div>}
+                  <PdfViewer pdfUrl={ebook.pages}></PdfViewer>
                   </Modal.Body>
                   <Modal.Footer>
                     <MyButton myval="Close" onClick={()=> handleCloseModal(false)} />
-                    {/* <Button variant="secondary" onClick={handleCloseModal}>
+                     {/* <Button variant="secondary" onClick={handleCloseModal}>
                       Close
-                    </Button> */}
+                    </Button>  */}
                   </Modal.Footer>
-                </Modal>
+                </Modal> 
+                 
+    
+        
+        
               </Col>
             </Row>
           </Container>
@@ -69,7 +64,7 @@ const EBookDetails = () => {
         
         
         </Container>
-        </div>
+</div>
   );
 };
 

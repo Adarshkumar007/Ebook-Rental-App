@@ -41,6 +41,16 @@ const ebookSchema = new mongoose.Schema({
       type: String,
       required: true
     }
+  },
+  preFile: {
+    data: {
+      type: Buffer,
+      required: true
+    },
+    contentType: {
+      type: String,
+      required: true
+    }
   }
   // Other required items
 }, { timestamps: true });
