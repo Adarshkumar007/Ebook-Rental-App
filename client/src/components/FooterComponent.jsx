@@ -25,7 +25,7 @@ const FooterComponent = () => {
               <ul className="list-unstyled">
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Contact Us
@@ -33,7 +33,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     About Us
@@ -41,7 +41,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Privacy
@@ -49,7 +49,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none  all-list-item-style items"
                   >
                     Security
@@ -62,7 +62,7 @@ const FooterComponent = () => {
               <ul className="list-unstyled text-small">
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     My Profile
@@ -70,7 +70,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Orders
@@ -78,7 +78,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Library
@@ -86,7 +86,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Cart
@@ -99,7 +99,7 @@ const FooterComponent = () => {
               <ul className="list-unstyled text-small">
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Be a Seller
@@ -107,7 +107,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     24x7 Help
@@ -115,7 +115,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Notification
@@ -123,7 +123,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="#"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Cart
@@ -137,7 +137,7 @@ const FooterComponent = () => {
                   <a className="navbar-brand" href="/">
                     <img
                       src={logo}
-                      alt=""
+                      alt="RentReader"
                       className="navbar-brand mb-2 footer-main-logo"
                     />
 

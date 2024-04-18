@@ -1,0 +1,5 @@
+.modal {
+    --bs-modal-width: 95%; /* Change the width value as per your requirement */
+    --bs-modal-padding: 2px;
+    --bs-modal-margin: 0rem;
+}

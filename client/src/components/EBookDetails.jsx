@@ -6,6 +6,7 @@ import MyButton from "./MyComponent/MyButton";
 import {url} from '../url';
 import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
 import PdfViewer from "./MyComponent/PdfViewer";
+import './MyComponent/MyCSS/EBookDetails.css'
 
 const EBookDetails = () => {
   const { key } = useParams();
@@ -39,12 +40,12 @@ const EBookDetails = () => {
             <Container>
             <Row>
               <Col>
-               <Modal show={true} onHide={()=> handleCloseModal(false)}>
+              <Modal show={true} onHide={() => handleCloseModal(false)} >
                   <Modal.Header closeButton>
                     <Modal.Title>Preview</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                  <PdfViewer pdfUrl={ebook.pages}></PdfViewer>
+                  <PdfViewer pdfUrl={ebook.pages} ></PdfViewer>
                   </Modal.Body>
                   <Modal.Footer>
                     <MyButton myval="Close" onClick={()=> handleCloseModal(false)} />

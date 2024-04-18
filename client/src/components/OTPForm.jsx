@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOTP, setNewLogin } from '../redux/actions/sendOTPAction';

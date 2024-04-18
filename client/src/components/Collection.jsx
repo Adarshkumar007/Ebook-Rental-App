@@ -3,7 +3,7 @@ import { useDispatch ,useSelector } from "react-redux";
 import axios from 'axios';
 import {url } from '../url'
 import { setUserTypeAction } from "../redux/actions/authActions";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BookDetailsLeft from "./MyComponent/BookDetailsLeft";
 
 const Collection =() =>{
