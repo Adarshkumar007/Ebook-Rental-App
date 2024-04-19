@@ -28,6 +28,7 @@ const EBookDetails = () => {
     <div>
       <Container>
         <BookDetailsContainer
+          bookId={ebook.id}
           image={ebook.imageSrc}
           title={ebook.title}
           publisher={ebook.publisherName}

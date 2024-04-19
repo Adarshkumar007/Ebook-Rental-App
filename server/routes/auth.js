@@ -1,9 +1,9 @@
 import express from 'express';
-import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, sellerSignUp, authenticateToken, userProfile, profileUpdate } from '../controllers/user_controller.js';
+import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, sellerSignUp, authenticateToken, userProfile, profileUpdate, getBooksId } from '../controllers/user_controller.js';
 import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
-import { eBookCollection, eBookPublish } from '../controllers/eBookPublish.js';
+import { addcart, eBookCollection, eBookPublish } from '../controllers/eBookPublish.js';
 import {eBookDisplay, eBookPreImage} from '../controllers/eBookUser.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -25,5 +25,6 @@ router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_i
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
 router.get('/collection',authenticateToken,eBookCollection);
-
+router.post('/addcart',authenticateToken,addcart);
+router.get('/api/getBookIds',authenticateToken,getBooksId);
 export default router;

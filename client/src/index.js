@@ -45,6 +45,7 @@ import Orders from './components/Order';
 import EBookDetails from './components/EBookDetails';
 import Collection from './components/Collection';
 import './styles.css'; // Import your custom CSS file
+import Cart from './components/Cart';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -60,6 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/seller" element={<SellerPage />} />
               <Route path="/ebook/:key" element={<EBookDetails />} />
               <Route path="/collection" element={<Collection/>}/>
+              <Route path="/cart" element={<Cart/>}/>
             </Routes>
           <FooterComponent />
       </Router>

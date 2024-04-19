@@ -85,6 +85,9 @@ const NavbarComponent = () => {
   const handleCollection=()=>{
     navigate("/collection")
   }
+  const handleCart = () =>{
+    navigate("cart");
+  }
   return (
     <>
       <nav
@@ -242,7 +245,7 @@ const NavbarComponent = () => {
                 <li className="nav-item">
                   <a
                     className="nav-link d-flex lg-justify-content-center"
-                    href="#"
+                    onClick={handleCart}
                   >
                     <BsCart4 className="account-pic" />
                     <span className="navi-items">Cart</span>

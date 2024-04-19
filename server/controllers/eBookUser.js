@@ -34,6 +34,7 @@ export const eBookPreImage=async (req, res) => {
     
       // const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
       const eBookObj = {
+          id:ebook._id,
           title: ebook.title,
           publisherName: ebook.publisherName,
           category: ebook.category,

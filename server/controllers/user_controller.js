@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { sendEmail } from './OTPController.js';
 import { Seller } from '../models/Seller.js';
 import mongoose from 'mongoose';
+import { Cart } from '../models/cart.js';
 const { ObjectId } = mongoose.Types;
 export const getHome=(req, res) =>{
     res.send('this works!');
@@ -191,6 +192,7 @@ export const authenticateToken = (req, res, next) => {
   jwt.verify(token, 'your_secret_key', (err, user) => {
     if (err) 
     return res.sendStatus(403); // Forbidden
+  
     req.user = user;
     next(); 
   });
@@ -230,3 +232,19 @@ catch (error){
 
 }
 } 
+export const getBooksId = async(req,res) => {
+  try {
+    const user = await Cart.findOne({ user_id: req.user.userId });
+    console.log(req.user.userId,user);
+    if(user){
+      const bookIds = user.bookIds;
+    res.json({ bookIds });
+    }
+    else{
+    res.json({ bookIds:[] });
+    }
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+}
+}
