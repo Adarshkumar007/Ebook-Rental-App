@@ -40,7 +40,7 @@ const EBookDetails = () => {
             <Container>
             <Row>
               <Col>
-              <Modal show={true} onHide={() => handleCloseModal(false)} >
+              <Modal show={true} onHide={() => handleCloseModal(false)} className="custom-modal">
                   <Modal.Header closeButton>
                     <Modal.Title>Preview</Modal.Title>
                   </Modal.Header>
