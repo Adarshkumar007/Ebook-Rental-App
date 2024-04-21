@@ -1,0 +1,27 @@
+.SellerCard{
+  display: flex;
+  gap :2rem;
+
+}
+
+@media screen and (max-width:768px) {
+  .SellerCard{
+    gap :1rem;
+  
+  }
+}
+@media screen and (max-width:501px) {
+  .SellerCard{
+    gap :0.5rem;
+  
+  }
+}
+@media screen and (max-width:445px) {
+  .SellerCard{
+    gap :1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+  }
+}

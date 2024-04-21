@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDispatch ,useSelector } from "react-redux";
-import axios from 'axios';
-import {url } from '../url'
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { url } from "../url";
 import { Col, Container, Modal, Row } from "react-bootstrap";
 import MyButton from "./MyComponent/MyButton";
 import { setUserTypeAction } from "../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
 import PdfViewer from "./MyComponent/PdfViewer";
+import SellerBookDetailsContainer from "./MyComponent/SellerBookDetailsContainer";
 
 const Collection =() =>{
     const [books, setBooks] = useState([]);
@@ -29,64 +30,72 @@ const Collection =() =>{
                 userType: "seller"
               },
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('sellertoken')}` // Assuming the token is stored in local storage
-          }
+            Authorization: `Bearer ${localStorage.getItem("sellertoken")}`, // Assuming the token is stored in local storage
+          },
         })
-        .then(response =>{ 
-            setBooks(response.data.books);
-            console.log("xc",response.data);
+        .then((response) => {
+          setBooks(response.data.books);
+          console.log("xc", response.data);
         })
-        .catch(error =>{ 
-          console.error('Error fetching profile:', error);
+        .catch((error) => {
+          console.error("Error fetching profile:", error);
           setError(error.response.data.message);
-          }
-        );
-      }}, []);
-      return (
-        <div>
-          <h1>{error}</h1>
-            {books.map(ebook => (
-                <Container>
-                <BookDetailsContainer
-                  image={ebook.imageSrc}
-                  title={ebook.title}
-                  publisher={ebook.publisherName}
-                  category={ebook.category}
-                  description={ebook.description}
-                  onClick={()=>handleCloseModal(true)} 
-                />
-        
-        { ispdfView &&
-                    <Container>
-                    <Row>
-                      <Col>
-                      <Modal show={true} onHide={() => handleCloseModal(false)} >
-                          <Modal.Header closeButton>
-                            <Modal.Title>Preview</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                          <PdfViewer pdfUrl={ebook.preFileSrc} ></PdfViewer>
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <MyButton myval="Close" onClick={()=> handleCloseModal(false)} />
-                             {/* <Button variant="secondary" onClick={handleCloseModal}>
-                              Close
-                            </Button>  */}
-                          </Modal.Footer>
-                        </Modal> 
-                         
-            
-                
-                
-                      </Col>
-                    </Row>
-                  </Container>
-        }
-                
-                
-                </Container>
-            ))}
-        </div>
-    );
-}
+        });
+    }
+  }, []);
+  console.log(books);
+  return (
+   
+    <Container>
+      <h1>{error}</h1>
+      <SellerBookDetailsContainer
+        books={books}
+        onClick={() => handleCloseModal(true)}
+      />
+       <SellerBookDetailsContainer
+        books={books}
+        onClick={() => handleCloseModal(true)}
+      />
+    </Container>
+    // <div>
+    //     {books.map(ebook => (
+    //         <Container>
+    //         <BookDetailsContainer
+    //           image={ebook.imageSrc}
+    //           title={ebook.title}
+    //           publisher={ebook.publisherName}
+    //           category={ebook.category}
+    //           description={ebook.description}
+    //           onClick={()=>handleCloseModal(true)}
+    //         />
+
+    // { ispdfView &&
+    //             <Container>
+    //             <Row>
+    //               <Col>
+    //               <Modal show={true} onHide={() => handleCloseModal(false)} >
+    //                   <Modal.Header closeButton>
+    //                     <Modal.Title>Preview</Modal.Title>
+    //                   </Modal.Header>
+    //                   <Modal.Body>
+    //                   <PdfViewer pdfUrl={ebook.preFileSrc} ></PdfViewer>
+    //                   </Modal.Body>
+    //                   <Modal.Footer>
+    //                     <MyButton myval="Close" onClick={()=> handleCloseModal(false)} />
+    //                      {/* <Button variant="secondary" onClick={handleCloseModal}>
+    //                       Close
+    //                     </Button>  */}
+    //                   </Modal.Footer>
+    //                 </Modal>
+
+    //               </Col>
+    //             </Row>
+    //           </Container>
+    // }
+
+    //         </Container>
+    //     ))}
+    // </div>
+  );
+};
 export default Collection;
