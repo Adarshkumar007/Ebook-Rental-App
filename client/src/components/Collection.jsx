@@ -52,10 +52,7 @@ const Collection =() =>{
         books={books}
         onClick={() => handleCloseModal(true)}
       />
-       <SellerBookDetailsContainer
-        books={books}
-        onClick={() => handleCloseModal(true)}
-      /></>}
+      </>}
     </Container>
     // <div>
     //     {books.map(ebook => (
