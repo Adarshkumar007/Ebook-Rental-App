@@ -1,12 +1,15 @@
+import { Seller } from "../models/Seller.js";
 import { Cart } from "../models/cart.js";
 import { eBook } from "../models/ebook.js";
 
 export const eBookPublish=async(req,res)=>{
     try {
+      const seller = await Seller.findOne({_id:req.user.userId});
         const newBook = new eBook({
           title: req.body.title,
           publisherId:req.user.userId,
-          publisherName: req.body.author,
+          publisherName:seller.username,
+          authorName: req.body.author,
           description: req.body.description,
           category:req.body.category,
           bookImage: {
@@ -33,9 +36,9 @@ export const eBookPublish=async(req,res)=>{
 }
 export const eBookCollection = async (req, res) => {
   try {
-    const userId = req.body.user;
-    console.log("Collection");
-    const books = await eBook.find({ userId: userId });
+    const userId = req.user.userId;
+    console.log("Collection",userId);
+    const books = await eBook.find({ publisherId: userId });
     if (books.length > 0) {
       const updatedEbook = books.map(item => {
         const imageBase64 = Buffer.from(item.bookImage.data).toString('base64');
@@ -55,7 +58,7 @@ export const eBookCollection = async (req, res) => {
       });
       return res.status(200).send({ books: updatedEbook });
     } else {
-      return res.status(404).send({ message: "Books not found" });
+      return res.status(404).send({ message: "No books found" });
     }
   } catch (error) {
     console.error('Error fetching books:', error);

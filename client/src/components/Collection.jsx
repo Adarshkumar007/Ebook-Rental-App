@@ -11,6 +11,7 @@ import PdfViewer from "./MyComponent/PdfViewer";
 
 const Collection =() =>{
     const [books, setBooks] = useState([]);
+    const [error,setError]=useState("");
     const dispatch=useDispatch();
     const navigate = useNavigate();
     const [ispdfView, handleCloseModal] = useState(false);
@@ -37,12 +38,13 @@ const Collection =() =>{
         })
         .catch(error =>{ 
           console.error('Error fetching profile:', error);
-          
+          setError(error.response.data.message);
           }
         );
       }}, []);
       return (
         <div>
+          <h1>{error}</h1>
             {books.map(ebook => (
                 <Container>
                 <BookDetailsContainer
