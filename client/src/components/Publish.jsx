@@ -8,7 +8,7 @@ import MyInput from "./MyComponent/MyInput";
 import MyTextArea from "./MyComponent/MyTextArea";
 import SuccessButton from "./MyComponent/SuccessButton";
 import Category from "./MyComponent/Category";
-import {url} from '../../src/url'; 
+import { url } from "../../src/url";
 function AddEBookForm() {
   const isSellerAuthenticated = useSelector(
     (state) => state.sellerauth.isAuthenticated
@@ -37,7 +37,7 @@ function AddEBookForm() {
       navigate("/seller");
     }
   }, []);
-  
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -61,29 +61,37 @@ function AddEBookForm() {
     formData.append("file", file);
     formData.append("prefile", preFile);
     formData.append("image", image);
-    formData.append("category",category);
+    formData.append("category", category);
 
     try {
-      const response = await axios.post(
-        url+"/publish",
-        formData,
-        {
-          params: {
-            userType: userType,
-          },
-          headers: {
-            Authorization: `Bearer ${
-              userType === "seller"
-                ? localStorage.getItem("sellertoken")
-                : localStorage.getItem("token")
-            }`,
-          },
-        }
-      );
+      const response = await axios.post(url + "/publish", formData, {
+        params: {
+          userType: userType,
+        },
+        headers: {
+          Authorization: `Bearer ${
+            userType === "seller"
+              ? localStorage.getItem("sellertoken")
+              : localStorage.getItem("token")
+          }`,
+        },
+      });
 
       console.log(response.data);
       setMessage(response.data);
       setError("");
+
+      // Clear input fields
+      setTitle("");
+      setAuthor("");
+      setDescription("");
+      setFile(null);
+      setFileName("");
+      setImage(null);
+      setImageName("");
+      setPreFile(null);
+      setPreFileName("");
+      handleSetCategory("");
     } catch (error) {
       console.error(
         "Error adding e-book:",
@@ -131,9 +139,33 @@ function AddEBookForm() {
           paddingBottom: "10px",
         }}
       >
-        <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error}</div></h4>
-         <h4><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "green"}}>{message}</div></h4>
-        
+        <h4>
+          <div
+            className="error"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "red",
+            }}
+          >
+            {error}
+          </div>
+        </h4>
+        <h4>
+          <div
+            className="error"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "green",
+            }}
+          >
+            {message}
+          </div>
+        </h4>
+
         <div className="mb-3">
           <Form.Group controlId="title">
             <div
@@ -296,41 +328,50 @@ function AddEBookForm() {
             </label>
           </div>
         </div>
-        
-          <div className="mb-3"  style={{
+
+        <div
+          className="mb-3"
+          style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-           
-          }}>
-            <Form.Group controlId="title"  style={{width:"100%", display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-                }}>
-              <div
-                style={{
-                  marginBottom: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width:"70%"
-                }}
-              >
-                <Category
+          }}
+        >
+          <Form.Group
+            controlId="title"
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "70%",
+              }}
+            >
+              <Category
                 value={category}
                 handleSetCategory={handleSetCategory}
-                style={{width:"70%"}}
-                />
-              </div>
-            </Form.Group>
-          </div>
-        
-        <div style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}>
-        <SuccessButton myval="Add E-Book" type="submit" />
+                style={{ width: "70%" }}
+              />
+            </div>
+          </Form.Group>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SuccessButton myval="Add E-Book" type="submit" />
         </div>
 
         {/* <button type="submit" className="btn btn-primary">

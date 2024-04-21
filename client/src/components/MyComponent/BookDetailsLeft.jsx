@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 const BookDetailsLeft = ({ image }) => {
+    
     return (
            
          
