@@ -47,15 +47,15 @@ const Collection =() =>{
   return (
    
     <Container>
-      <h1>{error}</h1>
-      <SellerBookDetailsContainer
+      {error!==""?<h1>{error}</h1>:
+      <><SellerBookDetailsContainer
         books={books}
         onClick={() => handleCloseModal(true)}
       />
        <SellerBookDetailsContainer
         books={books}
         onClick={() => handleCloseModal(true)}
-      />
+      /></>}
     </Container>
     // <div>
     //     {books.map(ebook => (
