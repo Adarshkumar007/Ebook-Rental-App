@@ -1,31 +1,33 @@
-.right-container1{
+.right-container1 {
     display: flex;
-    flex-Direction: column;
+    flex-direction: column;
     gap: 1px;
-    font-Family: "DM Sans", sans-serif;
+    font-family: "DM Sans", sans-serif;
     color: #000d42;
     height: 30rem;
     overflow-y: scroll;
 }
-@media screen and (max-width: 768px){
-    .right-container1{
-        height:20rem !important;
-    } 
+
+/* Hide the scrollbar for webkit browsers */
+.right-container1::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .right-container1 {
+        height: 20rem !important;
+    }
 }
 
 @media screen and (max-width: 767px) {
-    
-    .right-container1{
+    .right-container1 {
         height: auto;
         overflow-y: none;
     }
-
 }
 
 @media screen and (max-width: 231px) {
-    
-    .right-container1{
+    .right-container1 {
         width: 100%;
     }
-
 }
