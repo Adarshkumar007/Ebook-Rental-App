@@ -1,6 +1,6 @@
 import SellerSwipper from "./SellerSwipper";
 
-const SellerBookDetailsContainer = ({ books, onClick }) => {
+const SellerBookDetailsContainer = ({ books }) => {
   console.log(books);
   return (
     <div
@@ -12,7 +12,7 @@ const SellerBookDetailsContainer = ({ books, onClick }) => {
         boxShadow: "rgb(0 0 0 / 100%) 1px 1px 8px", 
       }}
     >
-      <SellerSwipper books={books} onClick={onClick} />
+      <SellerSwipper books={books}  />
     </div>
   );
 };

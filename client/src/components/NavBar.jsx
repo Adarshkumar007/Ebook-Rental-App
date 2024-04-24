@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -32,7 +32,6 @@ import { setOTPError } from "../redux/actions/sendOTPAction";
 
 import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
-import SuccessButton from "./MyComponent/SuccessButton";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -49,7 +48,10 @@ const NavbarComponent = () => {
   const authUsername = useSelector((state) => state.auth.username);
   console.log("hey",userType);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
-  const username = userType === "user" ? authUsername : sellerUsername;
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    setUsername(userType === "user" ? authUsername : sellerUsername);
+  }, [userType, authUsername, sellerUsername]);
 
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

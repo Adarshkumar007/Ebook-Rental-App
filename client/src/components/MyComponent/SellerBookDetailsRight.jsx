@@ -1,7 +1,12 @@
 
 import "./MyCSS/SellerBookDetailsRight.css";
 
-const SellerBookDetailsRight = ({title,category,publisher,description,onClick}) => {
+const SellerBookDetailsRight = ({id,title,category,publisher,description}) => {
+  const handleView = () => {
+    console.log("hello");
+    window.open(`/ebook/${id}`, "_blank");
+}
+
     return(
   <div className="right-container1">
     <h2 style={{ fontWeight: "600" }}>{title}</h2>
@@ -18,9 +23,9 @@ const SellerBookDetailsRight = ({title,category,publisher,description,onClick}) 
         type="button"
         className="btn btn-info"
         style={{ width: "6rem", border: "2px solid #000d42" }}
-        onClick={onClick}
+        onClick={handleView}
       >
-        Preview
+        View
       </button>
        <button
         type="button"

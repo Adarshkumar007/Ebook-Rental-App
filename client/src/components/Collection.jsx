@@ -15,7 +15,6 @@ const Collection =() =>{
     const [error,setError]=useState("");
     const dispatch=useDispatch();
     const navigate = useNavigate();
-    const [ispdfView, handleCloseModal] = useState(false);
     dispatch(setUserTypeAction("seller"));
     const isSellerAuthenticated = useSelector(
         (state) => state.sellerauth.isAuthenticated
@@ -44,15 +43,15 @@ const Collection =() =>{
     }
   }, []);
   console.log(books);
+  
   return (
    
     <Container>
       {error!==""?<h1>{error}</h1>:
-      <><SellerBookDetailsContainer
+      <SellerBookDetailsContainer
         books={books}
-        onClick={() => handleCloseModal(true)}
       />
-      </>}
+      }
     </Container>
     // <div>
     //     {books.map(ebook => (

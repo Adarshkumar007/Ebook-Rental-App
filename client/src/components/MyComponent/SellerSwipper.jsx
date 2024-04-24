@@ -18,12 +18,12 @@ const SellerSwipper = ({ books, onClick }) => {
       {books.map((ebook) => (
         <SellerBookCard
           key={ebook._id}
+          id={ebook._id}
           image={ebook.imageSrc}
           title={ebook.title}
           publisher={ebook.publisherName}
           category={ebook.category}
           description={ebook.description}
-          onClick={onClick}
           
         />
         

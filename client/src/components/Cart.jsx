@@ -13,14 +13,12 @@ const Cart = () => {
     useEffect(() => {
         const fetchBookIds = async () => {
             try {
-                console.log("ids1");
                 const response = await axios.get(url+'/api/getBookIds', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 });
-                console.log("ids");
-                console.log("ids",response.data.bookIds);
+                
                 setBookIds(response.data.bookIds);
             } 
              catch (error) {
