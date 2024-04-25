@@ -22,6 +22,7 @@ const authReducer = (state = initialState, action) => {
         isLoading: false,
         error:null,
         activeModal: null,
+        username:localStorage.getItem('username'),
       };
     case SIGNUP_SUCCESS:
       return {

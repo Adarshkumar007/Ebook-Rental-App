@@ -4,7 +4,7 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 const MoreInfo=()=>{
     return(
         <div style={{ display: "flex", alignItems:"end",justifyContent:"flex-end",marginBottom:"0.75rem" }}>
-        <span className="badge text-bg-light moreinfo">Explore More
+        <span className="badge text-bg-light moreinfo pointer">Explore More
         <IoChevronForwardOutline/>
         <IoChevronForwardOutline/>
         <IoChevronForwardOutline/>

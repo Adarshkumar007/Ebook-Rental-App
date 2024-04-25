@@ -10,8 +10,8 @@ import Slider from "react-slick";
 const Swipper = ({ebook}) => {
   console.log(ebook);
     const settings = {
-        className: "center",
-        infinite: true,
+        className: "",
+        infinite: false,
         centerPadding: "20px",
         slidesToShow: 6,
         swipeToSlide: true,
@@ -65,16 +65,17 @@ const Swipper = ({ebook}) => {
 
   return (
     <>
-    <h4 className="sider-cat">Category Name</h4>
-    
     <Slider {...settings} >
       
       {ebook.map(({_id, imageSrc}) => (
+        
         <Cards cardkey={_id} image={imageSrc} />
+        
       ))}
       </Slider>
       <MoreInfo />
-    </>
+      </>
+    
   );
 };
 

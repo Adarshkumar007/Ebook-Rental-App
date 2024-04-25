@@ -49,10 +49,7 @@ const NavbarComponent = () => {
   console.log("hey",userType);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
   const [username, setUsername] = useState("");
-  useEffect(() => {
-    setUsername(userType === "user" ? authUsername : sellerUsername);
-  }, [userType, authUsername, sellerUsername]);
-
+  
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -90,6 +87,11 @@ const NavbarComponent = () => {
   const handleCart = () =>{
     navigate("cart");
   }
+  useEffect(() => {
+    setUsername(userType === "user" ? authUsername : sellerUsername);
+    console.log("user",username);
+  }, [userType, authUsername, sellerUsername]);
+
   return (
     <>
       <nav
@@ -246,10 +248,11 @@ const NavbarComponent = () => {
               {userType==="user" && (
                 <li className="nav-item">
                   <a
-                    className="nav-link d-flex lg-justify-content-center"
+                    className="nav-link d-flex lg-justify-content-center pointer"
                     onClick={handleCart}
+                    
                   >
-                    <BsCart4 className="account-pic" />
+                    <BsCart4 className="account-pic " />
                     <span className="navi-items">Cart</span>
                   </a>
                 </li>

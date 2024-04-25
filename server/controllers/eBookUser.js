@@ -54,6 +54,37 @@ export const eBookPreImage=async (req, res) => {
   
     
 };
+export const getCategories = async(req,res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+export const getBooks = async (req, res) => {
+  const categoryType = req.params.category;
+  try {
+    const ebook = await eBook.find({category:categoryType}).select('_id bookImage category');
+ 
+
+    if (ebook.length === 0) {
+      return res.status(200).json([]);
+    }
+    console.log(categoryType);    
+    const updatedEbook = ebook.map(item => {
+      const imageBase64 = Buffer.from(item.bookImage.data).toString('base64');
+      const imageSrc = `data:${item.bookImage.contentType};base64,${imageBase64}`;
+      return { _id: item._id, imageSrc: imageSrc ,category:item.category };
+    });
+    res.status(200).json(updatedEbook);
+  } catch (error) {
+    console.error('Error fetching ebook:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

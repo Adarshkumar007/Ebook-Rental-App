@@ -27,7 +27,9 @@
     width: 10rem;
     transition: transform 0.5s;
 }
-
+.slick-track{
+    margin: 0px!important;
+}
 @media screen and (max-width:500px) and (min-width:438px) {
     .card-img {
         height: 12rem;
