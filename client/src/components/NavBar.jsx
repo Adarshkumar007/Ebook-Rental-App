@@ -48,8 +48,8 @@ const NavbarComponent = () => {
   const authUsername = useSelector((state) => state.auth.username);
   console.log("hey",userType);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
-  const [username, setUsername] = useState("");
-  
+  const username = userType === "user" ? authUsername : sellerUsername;
+
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -87,11 +87,7 @@ const NavbarComponent = () => {
   const handleCart = () =>{
     navigate("cart");
   }
-  useEffect(() => {
-    setUsername(userType === "user" ? authUsername : sellerUsername);
-    console.log("user",username);
-  }, [userType, authUsername, sellerUsername]);
-
+  
   return (
     <>
       <nav

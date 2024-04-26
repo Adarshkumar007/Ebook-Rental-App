@@ -8,7 +8,6 @@ import './Swipper.css'
 import Slider from "react-slick";
 
 const Swipper = ({ebook}) => {
-  console.log(ebook);
     const settings = {
         className: "",
         infinite: false,
