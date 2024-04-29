@@ -46,22 +46,22 @@ const BookDetailsRight = ({bookId, title, publisher, category, description ,onCl
             className="right-container"
            
         >
-            <h2 style={{ fontWeight: "600" }}>{title}</h2>
-            <h6>
-                <span style={{ color: "#000d42ab", fontWeight: "400" }}>Category: </span>
+            <h2 className='book-content' style={{ fontWeight: "600" }}>{title}</h2>
+            <h6 className='book-content'>
+                <span style={{ color: "#000d42ab", fontWeight: "400" }} >Category: </span>
                 {category}
             </h6>
-            <h6 style={{ marginBottom: "20px" }}>
+            <h6 className='book-content' style={{ marginBottom: "20px" }}>
                 <span style={{ color: "#000d42ab", fontWeight: "400" }}>Publisher: </span>
                 {publisher}
             </h6>
-            <div style={{display:'flex',gap:'10px',marginBottom: "20px"}}>
+            <div className='bookbutton-list'>
             <button type="button" className="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={onClick}>Preview</button>
             <button type="button" className="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={handleCart}>Add Cart</button>
 
             <button type="button" className="btn btn-danger" style={{width:'6rem',border: "2px solid #000d42"}}>Subscribe</button>
             </div>
-            <span style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>
+            <span className='book-content' style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>
             <p style={{ textAlign: "justify" }}>{description}</p>
             
         </div>

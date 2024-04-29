@@ -12,13 +12,13 @@
     height: 30rem;
     overflow-y: scroll;
 }
-@media screen and (min-width: 767px){
+@media screen and (min-width: 768px){
     .right-container{
         width:60rem;
     } 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .invidual-book-details {
         display: flex;
         align-items: center;
@@ -29,6 +29,38 @@
     .right-container{
         height: auto;
         overflow-y: none;
+    }
+
+}
+.bookbutton-list{
+    display:flex;
+    gap: 10px;;
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 306px) {
+   .book-content{
+    text-align: center;
+   }
+
+   .bookbutton-list{
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+   }
+
+}
+
+.reviews{
+    display:flex;
+    margin:20px;
+    gap:10px;
+}
+@media screen and (max-width: 768px) {
+    .reviews{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0px !important;
     }
 
 }

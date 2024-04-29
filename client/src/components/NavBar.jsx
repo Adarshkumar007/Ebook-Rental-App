@@ -8,7 +8,7 @@ import {
   setUserTypeAction,
 } from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
-import { useNavigate , Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 import logo from "./images/logo.png";
@@ -38,7 +38,7 @@ const NavbarComponent = () => {
   const activeModalSeller = useSelector(
     (state) => state.sellerauth.activeModal
   );
-  console.log("heiii",activeModal,activeModalSeller);
+  console.log("heiii", activeModal, activeModalSeller);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isSellerAuthenticated = useSelector(
@@ -46,7 +46,7 @@ const NavbarComponent = () => {
   );
   const userType = useSelector((state) => state.setUserType.USER_TYPE);
   const authUsername = useSelector((state) => state.auth.username);
-  console.log("hey",userType);
+  console.log("hey", userType);
   const sellerUsername = useSelector((state) => state.sellerauth.username);
   const username = userType === "user" ? authUsername : sellerUsername;
 
@@ -75,18 +75,19 @@ const NavbarComponent = () => {
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const handlePublish=()=>{
+  const handlePublish = () => {
     navigate("/publish");
-  }
-  const handleOrders=()=>{
+  };
+  const handleOrders = () => {
     navigate("/orders");
-  }
-  const handleCollection=()=>{
-    navigate("/collection")
-  }
-  const handleCart = () =>{
+  };
+  const handleCollection = () => {
+    navigate("/collection");
+  };
+  const handleCart = () => {
     navigate("cart");
-  }
+  };
+  
   
   return (
     <>
@@ -158,7 +159,8 @@ const NavbarComponent = () => {
                     isDropdownOpen ? "dropdown-menu-end show" : ""
                   }`}
                 >
-                  {((userType==="user"&&!isAuthenticated)||(userType==="seller"&&!isSellerAuthenticated))  && (
+                  {((userType === "user" && !isAuthenticated) ||
+                    (userType === "seller" && !isSellerAuthenticated)) && (
                     <>
                       <li>
                         <a
@@ -175,7 +177,10 @@ const NavbarComponent = () => {
                     (userType === "seller" && isSellerAuthenticated)) && (
                     <>
                       <li>
-                        <a className="dropdown-item pointer" onClick={handleProfile}>
+                        <a
+                          className="dropdown-item pointer"
+                          onClick={handleProfile}
+                        >
                           <FaUserCircle
                             className="account-pic"
                             id="list-pics"
@@ -186,7 +191,10 @@ const NavbarComponent = () => {
                       {userType === "user" && (
                         <>
                           <li>
-                            <a className="dropdown-item pointer" onClick={handleOrders}>
+                            <a
+                              className="dropdown-item pointer"
+                              onClick={handleOrders}
+                            >
                               <CiDeliveryTruck
                                 className="account-pic"
                                 id="list-pics"
@@ -205,26 +213,36 @@ const NavbarComponent = () => {
                           </li>
                         </>
                       )}
-                      {userType === "seller" && 
-                      <>
+                      {userType === "seller" && (
+                        <>
                           <li>
-                            <a className="dropdown-item pointer" onClick={handlePublish}>
-                            <FaBookMedical className="account-pic"
-                                id="list-pics" />
+                            <a
+                              className="dropdown-item pointer"
+                              onClick={handlePublish}
+                            >
+                              <FaBookMedical
+                                className="account-pic"
+                                id="list-pics"
+                              />
                               <span className="account-options">Publish</span>
                             </a>
                           </li>
                           <li>
-                          <a className="dropdown-item pointer" onClick={handleCollection}>
-                          <SiBookstack 
-                          className="account-pic"
-                          id="list-pics"
-                          />
-                            <span className="account-options">Collections</span>
-                          </a>
-                        </li>
+                            <a
+                              className="dropdown-item pointer"
+                              onClick={handleCollection}
+                            >
+                              <SiBookstack
+                                className="account-pic"
+                                id="list-pics"
+                              />
+                              <span className="account-options">
+                                Collections
+                              </span>
+                            </a>
+                          </li>
                         </>
-                      }
+                      )}
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
@@ -241,7 +259,7 @@ const NavbarComponent = () => {
                   )}
                 </ul>
               </li>
-              {userType==="user" && (
+              {userType === "user" && (
                 <li className="nav-item">
                   <a
                     className="nav-link d-flex lg-justify-content-center pointer"
@@ -265,17 +283,17 @@ const NavbarComponent = () => {
                   <span className="navi-items">More</span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end">
-                  {userType==="user" && 
-                  <li>
-                    <a
-                      className="dropdown-item pointer"
-                      onClick={handleSellerAC}
-                    >
-                      <BsShop className="account-pic" id="list-pics" />
-                      <span className="account-options">Be a Seller</span>
-                    </a>
-                  </li>
-}
+                  {userType === "user" && (
+                    <li>
+                      <a
+                        className="dropdown-item pointer"
+                        onClick={handleSellerAC}
+                      >
+                        <BsShop className="account-pic" id="list-pics" />
+                        <span className="account-options">Be a Seller</span>
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <a className="dropdown-item pointer">
                       <BiSupport className="account-pic" id="list-pics" />
@@ -337,16 +355,16 @@ const NavbarComponent = () => {
           </Col>
         </Row>
       </Container>
-      { ((activeModal ==="profile")||(activeModalSeller==="profile")) &&
+      {(activeModal === "profile" || activeModalSeller === "profile") && (
         <Container>
           <Row>
             <Col>
-            <Modal show={true} onHide={handleCloseModal}>
+              <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Profile</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <UserProfile userType={userType}/>
+                  <UserProfile userType={userType} />
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
@@ -358,8 +376,7 @@ const NavbarComponent = () => {
             </Col>
           </Row>
         </Container>
-      }
-      
+      )}
     </>
   );
 };

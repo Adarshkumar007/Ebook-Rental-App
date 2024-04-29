@@ -18,3 +18,11 @@
         width: 13rem;
     }
 }
+
+@media screen and (max-width:306px) {
+    .card-img1 {
+        height: 15rem;
+        width: 10rem;
+    }
+  
+}
