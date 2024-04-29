@@ -6,6 +6,13 @@
     gap:5px;
     width: 20rem;
 }
+
+@media screen and (max-width:768px) {
+    .MyReview-Container{
+        width: 90%;
+    }
+    
+}
 .Pic-Name{
     display: flex;
     gap:2px;
@@ -98,3 +105,40 @@ input[type=radio]{
     }
 }
 
+@media screen and (max-width:768px)  {
+    .all-review {
+        width:95%;
+    }
+}
+
+.Like-DisLike{
+    display: flex;
+    gap:1rem;
+    margin-left: auto;
+    margin-right: 3rem;
+}
+
+@media screen and (max-width:360px) {
+    .Like-DisLike{
+        flex-direction: column;
+        gap: 0;
+        margin-right: 0;
+        
+    }
+}
+@media screen and (max-width:241px) {
+    .Pic-Name{
+        display: flex;
+        flex-direction: column;
+        gap:2px;
+        align-items: center;
+    }
+
+    .Like-DisLike{
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 0;
+        width: 100%;
+        
+    }
+}
