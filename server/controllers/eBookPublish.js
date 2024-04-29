@@ -37,7 +37,6 @@ export const eBookPublish=async(req,res)=>{
 export const eBookCollection = async (req, res) => {
   try {
     const userId = req.user.userId;
-    console.log("Collection",userId);
     const books = await eBook.find({ publisherId: userId });
     if (books.length > 0) {
       const updatedEbook = books.map(item => {

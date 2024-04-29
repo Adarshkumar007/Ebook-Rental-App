@@ -1,7 +1,6 @@
 import SellerSwipper from "./SellerSwipper";
 
 const SellerBookDetailsContainer = ({ books }) => {
-  console.log(books);
   return (
     <div
       style={{

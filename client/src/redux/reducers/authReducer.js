@@ -4,16 +4,17 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: localStorage.getItem('token')?true:false,
   isLoading: false,
-  user: null,
   username:localStorage.getItem('username'),
+  imageSrc:localStorage.getItem('imageSrc'),
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      console.log(action.payload.token);
+      console.log(action.payload.imageSrc);
       localStorage.setItem('token', action.payload.token);
       localStorage.setItem('username', action.payload.username);
+      localStorage.setItem('imageSrc', action.payload.imageSrc);
       
       return {
         ...state,
@@ -23,6 +24,7 @@ const authReducer = (state = initialState, action) => {
         error:null,
         activeModal: null,
         username:localStorage.getItem('username'),
+        imageSrc:localStorage.getItem('imageSrc'),
       };
     case SIGNUP_SUCCESS:
       return {
@@ -57,6 +59,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated:false,
         isLoading:false,
+        username:localStorage.removeItem('username'),
       };
     case SET_ACTIVE_MODAL:
       return {

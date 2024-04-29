@@ -9,9 +9,12 @@ import {url} from '../../src/url';
 function UserProfile({userType}) {
   const [profile, setProfile] = useState(null);
   const [error ,setError] = useState(false);
+  var x=0;
     console.log(userType);
   useEffect(() => {
+    if(x===0){
     // Fetch user profile
+    x++;
     axios.get(url+'/profile', {
         params: {
             userType: userType
@@ -30,7 +33,8 @@ function UserProfile({userType}) {
       setError(error);
       }
     );
-  }, []);
+  }
+}, []);
   if (!profile) {
     return (
       <>
@@ -100,11 +104,7 @@ function UserProfile({userType}) {
         setError(res.data.message);
       } catch (err) {
         setError(err.message);
-       
       }
-   
-  
-    
   }
 
   return (

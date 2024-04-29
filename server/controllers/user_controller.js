@@ -60,8 +60,10 @@ export const logIn = async (req, res) => {
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
+      const imageBase64 = Buffer.from(user.profile_image.data).toString('base64');
+        const imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
       const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
-      return res.status(200).json({ message: 'Login successful', token, username:user.username });
+      return res.status(200).json({ message: 'Login successful', token, username:user.username ,imageSrc:imageSrc});
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Login failed' });

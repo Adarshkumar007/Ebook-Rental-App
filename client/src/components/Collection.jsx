@@ -1,97 +1,64 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { url } from "../url";
-import { Col, Container, Modal, Row } from "react-bootstrap";
-import MyButton from "./MyComponent/MyButton";
+import { Container, Alert } from "react-bootstrap";
 import { setUserTypeAction } from "../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
-import BookDetailsContainer from "./MyComponent/BookDetailsContainer";
-import PdfViewer from "./MyComponent/PdfViewer";
 import SellerBookDetailsContainer from "./MyComponent/SellerBookDetailsContainer";
 
-const Collection =() =>{
-    const [books, setBooks] = useState([]);
-    const [error,setError]=useState("");
-    const dispatch=useDispatch();
-    const navigate = useNavigate();
-    dispatch(setUserTypeAction("seller"));
-    const isSellerAuthenticated = useSelector(
-        (state) => state.sellerauth.isAuthenticated
-      );
-    useEffect(() => {
-        if(!isSellerAuthenticated){
-            navigate('/seller');
-        }else{
-          console.log("coll");
-        axios.get(url+'/collection', {
-            params: {
-                userType: "seller"
-              },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("sellertoken")}`, // Assuming the token is stored in local storage
-          },
-        })
-        .then((response) => {
+const Collection = () => {
+  const [books, setBooks] = useState([]);
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  dispatch(setUserTypeAction("seller"));
+  const isSellerAuthenticated = useSelector(
+    (state) => state.sellerauth.isAuthenticated
+  );
+  var x=0;
+  useEffect(() => {
+
+    const fetchData = () => {
+      axios.get(url + '/collection', {
+        params: {
+          userType: "seller"
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("sellertoken")}`,
+        },
+      })
+      .then((response) => {
+        
           setBooks(response.data.books);
           console.log("xc", response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching profile:", error);
-          setError(error.response.data.message);
-        });
+        
+      })
+      .catch((error) => {
+        console.error("Error fetching profile:", error);
+        setError(error.response.data.message);
+      });
+    };
+    x=x+1;
+    if(x===1){
+    if (isSellerAuthenticated) {
+      fetchData();
+    } else {
+      navigate('/seller');
     }
-  }, []);
-  console.log(books);
-  
-  return (
+  }
    
+  }, [isSellerAuthenticated]);
+
+  return (
     <Container>
-      {error!==""?<h1>{error}</h1>:
-      <SellerBookDetailsContainer
-        books={books}
-      />
-      }
+      {error ? (
+        <Alert variant="danger">{error}</Alert>
+      ) : (
+        <SellerBookDetailsContainer books={books} />
+      )}
     </Container>
-    // <div>
-    //     {books.map(ebook => (
-    //         <Container>
-    //         <BookDetailsContainer
-    //           image={ebook.imageSrc}
-    //           title={ebook.title}
-    //           publisher={ebook.publisherName}
-    //           category={ebook.category}
-    //           description={ebook.description}
-    //           onClick={()=>handleCloseModal(true)}
-    //         />
-
-    // { ispdfView &&
-    //             <Container>
-    //             <Row>
-    //               <Col>
-    //               <Modal show={true} onHide={() => handleCloseModal(false)} >
-    //                   <Modal.Header closeButton>
-    //                     <Modal.Title>Preview</Modal.Title>
-    //                   </Modal.Header>
-    //                   <Modal.Body>
-    //                   <PdfViewer pdfUrl={ebook.preFileSrc} ></PdfViewer>
-    //                   </Modal.Body>
-    //                   <Modal.Footer>
-    //                     <MyButton myval="Close" onClick={()=> handleCloseModal(false)} />
-    //                      {/* <Button variant="secondary" onClick={handleCloseModal}>
-    //                       Close
-    //                     </Button>  */}
-    //                   </Modal.Footer>
-    //                 </Modal>
-
-    //               </Col>
-    //             </Row>
-    //           </Container>
-    // }
-
-    //         </Container>
-    //     ))}
-    // </div>
   );
 };
+
 export default Collection;
