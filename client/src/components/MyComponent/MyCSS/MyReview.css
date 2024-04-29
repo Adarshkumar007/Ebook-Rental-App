@@ -1,0 +1,100 @@
+
+
+.MyReview-Container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: 20rem;
+}
+.Pic-Name{
+    display: flex;
+    gap:2px;
+    align-items: center;
+}
+.Name-Rating{
+  display: flex;
+  flex-direction: column;
+}
+.name-rating{
+    display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.Profie-pic{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border:2px solid #000d42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Profie-Pic{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border:2px solid #000d42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.MyPic{
+    height: 100%;
+    width: 100%;
+    color: #000d42;
+}
+
+
+
+input[type=radio]{
+    display: none;
+}
+.star{
+    cursor: pointer;
+   
+}
+
+.write-Review{
+    width: 100%;
+    
+}
+.MyReview-content{
+    width: 100%;
+    height: 6rem;
+}
+
+.Average-rating{
+    background-color: #000d42;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 2px 4px 2px 6px;
+    border-radius: 3px;
+}
+
+
+.all-review {
+    display: flex;
+    width: 60rem;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px; 
+    overflow-y: scroll; 
+    -webkit-overflow-scrolling: touch; 
+    height: 30rem;
+    scrollbar-width: thin; 
+    scrollbar-color: transparent transparent; 
+}
+
+@media screen and (max-width:1200px) {
+    .all-review {
+        width: 40rem;
+    }
+}
+@media screen and (max-width:992px)  {
+    .all-review {
+        width:25rem;
+    }
+}
+
