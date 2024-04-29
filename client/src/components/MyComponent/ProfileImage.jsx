@@ -8,7 +8,7 @@ const ProfileImage = ({image,handleSetFile}) => {
 
   const handleImageUpload = () => {
     fileInputRef.current.click();
-  };
+  };  
   useEffect(() => {
     setImageSrc(image);
   }, [image]);
