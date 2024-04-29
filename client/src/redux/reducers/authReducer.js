@@ -55,11 +55,13 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT:
       localStorage.removeItem('token');
       localStorage.removeItem('username');
+      localStorage.removeItem('imageSrc');
       return{
         ...state,
         isAuthenticated:false,
         isLoading:false,
-        username:localStorage.removeItem('username'),
+        username:localStorage.getItem('username'),
+        imageSrc:localStorage.getItem('imageSrc'),
       };
     case SET_ACTIVE_MODAL:
       return {

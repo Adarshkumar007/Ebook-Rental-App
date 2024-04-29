@@ -13,7 +13,7 @@ const BookDetailsContainer=({ bookId,image,title,publisher,category,description,
 
         </div>
         <div className="reviews" style={{display:"flex",margin:"20px",gap:"10px"}}>
-            <MyReview/>
+            <MyReview bookId={bookId}/>
             <AllReview/>
            
         </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container } from "react-bootstrap";
 import { BsPersonSquare } from "react-icons/bs";
 
@@ -9,6 +9,9 @@ const ProfileImage = ({image,handleSetFile}) => {
   const handleImageUpload = () => {
     fileInputRef.current.click();
   };
+  useEffect(() => {
+    setImageSrc(image);
+  }, [image]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
