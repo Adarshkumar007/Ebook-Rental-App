@@ -1,0 +1,87 @@
+.MyReviewContainer{
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    height: 15rem;
+    margin: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(5 5 5 / 44%);
+    padding: 10px;
+    background-color: #ffffff;
+
+}
+
+@media screen and (max-width:458px) {
+    .MyReviewContainer{
+        flex-direction: column;
+        height: fit-content;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+.review-book{
+    width: 10rem;
+    height: 100%;
+}
+
+.Name-rating-review-share-options{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.Book-Title{
+    color: #000d42;
+    font-size: 25px;
+}
+
+.LikeDislikeOptions{
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.MyLikeDislike{
+    color: #000d42;
+    display: flex;
+    align-items: center;
+    gap:2rem;
+}
+.EditDelete{
+    display:flex;
+    gap:2rem;
+    color:#000d42;
+    font-weight:bold;
+}
+@media screen and (max-width:300px) {
+    .LikeDislikeOptions{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .MyLikeDislike{
+        align-items: center;
+        justify-content: space-between;
+        gap:0;
+    }
+    .EditDelete{
+        gap:0;
+        justify-content: space-between;
+    }
+    .review-book{
+            width: 10rem;
+            height: 13rem;
+    }
+    
+}
+@media screen and (max-width:192px) {
+    .review-book {
+        width: 7rem;
+        height: 10rem;
+    }
+   
+}
+.MyReviewImpression{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}

@@ -19,7 +19,7 @@ import { FaUserPlus } from "react-icons/fa6";
 import { FaUserXmark } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { CiDeliveryTruck } from "react-icons/ci";
+import { LuTruck } from "react-icons/lu";
 import { BsShop } from "react-icons/bs";
 import { BsCart4 } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
@@ -27,6 +27,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { FaBookMedical } from "react-icons/fa";
 import { SiBookstack } from "react-icons/si";
+import { MdOutlineReviews } from "react-icons/md";
 import { Col, Container, Modal, Row, Button } from "react-bootstrap";
 import { setOTPError } from "../redux/actions/sendOTPAction";
 
@@ -80,6 +81,9 @@ const NavbarComponent = () => {
   };
   const handleOrders = () => {
     navigate("/orders");
+  };
+  const handleReviews = () => {
+    navigate("/reviews");
   };
   const handleCollection = () => {
     navigate("/collection");
@@ -195,11 +199,23 @@ const NavbarComponent = () => {
                               className="dropdown-item pointer"
                               onClick={handleOrders}
                             >
-                              <CiDeliveryTruck
+                              <LuTruck
                                 className="account-pic"
                                 id="list-pics"
                               />
                               <span className="account-options">Orders</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item pointer"
+                              onClick={handleReviews}
+                            >
+                              <MdOutlineReviews
+                                className="account-pic"
+                                id="list-pics"
+                              />
+                              <span className="account-options">Reviews</span>
                             </a>
                           </li>
                           <li>
