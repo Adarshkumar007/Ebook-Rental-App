@@ -14,7 +14,7 @@ const BookDetailsContainer=({ bookId,image,title,publisher,category,description,
         </div>
         <div className="reviews" style={{display:"flex",margin:"20px",gap:"10px"}}>
             <MyReview bookId={bookId}/>
-            <AllReview/>
+            <AllReview bookId={bookId}/>
            
         </div>
         </>

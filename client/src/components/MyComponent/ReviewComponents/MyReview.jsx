@@ -1,5 +1,4 @@
-import { useState } from "react";
-import MyReviewPicture from "./MyReviewPicture";
+import { useEffect, useState } from "react";
 import MyReviewStar from "./MyReviewStar";
 import axios from 'axios';
 import ReviewDetails from "./ReviewDetails";
@@ -13,10 +12,10 @@ const MyReview = ({bookId}) => {
   const [rating, setRating] = useState(null);
   const [review , setReview] = useState("");
   const [hover, setHover] = useState(null);
+  const [currentRating ,setCurrentRating] = useState(5);
   const username =useSelector((state) => state.auth.username);
   const imageSrc = useSelector((state) =>state.auth.imageSrc);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  console.log("sdjf",username,imageSrc);
   const handleRatingChange = (currentRating) => {
     setRating(currentRating);
   };
@@ -25,9 +24,14 @@ const MyReview = ({bookId}) => {
   };
   const handleSetFile = () =>{
   }
- 
+  
+  
   const handleOnClick = async () =>{
     if(isAuthenticated){
+      if(!rating){
+          console.log("invalid rating");
+      }
+      else{
       try {
         const res = await axios.post(url+'/rating',
          {
@@ -42,6 +46,7 @@ const MyReview = ({bookId}) => {
         });
         console.log("update",res.data.message);
       } catch (err) {
+      }
       }
     }
   }
@@ -73,7 +78,7 @@ const MyReview = ({bookId}) => {
       </div>
       <SuccessButton myval={"Submit"} onClick={handleOnClick} />
 
-      <ReviewDetails/>
+      <ReviewDetails bookId={bookId}/>
     </div>
   );
 };

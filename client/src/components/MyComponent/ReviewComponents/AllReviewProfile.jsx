@@ -2,10 +2,11 @@ import MyReviewPicture from "./MyReviewPicture";
 import AllReviewStar from "./AllReviewStar";
 import Like from "./Like";
 import Dislike from "./Dislike";
-
-import { useState } from "react";
-
-const AllReviewProfile = () => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ProfileImage from "../ProfileImage";
+import {url} from '../../../url';
+const AllReviewProfile = ({userId ,rating}) => {
   //Like handlig
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(55);
@@ -27,7 +28,7 @@ const AllReviewProfile = () => {
   //Dislike handling
   const [disliked, setDisliked] = useState(false);
   const [dislikeCount, setDislikeCount] = useState(20);
-
+  const [userInfo ,setuserInfo] = useState({});
   const handleDislikeButton = () => {
     if (disliked) {
       setDislikeCount((prevCount) => prevCount - 1);
@@ -42,15 +43,32 @@ const AllReviewProfile = () => {
       }
     }
   };
+  const handleSetFile = () =>{}
+  useEffect(()=>{
+    const fetchUserInfo = async () => {
+      
+      try {
+        // Fetch review counts from the API
+        const response = await axios.get(url+`/api/userinfo/${userId}`);
+        setuserInfo(response.data);
+        
+      } catch (error) {
+        console.error("Error fetching review counts:", error);
+      }
+    };
 
+    if(userId){
+      fetchUserInfo();
+    }
+  },[])
   return (
     <div className="Pic-Name">
-      <MyReviewPicture Profiepic={"Profie-Pic"} />
+      <ProfileImage image={""} handleSetFile={handleSetFile}/>
       <div className="name-rating">
         <h6 style={{ marginBottom: "0px !important" }}>
-          <span>KN Ganesh</span>
+          <span>{userInfo.username}</span>
         </h6>
-        <AllReviewStar rate={5} />
+        <AllReviewStar rate={rating} />
       </div>
       <div
       className="Like-DisLike"

@@ -1,9 +1,33 @@
+import { useEffect, useState } from "react";
 import IndividualReview from "./IndividualReview";
-const AllReview = () => {
+import axios from "axios";
+import { url } from "../../../url";
+
+const AllReview = ({bookId}) => {
+  const [reviews, setReviews] = useState([]);
+  const currentRating = 5;
+  useEffect(()=>{
+    if(bookId){
+      const fetchReviews = async () => {
+        try {
+          if (bookId) {
+            // Fetch ratings and reviews based on bookId from the API
+            const response = await axios.get(url+`/api/reviews/${bookId}/${currentRating}`);
+            setReviews(response.data);
+            console.log("sds",response.data); 
+          }
+        } catch (error) {
+          console.error("Error fetching reviews:", error);
+        }
+      };
+  
+      fetchReviews();
+    }
+  },[bookId]);
   return (
     <div className="all-review">
-      {[...Array(5)].map((_, index) => (
-        <IndividualReview key={index} />
+      {reviews.map((review, index) => (
+        <IndividualReview key={index} review={review} />
       ))}
     </div>
   );

@@ -5,7 +5,7 @@ import { validateOTP } from '../controllers/OTPController.js';
 import multer from 'multer';
 import { addcart, eBookCollection, eBookPublish } from '../controllers/eBookPublish.js';
 import {eBookDisplay, eBookPreImage, getBooks, getCategories} from '../controllers/eBookUser.js';
-import { ratings } from '../controllers/ratings.js';
+import { getReviews, getReviewsCount, ratings, userInfo } from '../controllers/ratings.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -30,6 +30,8 @@ router.post('/addcart',authenticateToken,addcart);
 router.get('/api/getBookIds',authenticateToken,getBooksId);
 router.get('/api/categories',getCategories);
 router.get('/api/home/:category',getBooks);
+router.get('/api/reviews/:bookId/:currentRating', getReviews);
 router.post('/rating',authenticateToken,ratings);
-
+router.get('/api/reviewCounts',getReviewsCount);
+router.get('/api/userinfo/:userId',userInfo);
 export default router;

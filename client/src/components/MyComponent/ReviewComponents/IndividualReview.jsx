@@ -4,7 +4,7 @@ import AllReviewComment from "./AllReviewComment";
 const comment =
   "Your insights on this topic are truly enlightening. I'm amazed by the depth of your understanding and the clarity with which you explain complex concepts. Reading your analysis has given me a fresh perspective and has inspired me to delve deeper into the subject matter. Your expertise shines through in every word, and I can't thank you enough for sharing your knowledge with the community. Keep up the fantastic work!";
 
-const IndividualReview = () => {
+const IndividualReview = ({review}) => {
   return (
     <div
       style={{
@@ -16,8 +16,8 @@ const IndividualReview = () => {
         padding: "10px",
       }}
     >
-      <AllReviewProfile />
-      <AllReviewComment comment={comment} />
+      <AllReviewProfile userId={review.userId} rating={review.rating}/>
+      <AllReviewComment comment={review.review} />
     </div>
   );
 };
