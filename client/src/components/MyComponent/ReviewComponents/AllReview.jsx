@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import IndividualReview from "./IndividualReview";
 import axios from "axios";
 import { url } from "../../../url";
+import { useSelector } from "react-redux";
 
 const AllReview = ({bookId}) => {
   const [reviews, setReviews] = useState([]);
-  const currentRating = 5;
+  const currentRating = useSelector((state)=>state.currentratingvalue.currentRating);
   useEffect(()=>{
     if(bookId){
       const fetchReviews = async () => {
@@ -23,7 +24,7 @@ const AllReview = ({bookId}) => {
   
       fetchReviews();
     }
-  },[bookId]);
+  },[bookId,currentRating]);
   return (
     <div className="all-review">
       {reviews.map((review, index) => (

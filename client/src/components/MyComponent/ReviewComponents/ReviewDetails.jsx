@@ -3,6 +3,8 @@ import ReviewCalculation from "./ReviewCalculation";
 import StarCount from "./StarCount";
 import axios from "axios";
 import { url } from "../../../url";
+import { useDispatch } from "react-redux";
+import { CURRENT_RATING } from "../../../redux/actions/types";
 const ReviewDetails = ({bookId}) => {
   
   const [reviewCounts,setReviewCounts] = useState([
@@ -14,7 +16,7 @@ const ReviewDetails = ({bookId}) => {
   ]);
   const [avgRating ,setAvgRating] = useState(0);
   const [totalRating ,setTotalRating] = useState(0);
-
+  const dispatch = useDispatch();
   useEffect(()=>{
     const fetchReviewCounts = async () => {
       
@@ -37,14 +39,17 @@ const ReviewDetails = ({bookId}) => {
     
 
   },[bookId]);
-  const handleRatingSelection = () =>{
-    
+  const handleRatingSelection = (count) =>{
+    dispatch({
+      type: CURRENT_RATING,
+      count: count,
+    });
   }
   return (
     <div style={{ display: "flex", width: "100%", flexDirection: "column", gap: "10px" }}>
       <ReviewCalculation avgRating={avgRating} totalRating={totalRating} />
       {reviewCounts.map((review, index) => (
-        <StarCount key={index} count={review.count} numStar={review.numStar} onClick={handleRatingSelection} />
+        <StarCount key={index} count={review.count} numStar={review.numStar} onClick={() => handleRatingSelection(review.numStar)} />
       ))}
     </div>
   );

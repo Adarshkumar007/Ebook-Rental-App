@@ -60,8 +60,15 @@ export const userInfo = async(req,res) => {
     try {
       const { userId } = req.params;
       const user = await User.findOne({ _id:userId }).select('username profile_image');
+      var imageSrc="";
+      if(user.profile_image.data){
+        const imageBase64 = Buffer.from(user.profile_image.data).toString('base64');
+           imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
+        }
       console.log(user);
-      res.json(user);
+      res.json({imageSrc:imageSrc,
+      username:user.username,
+    });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }

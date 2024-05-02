@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import ProfileImage from "../ProfileImage";
 import {url} from '../../../url';
 const AllReviewProfile = ({userId ,rating}) => {
-  //Like handlig
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(55);
   const handleLikeButton = () => {
@@ -63,7 +62,7 @@ const AllReviewProfile = ({userId ,rating}) => {
   },[])
   return (
     <div className="Pic-Name">
-      <ProfileImage image={""} handleSetFile={handleSetFile}/>
+      <ProfileImage image={userInfo.imageSrc} handleSetFile={handleSetFile}/>
       <div className="name-rating">
         <h6 style={{ marginBottom: "0px !important" }}>
           <span>{userInfo.username}</span>
