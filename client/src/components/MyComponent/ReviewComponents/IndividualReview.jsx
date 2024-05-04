@@ -16,7 +16,7 @@ const IndividualReview = ({review}) => {
         padding: "10px",
       }}
     >
-      <AllReviewProfile userId={review.userId} rating={review.rating}/>
+      <AllReviewProfile review={review} />
       <AllReviewComment comment={review.review} />
     </div>
   );

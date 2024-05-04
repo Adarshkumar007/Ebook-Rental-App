@@ -6,9 +6,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfileImage from "../ProfileImage";
 import {url} from '../../../url';
-const AllReviewProfile = ({userId ,rating}) => {
+const AllReviewProfile = ({ review }) => {
   const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(55);
+  const [likeCount, setLikeCount] = useState(review.likes);
   const handleLikeButton = () => {
     if (liked) {
       setLikeCount((prevCount) => prevCount - 1);
@@ -26,7 +26,7 @@ const AllReviewProfile = ({userId ,rating}) => {
 
   //Dislike handling
   const [disliked, setDisliked] = useState(false);
-  const [dislikeCount, setDislikeCount] = useState(20);
+  const [dislikeCount, setDislikeCount] = useState(review.dislikes);
   const [userInfo ,setuserInfo] = useState({});
   const handleDislikeButton = () => {
     if (disliked) {
@@ -48,7 +48,7 @@ const AllReviewProfile = ({userId ,rating}) => {
       
       try {
         // Fetch review counts from the API
-        const response = await axios.get(url+`/api/userinfo/${userId}`);
+        const response = await axios.get(url+`/api/userinfo/${review.userId}`);
         setuserInfo(response.data);
         
       } catch (error) {
@@ -56,7 +56,7 @@ const AllReviewProfile = ({userId ,rating}) => {
       }
     };
 
-    if(userId){
+    if(review.userId){
       fetchUserInfo();
     }
   },[])
@@ -67,7 +67,7 @@ const AllReviewProfile = ({userId ,rating}) => {
         <h6 style={{ marginBottom: "0px !important" }}>
           <span>{userInfo.username}</span>
         </h6>
-        <AllReviewStar rate={rating} />
+        <AllReviewStar rate={review.rating} />
       </div>
       <div
       className="Like-DisLike"
