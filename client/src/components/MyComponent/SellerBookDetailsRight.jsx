@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./MyCSS/SellerBookDetailsRight.css";
 import AllReviewStar from "./ReviewComponents/AllReviewStar";
+import { setActiveModal } from "../../redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
 // import ReviewModalContent from "./ReviewModalContent"; // Assuming you have a separate component for the modal content
 
 const SellerBookDetailsRight = ({ id, title, category, publisher, description }) => {
-  const [showModal, setShowModal] = useState(false);
-
+  // const [showModal, setShowModal] = useState(false);
+  const activeModal = useSelector((state) => state.sellerauth.activeModal);
+  const dispatch = useDispatch(); 
   const handleView = () => {
     console.log("hello");
     window.open(`/ebook/${id}`, "_blank");
   };
 
   const handleReviews = () => {
-    setShowModal(true);
+    dispatch(setActiveModal("review", "seller"));
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    dispatch(setActiveModal(null, "seller"));
   };
 
   return (
@@ -59,8 +62,8 @@ const SellerBookDetailsRight = ({ id, title, category, publisher, description })
       </div>
       <span style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>
       <p style={{ textAlign: "justify" }}>{description}</p>
-
-      <Modal show={showModal} onHide={handleCloseModal}>
+      {activeModal==="review" && 
+      <Modal show={true} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Reviews</Modal.Title>
         </Modal.Header>
@@ -71,6 +74,7 @@ const SellerBookDetailsRight = ({ id, title, category, publisher, description })
           <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
         </Modal.Footer>
       </Modal>
+}
     </div>
   );
 };
