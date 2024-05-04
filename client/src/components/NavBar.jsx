@@ -384,9 +384,7 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-                  {/* <Button variant="secondary" onClick={handleCloseModal}>
-                    Close
-                  </Button> */}
+                 
                 </Modal.Footer>
               </Modal>
             </Col>
