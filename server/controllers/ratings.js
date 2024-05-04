@@ -1,3 +1,4 @@
+import  mongoose from 'mongoose';
 import { User } from '../models/User.js';
 import { RatingReview } from '../models/reviewsandratings.js';
 
@@ -36,10 +37,16 @@ export const getReviews = async (req, res) => {
 
 export const getReviewsCount =  async (req, res) => {
     try {
-      // Aggregate the counts of reviews based on the numStar field
-      const counts = await RatingReview.aggregate([
-        { $group: { _id: "$rating", count: { $sum: 1 } } }
-      ]);
+      const {bookId}=req.params;
+      const bookIdObject = new mongoose.Types.ObjectId(bookId);
+      console.log("lsdk",bookIdObject);
+
+const counts = await RatingReview.aggregate([
+  { $match: { bookId: bookIdObject } },
+  { $group: { _id: "$rating", count: { $sum: 1 } } }
+]);
+      
+      console.log("count",counts);
       
       // Create a map from the aggregated counts
       const reviewCounts = [

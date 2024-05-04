@@ -32,6 +32,6 @@ router.get('/api/categories',getCategories);
 router.get('/api/home/:category',getBooks);
 router.get('/api/reviews/:bookId/:currentRating', getReviews);
 router.post('/rating',authenticateToken,ratings);
-router.get('/api/reviewCounts',getReviewsCount);
+router.get('/api/reviewCounts/:bookId',getReviewsCount);
 router.get('/api/userinfo/:userId',userInfo);
 export default router;

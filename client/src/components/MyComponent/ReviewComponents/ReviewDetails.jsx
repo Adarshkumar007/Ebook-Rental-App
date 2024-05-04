@@ -22,7 +22,7 @@ const ReviewDetails = ({bookId}) => {
       
       try {
         // Fetch review counts from the API
-        const response = await axios.get(url+"/api/reviewCounts");
+        const response = await axios.get(url+`/api/reviewCounts/${bookId}`);
         setReviewCounts(response.data);
         const total = response.data.reduce((acc, curr) => acc + curr.count, 0);
         const avg = total / reviewCounts.length;
