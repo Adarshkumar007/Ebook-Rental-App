@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Container } from "react-bootstrap";
 import "./MyCSS/SellerBookDetailsRight.css";
 import AllReviewStar from "./ReviewComponents/AllReviewStar";
 import { setActiveModal } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
-// import ReviewModalContent from "./ReviewModalContent"; // Assuming you have a separate component for the modal content
+import ReviewModalContent from "./SellerBookReview/ReviewModalContent";
+import MyButton from "./MyButton";
 
-const SellerBookDetailsRight = ({ id, title, category, publisher, description }) => {
+const SellerBookDetailsRight = ({
+  id,
+  title,
+  category,
+  publisher,
+  description,
+}) => {
   // const [showModal, setShowModal] = useState(false);
   const activeModal = useSelector((state) => state.sellerauth.activeModal);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const handleView = () => {
     console.log("hello");
     window.open(`/ebook/${id}`, "_blank");
@@ -28,14 +35,25 @@ const SellerBookDetailsRight = ({ id, title, category, publisher, description })
       <h2 style={{ fontWeight: "600", marginBottom: "0" }}>{title}</h2>
       <AllReviewStar rate={4} />
       <h6>
-        <span style={{ color: "#000d42ab", fontWeight: "400" }}>Category: </span>
+        <span style={{ color: "#000d42ab", fontWeight: "400" }}>
+          Category:{" "}
+        </span>
         {category}
       </h6>
       <h6 style={{ marginBottom: "10px" }}>
-        <span style={{ color: "#000d42ab", fontWeight: "400" }}>Publisher: </span>
+        <span style={{ color: "#000d42ab", fontWeight: "400" }}>
+          Publisher:{" "}
+        </span>
         {publisher}
       </h6>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          marginBottom: "10px",
+        }}
+      >
         <button
           type="button"
           className="btn btn-info"
@@ -60,21 +78,25 @@ const SellerBookDetailsRight = ({ id, title, category, publisher, description })
           Reviews
         </button>
       </div>
-      <span style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>
+      <span style={{ color: "#000d42ab", fontWeight: "400" }}>
+        Description:
+      </span>
       <p style={{ textAlign: "justify" }}>{description}</p>
-      {activeModal==="review" && 
-      <Modal show={true} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Reviews</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* <ReviewModalContent ebookId={id} /> */}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-}
+      {activeModal === "review" && (
+        <Modal show={true} onHide={handleCloseModal} className="custom-modal">
+          <Modal.Header closeButton>
+            <Modal.Title>Reviews</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Container>
+              <ReviewModalContent />
+            </Container>
+          </Modal.Body>
+          <Modal.Footer>
+            <MyButton myval="Close" onClick={handleCloseModal} />
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
 };

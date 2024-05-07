@@ -31,3 +31,16 @@
         width: 100%;
     }
 }
+/* Custom modal styles */
+.modal-content {
+    background-color: #fff !important; /* Set your desired background color */
+  }
+  
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.102) !important; /* Set your desired overlay color and opacity */
+  }
+  .custom-modal {
+    --bs-modal-width: 95%;
+    --bs-modal-padding: 2px;
+    --bs-modal-margin: 0rem;
+}
