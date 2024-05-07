@@ -6,7 +6,9 @@ const initialState = {
 
 const ratingReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case CURRENT_RATING:
+      console.log(action.count);
         return {
             ...state,
             currentRating:action.count,

@@ -33,6 +33,7 @@ import { setOTPError } from "../redux/actions/sendOTPAction";
 
 import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
+import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalContent";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -388,6 +389,28 @@ const NavbarComponent = () => {
                 </Modal.Footer>
               </Modal>
             </Col>
+          </Row>
+        </Container>
+      )}
+      {activeModalSeller === "review" && (
+        <Container>
+        <Row>
+          <Col>
+        <Modal show={true} onHide={handleCloseModal} className="custom-modal">
+          <Modal.Header closeButton>
+            
+            <Modal.Title>Reviews </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Container>
+              <ReviewModalContent/>
+            </Container>
+          </Modal.Body>
+          <Modal.Footer>
+            <MyButton myval="Close" onClick={handleCloseModal} />
+          </Modal.Footer>
+        </Modal>
+        </Col>
           </Row>
         </Container>
       )}

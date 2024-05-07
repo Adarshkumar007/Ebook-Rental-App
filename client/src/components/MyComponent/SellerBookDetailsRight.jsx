@@ -6,6 +6,7 @@ import { setActiveModal } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewModalContent from "./SellerBookReview/ReviewModalContent";
 import MyButton from "./MyButton";
+import { CURRENT_BOOKID } from "../../redux/actions/types";
 
 const SellerBookDetailsRight = ({
   id,
@@ -22,13 +23,16 @@ const SellerBookDetailsRight = ({
     window.open(`/ebook/${id}`, "_blank");
   };
 
-  const handleReviews = () => {
+  const handleReviews = (id) => {
     dispatch(setActiveModal("review", "seller"));
+    console.log("clicked",id);
+    dispatch({
+      type: CURRENT_BOOKID,
+      currentBookID: id,
+    });
   };
 
-  const handleCloseModal = () => {
-    dispatch(setActiveModal(null, "seller"));
-  };
+
 
   return (
     <div className="right-container1">
@@ -73,7 +77,7 @@ const SellerBookDetailsRight = ({
           type="button"
           className="btn btn-info"
           style={{ width: "5rem", border: "2px solid #000d42" }}
-          onClick={handleReviews}
+          onClick={()=>handleReviews(id)}
         >
           Reviews
         </button>
@@ -82,21 +86,6 @@ const SellerBookDetailsRight = ({
         Description:
       </span>
       <p style={{ textAlign: "justify" }}>{description}</p>
-      {activeModal === "review" && (
-        <Modal show={true} onHide={handleCloseModal} className="custom-modal">
-          <Modal.Header closeButton>
-            <Modal.Title>Reviews</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Container>
-              <ReviewModalContent />
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <MyButton myval="Close" onClick={handleCloseModal} />
-          </Modal.Footer>
-        </Modal>
-      )}
     </div>
   );
 };

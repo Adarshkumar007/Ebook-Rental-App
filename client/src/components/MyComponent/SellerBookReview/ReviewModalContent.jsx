@@ -5,8 +5,8 @@ import ReviewModalContentRight from './ReviewModalContentRight'
 const ReviewModalContent=()=>{
     return(
      <div className="SellerBookReview">
-        <ReviewModalContentLeft/>
-        <ReviewModalContentRight/>
+        <ReviewModalContentLeft />
+        <ReviewModalContentRight />
      </div>
     )
 }
