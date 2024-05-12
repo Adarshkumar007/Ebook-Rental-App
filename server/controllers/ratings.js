@@ -27,7 +27,7 @@ export const getReviews = async (req, res) => {
     try {
       // Find all ratings and reviews for the given bookId
       const reviews = await RatingReview.find({ bookId, rating:currentRating });
-      console.log(bookId,currentRating);
+      // console.log(bookId,currentRating);
       res.json(reviews);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -46,7 +46,7 @@ const counts = await RatingReview.aggregate([
   { $group: { _id: "$rating", count: { $sum: 1 } } }
 ]);
       
-      console.log("count",counts);
+      // console.log("count",counts);
       
       // Create a map from the aggregated counts
       const reviewCounts = [
@@ -56,7 +56,7 @@ const counts = await RatingReview.aggregate([
         { count: counts.find(count => count._id === 2)?.count || 0, numStar: 2 },
         { count: counts.find(count => count._id === 1)?.count || 0, numStar: 1 }
       ];
-      console.log("sd",reviewCounts);
+      // console.log("sd",reviewCounts);
       res.json(reviewCounts);
     } catch (error) {
       console.error("Error fetching review counts:", error);
@@ -72,11 +72,98 @@ export const userInfo = async(req,res) => {
         const imageBase64 = Buffer.from(user.profile_image.data).toString('base64');
            imageSrc = `data:${user.profile_image.contentType};base64,${imageBase64}`;
         }
-      console.log(user);
+      // console.log(user);
       res.json({imageSrc:imageSrc,
       username:user.username,
     });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
+}
+
+export const likes_Update = async(req,res) =>{
+  try {
+    const { id } = req.body;
+    const userId = req.user.userId;
+    const reviewId = new mongoose.Types.ObjectId(id);
+    const filter = { _id: reviewId };
+    const update = {};
+  
+    // Check if the user is already in the likes array
+    const review = await RatingReview.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+    const dislikesSet = new Set(review.dislikes.map(String)); 
+    if (dislikesSet.has(userId)) {
+      // User is already in the likes, remove them
+      update.$pull = { dislikes: userId };
+    } 
+    const likesSet = new Set(review.likes.map(String)); // Convert ObjectId array to string set for easy checking
+    if (likesSet.has(userId)) {
+      // User is already in the likes, remove them
+      update.$pull = { likes: userId };
+    } else {
+      // User is not in the likes, add them
+      update.$addToSet = { likes: userId };
+    }
+  
+    const options = { new: true };
+    const updatedDocument = await RatingReview.findOneAndUpdate(filter, update, options);
+  
+    if (updatedDocument) {
+      console.log('Document updated:', updatedDocument);
+    } else {
+      console.log('Document not found or not updated.');
+    }
+    res.status(200).json({ message: "Likes updated" });
+  
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+  
+}
+export const dislikes_Update = async(req,res) =>{
+  try {
+    const { id } = req.body;
+    const userId = req.user.userId;
+    const reviewId = new mongoose.Types.ObjectId(id);
+    const filter = { _id: reviewId };
+    const update = {};
+  
+    // Check if the user is already in the likes array
+    const review = await RatingReview.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+    const likesSet = new Set(review.likes.map(String)); // Convert ObjectId array to string set for easy checking
+    if (likesSet.has(userId)) {
+      // User is already in the likes, remove them
+      update.$pull = { likes: userId };
+    }
+    const dislikesSet = new Set(review.dislikes.map(String)); 
+    if (dislikesSet.has(userId)) {
+      // User is already in the likes, remove them
+      update.$pull = { dislikes: userId };
+    } else {
+      // User is not in the likes, add them
+      update.$addToSet = { dislikes: userId };
+    }
+  
+    const options = { new: true };
+    const updatedDocument = await RatingReview.findOneAndUpdate(filter, update, options);
+  
+    if (updatedDocument) {
+      console.log('Document updated:', updatedDocument);
+    } else {
+      console.log('Document not found or not updated.');
+    }
+    res.status(200).json({ message: "DisLikes updated" });
+  
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+  
 }

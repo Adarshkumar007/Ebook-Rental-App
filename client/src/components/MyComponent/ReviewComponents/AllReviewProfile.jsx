@@ -6,9 +6,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfileImage from "../ProfileImage";
 import {url} from '../../../url';
+import { useSelector } from "react-redux";
 const AllReviewProfile = ({ review }) => {
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(review.likes);
+  const [liked, setLiked] = useState(review.likes.includes(review.userId));
+  const [likeCount, setLikeCount] = useState(review.likes ? review.likes.length.toString() : "0");
+  const [dislikeCount, setDislikeCount] = useState(review.dislikes ? review.dislikes.length.toString() : "0");
+console.log("type",typeof(review.dislikes.length.toString()));
   const handleLikeButton = () => {
     if (liked) {
       setLikeCount((prevCount) => prevCount - 1);
@@ -22,11 +25,11 @@ const AllReviewProfile = ({ review }) => {
         setDisliked(false);
       }
     }
+    handlelikes();
   };
 
   //Dislike handling
-  const [disliked, setDisliked] = useState(false);
-  const [dislikeCount, setDislikeCount] = useState(review.dislikes);
+  const [disliked, setDisliked] = useState(review.dislikes.includes(review.userId));
   const [userInfo ,setuserInfo] = useState({});
   const handleDislikeButton = () => {
     if (disliked) {
@@ -41,6 +44,7 @@ const AllReviewProfile = ({ review }) => {
         setLiked(false);
       }
     }
+    handledislikes();
   };
   const handleSetFile = () =>{}
   useEffect(()=>{
@@ -60,6 +64,46 @@ const AllReviewProfile = ({ review }) => {
       fetchUserInfo();
     }
   },[])
+  const handlelikes = async () =>{
+    console.log("cliked");
+          try {
+            // Fetch review counts from the API
+            console.log("review",likeCount,dislikeCount);
+            const response = await axios.post(url + '/api/bookreview/likes', {
+              id: review._id
+            }, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            });
+            
+        
+            console.log("asdsa",response.data.message);
+            
+          } catch (error) {
+            console.error("Error fetching review counts:", error);
+          }
+        }
+    const handledislikes = async () =>{
+      try {
+        // Fetch review counts from the API
+        console.log("review",likeCount,dislikeCount);
+        const response = await axios.post(url + '/api/bookreview/dislikes', {
+          id: review._id
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        
+    
+        console.log("asdsa",response.data.message);
+        
+      } catch (error) {
+        console.error("Error fetching review counts:", error);
+      }
+          }
+  
   return (
     <div className="Pic-Name">
       <ProfileImage image={userInfo.imageSrc} handleSetFile={handleSetFile}/>

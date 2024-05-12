@@ -1,4 +1,4 @@
-import mongoose from  'mongoose';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Define a schema for ratings and reviews
@@ -22,19 +22,18 @@ const ratingReviewSchema = new Schema({
   review: {
     type: String
   },
-  likes:{
-    type: Number,
-    default:0
-  },
-  dislikes:{
-    type: Number,
-    default:0
-  },
+  likes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User' // Reference to the User model
+  }],
+  dislikes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User' // Reference to the User model
+  }],
   createdAt: {
     type: Date,
     default: Date.now
   }
 });
-
 
 export const RatingReview = mongoose.model('RatingReview', ratingReviewSchema);

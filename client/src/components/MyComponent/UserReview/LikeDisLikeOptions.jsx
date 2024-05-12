@@ -4,7 +4,7 @@
     return(
         <div className="LikeDislikeOptions">
             <EditDelete/>
-            <MyLikeDislike />
+            {/* <MyLikeDislike /> */}
         </div>
 
     )
