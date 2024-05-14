@@ -6,9 +6,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfileImage from "../ProfileImage";
 import {url} from '../../../url';
-import { useSelector } from "react-redux";
 const AllReviewProfile = ({ review }) => {
-  const [liked, setLiked] = useState(review.likes.includes(review.userId));
+  
+  const [liked, setLiked] = useState(review.likes.includes(localStorage.getItem('id')));
   const [likeCount, setLikeCount] = useState(review.likes ? review.likes.length.toString() : "0");
   const [dislikeCount, setDislikeCount] = useState(review.dislikes ? review.dislikes.length.toString() : "0");
 console.log("type",typeof(review.dislikes.length.toString()));
@@ -17,7 +17,7 @@ console.log("type",typeof(review.dislikes.length.toString()));
       setLikeCount((prevCount) => prevCount - 1);
       setLiked(false);
     } else {
-      setLikeCount((prevCount) => prevCount + 1);
+      setLikeCount((prevCount) => parseInt(prevCount) + 1);
       setLiked(true);
       //disable  Dislike
       if (disliked) {
@@ -29,14 +29,14 @@ console.log("type",typeof(review.dislikes.length.toString()));
   };
 
   //Dislike handling
-  const [disliked, setDisliked] = useState(review.dislikes.includes(review.userId));
+  const [disliked, setDisliked] = useState(review.dislikes.includes(localStorage.getItem('id')));
   const [userInfo ,setuserInfo] = useState({});
   const handleDislikeButton = () => {
     if (disliked) {
       setDislikeCount((prevCount) => prevCount - 1);
       setDisliked(false);
     } else {
-      setDislikeCount((prevCount) => prevCount + 1);
+      setDislikeCount((prevCount) => parseInt(prevCount) + 1);
       setDisliked(true);
       //disable  Like
       if (liked) {
@@ -63,9 +63,8 @@ console.log("type",typeof(review.dislikes.length.toString()));
     if(review.userId){
       fetchUserInfo();
     }
-  },[])
+  },[review.userId])
   const handlelikes = async () =>{
-    console.log("cliked");
           try {
             // Fetch review counts from the API
             console.log("review",likeCount,dislikeCount);
