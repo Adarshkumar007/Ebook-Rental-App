@@ -167,3 +167,14 @@ export const dislikes_Update = async(req,res) =>{
   }
   
 }
+export const user_reviews = async(req , res) =>{
+  const userId = req.user.userId;
+  try {
+    const reviews = await RatingReview.find({ userId: userId });
+    res.status(200).json(reviews);
+  } catch (error) {
+    res.status(500).json({ message: "fetching user review failed" });
+  }
+  
+
+}

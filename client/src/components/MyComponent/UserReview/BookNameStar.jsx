@@ -1,8 +1,8 @@
 import AllReviewStar from "../ReviewComponents/AllReviewStar";
-const BookNameStar = () => {
+const BookNameStar = ({bookInfo, review}) => {
   return (
     <div>
-      <h4 className="Book-Title">I Am Not Built To Break</h4>
+      <h4 className="Book-Title">{bookInfo.title}</h4>
       <div
         style={{
           color: "rgb(102 101 101 / 81%)",
@@ -10,9 +10,9 @@ const BookNameStar = () => {
           fontWeight: "bold",
         }}
       >
-        12/04/2024
+        {review.createdAt}
       </div>
-      <AllReviewStar rate={5} />
+      <AllReviewStar rate={review.rating} />
     </div>
   );
 };

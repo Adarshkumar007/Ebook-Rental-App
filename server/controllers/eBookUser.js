@@ -85,6 +85,21 @@ export const getBooks = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 }
+export const getBookInfo = async(req, res) => {
+  const bookId = req.query.bookId;
+
+  
+  eBook.findById(bookId).select('_id title bookImage')
+    .then(book => {    
+      const imageBase64 = Buffer.from(book.bookImage.data).toString('base64');
+      const imageSrc = `data:${book.bookImage.contentType};base64,${imageBase64}`;
+      res.status(200).json({ _id: book._id, imageSrc: imageSrc ,title:book.title });
+    })
+    .catch(error => {
+      console.error('Error fetching book information:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    });
+}
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

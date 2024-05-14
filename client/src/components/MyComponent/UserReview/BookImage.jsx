@@ -1,7 +1,7 @@
 import '../MyCSS/UserReview.css'
-const BookImage=({image})=>{
+const BookImage=({bookInfo})=>{
     return(
-        <img src={image} className="review-book"/>
+        <img src={bookInfo.imageSrc} className="review-book"/>
     )
 }
 export default BookImage;
