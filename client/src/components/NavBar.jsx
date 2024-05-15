@@ -411,6 +411,28 @@ const NavbarComponent = () => {
           </Row>
         </Container>
       )}
+      {activeModal === "subscribe" && (
+        <Container>
+          <Row>
+            <Col>
+              <Modal
+                show={true}
+                onHide={handleCloseModal}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Reviews </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                 
+                </Modal.Body>
+                <Modal.Footer>
+                  <MyButton myval="Close" onClick={handleCloseModal} />
+                </Modal.Footer>
+              </Modal>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </>
   );
 };
