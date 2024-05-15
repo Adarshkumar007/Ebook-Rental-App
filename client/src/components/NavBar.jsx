@@ -34,6 +34,7 @@ import { setOTPError } from "../redux/actions/sendOTPAction";
 import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
 import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalContent";
+import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptionPlan";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -420,10 +421,10 @@ const NavbarComponent = () => {
                 onHide={handleCloseModal}
               >
                 <Modal.Header closeButton>
-                  <Modal.Title>Reviews </Modal.Title>
+                  <Modal.Title>Subscription Plans </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                 
+                 <UserSubscriptionPlan/>
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
