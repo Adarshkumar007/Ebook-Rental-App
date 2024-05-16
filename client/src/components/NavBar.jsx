@@ -34,6 +34,7 @@ import { setOTPError } from "../redux/actions/sendOTPAction";
 import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
 import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalContent";
+import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptionPlan";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -92,8 +93,7 @@ const NavbarComponent = () => {
   const handleCart = () => {
     navigate("cart");
   };
-  
-  
+
   return (
     <>
       <nav
@@ -200,10 +200,7 @@ const NavbarComponent = () => {
                               className="dropdown-item pointer"
                               onClick={handleOrders}
                             >
-                              <LuTruck
-                                className="account-pic"
-                                id="list-pics"
-                              />
+                              <LuTruck className="account-pic" id="list-pics" />
                               <span className="account-options">Orders</span>
                             </a>
                           </li>
@@ -281,7 +278,6 @@ const NavbarComponent = () => {
                   <a
                     className="nav-link d-flex lg-justify-content-center pointer"
                     onClick={handleCart}
-                    
                   >
                     <BsCart4 className="account-pic " />
                     <span className="navi-items">Cart</span>
@@ -385,7 +381,6 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-                 
                 </Modal.Footer>
               </Modal>
             </Col>
@@ -394,23 +389,48 @@ const NavbarComponent = () => {
       )}
       {activeModalSeller === "review" && (
         <Container>
-        <Row>
-          <Col>
-        <Modal show={true} onHide={handleCloseModal} className="custom-modal">
-          <Modal.Header closeButton>
-            
-            <Modal.Title>Reviews </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Container>
-              <ReviewModalContent/>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <MyButton myval="Close" onClick={handleCloseModal} />
-          </Modal.Footer>
-        </Modal>
-        </Col>
+          <Row>
+            <Col>
+              <Modal
+                show={true}
+                onHide={handleCloseModal}
+                className="custom-modal"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Reviews </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Container>
+                    <ReviewModalContent />
+                  </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                  <MyButton myval="Close" onClick={handleCloseModal} />
+                </Modal.Footer>
+              </Modal>
+            </Col>
+          </Row>
+        </Container>
+      )}
+      {activeModal === "subscribe" && (
+        <Container>
+          <Row>
+            <Col>
+              <Modal
+                show={true}
+                onHide={handleCloseModal}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Subscription Plans </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                 <UserSubscriptionPlan/>
+                </Modal.Body>
+                <Modal.Footer>
+                  <MyButton myval="Close" onClick={handleCloseModal} />
+                </Modal.Footer>
+              </Modal>
+            </Col>
           </Row>
         </Container>
       )}

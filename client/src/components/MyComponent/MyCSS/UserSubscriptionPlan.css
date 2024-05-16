@@ -1,0 +1,44 @@
+.UserSubscriptionPlan{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.book-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+.bookImage {
+    width: 10rem;
+    height: 15rem;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 59%);
+}
+.Plan-list{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.Plan{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 6px;
+    padding: 5px 0px;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 59%);
+    flex-wrap: wrap;
+}
+.Subscribe-Button{
+    font-size: 12px;
+    border: 2px solid rgb(0, 13, 66);
+    font-weight: bold !important;
+
+}
+.month,.price{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap:1px;
+}

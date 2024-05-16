@@ -1,0 +1,72 @@
+.cart-container{
+ display: flex;
+ margin: 20px 5px;
+ flex-wrap: wrap;
+ gap: 20px;
+
+}
+
+@media screen and (max-width:1200px) {
+    .cart-container{
+       justify-content: space-between !important;
+    }
+}
+@media screen and (max-width:534px) {
+    .cart-container{
+       justify-content: center !important;
+    }
+}
+@media screen and (max-width:250px) {
+    .cart-card {
+
+        width: 10rem !important;
+        height: 16rem !important;
+    }
+}
+
+
+.cart-card {
+
+        width: 15rem;
+        height: 23rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgb(0 0 0 / 59%);
+    
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: box-shadow 0.3s ease; 
+  }
+  
+  
+  .details {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+  }
+  
+  .cart-card:hover .details {
+    opacity: 1; 
+  }
+  .removeBook{
+    position: absolute;
+    top: 10px;
+    right: 80%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    color: red;
+  }
+  .cart-card:hover .removeBook {
+    opacity: 1; 
+  }
+
