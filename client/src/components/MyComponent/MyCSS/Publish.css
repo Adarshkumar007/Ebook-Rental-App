@@ -1,0 +1,86 @@
+.Publish-Container{
+    display: flex;
+    flex-Direction: column;
+}
+
+.Publish-Title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Publish-Heading{
+    margin: 10px 0px;
+    font-weight: bold;
+    font-size: 27px;
+    font-family:DM Sans, sans-serif;
+}
+.Book-Information{
+    width: 100%;
+    display: flex;
+}
+
+@media  (max-width:768px) {
+    .Book-Information{
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+    } 
+    .Book-Form{
+        width:100% !important;
+        padding:0 !important;
+    }
+    .SubscriptionVariation {
+        height: fit-content !important;
+        padding:  0 !important;
+        overflow-y:hidden;
+      
+    }
+    .SubscriptionPlanForm{
+        display: flex;
+        align-items: center;
+       gap: 10px;
+        width: 100%;
+        margin-bottom:20px;
+    }
+    .SubscriptionPlanContainer{
+      
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+
+.Book-Form{
+    width: 50%;
+    padding: 10px 0;
+}
+.form-control,.form-select {
+    width: 90% !important;
+}
+.input-group {
+    width: 90% !important;
+    flex-wrap: nowrap !important;
+}
+.SubscriptionVariation {
+    height: 30rem;
+    padding: 15px 0;
+    width: 90%;
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+}
+
+
+
+.SubscriptionPlanForm{
+    display: flex;
+    align-items: center;
+   gap: 10px;
+    width: 100%;
+    margin-bottom:20px;
+}
+
+.SubscriptionPlanContainer{
+    padding: 10px 0;
+    width: 50%;
+}
+

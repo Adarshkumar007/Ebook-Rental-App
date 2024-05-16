@@ -13,6 +13,7 @@ import img3 from './images/image2.jpg'
 import img4 from './images/image3.jpg'
 import img5 from './images/image4.jpg'
 import img6 from './images/image5.jpg'
+import CartEmpty from "./CartEmpty";
 const books=[
 img1,img2,img3,img4,img5,img6
 ];
@@ -68,6 +69,7 @@ const Cart = () => {
   console.log(bookInfos);
   return (
     <Container>
+    {books.length===0 && <CartEmpty/>}
       <div className="cart-container">
         {books.map((book,index)=><CartCard key={index} book={book} />)}
         
