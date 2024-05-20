@@ -78,6 +78,10 @@ const NavbarComponent = () => {
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const handleLibrary=()=>{
+    navigate("/library");
+  }
   const handlePublish = () => {
     navigate("/publish");
   };
@@ -217,7 +221,8 @@ const NavbarComponent = () => {
                             </a>
                           </li>
                           <li>
-                            <a className="dropdown-item pointer">
+                            <a className="dropdown-item pointer"
+                            onClick={handleLibrary}>
                               <IoLibrary
                                 className="account-pic"
                                 id="list-pics"
