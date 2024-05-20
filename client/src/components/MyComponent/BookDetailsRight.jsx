@@ -5,6 +5,7 @@ import {url} from '../../url';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveModal } from '../../redux/actions/authActions';
+import { CURRENT_BOOKID } from '../../redux/actions/types';
 
 const BookDetailsRight = ({bookId, title, publisher, category, description ,onClick}) => {
     const dispatch = useDispatch();
@@ -41,6 +42,13 @@ const BookDetailsRight = ({bookId, title, publisher, category, description ,onCl
         }
 
     }
+    const handleSubscribe = () =>{
+      dispatch(setActiveModal("subscribe","user"));
+      dispatch({
+        type: CURRENT_BOOKID,
+        currentBookID: bookId,
+      });
+    }
     return (
         <div
             className="right-container"
@@ -59,7 +67,7 @@ const BookDetailsRight = ({bookId, title, publisher, category, description ,onCl
             <button type="button" className="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={onClick}>Preview</button>
             <button type="button" className="btn btn-info" style={{width:'6rem',border: "2px solid #000d42"}} onClick={handleCart}>Add Cart</button>
 
-            <button type="button" className="btn btn-danger" style={{width:'6rem',border: "2px solid #000d42"}} onClick={()=>{dispatch(setActiveModal("subscribe","user"))}}>Subscribe</button>
+            <button type="button" className="btn btn-danger" style={{width:'6rem',border: "2px solid #000d42"}} onClick={handleSubscribe}>Subscribe</button>
             </div>
             <span className='book-content' style={{ color: "#000d42ab", fontWeight: "400" }}>Description:</span>
             <p style={{ textAlign: "justify" }}>{description}</p>

@@ -23,6 +23,8 @@ export const eBookPreImage=async (req, res) => {
   export const eBookDisplay= async(req, res) => {
     const key = req.query.key; // Get the 'key' query parameter
     try {
+    console.log("keasdsay",key);
+
     const ebook = await eBook.findById(key);
     if(ebook){
     const imageBase64 = Buffer.from(ebook.bookImage.data).toString('base64');
@@ -53,6 +55,31 @@ export const eBookPreImage=async (req, res) => {
   }
   
     
+};
+export const eBookSub= async(req, res) => {
+  const key = req.query.bookId; // Get the 'key' query parameter
+  console.log("keyasdsa",key);
+  try {
+  const ebook = await eBook.findById(key);
+  if(ebook){
+  const imageBase64 = Buffer.from(ebook.bookImage.data).toString('base64');
+  const imageSrc = `data:${ebook.bookImage.contentType};base64,${imageBase64}`;
+    const eBookObj = {
+        id:ebook._id,
+        title: ebook.title,
+        imageSrc: imageSrc,
+    };
+    res.json(eBookObj);
+    }
+    else {
+      res.status(404).json({ error: 'Ebook not found' });
+  }
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to extract pages from PDF' });
+}
+
+  
 };
 export const getCategories = async(req,res) => {
   try {

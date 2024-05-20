@@ -1,4 +1,4 @@
-const Plan = ({plan}) => {
+const Plan = ({plan , onClick}) => {
     console.log(plan);
   return (
     <div className="Plan">
@@ -11,7 +11,7 @@ const Plan = ({plan}) => {
         <div>₹</div>
         <div>{plan.price}</div>
       </div>
-      <button type="button" className="btn btn-danger Subscribe-Button">
+      <button type="button" className="btn btn-danger Subscribe-Button" onClick={onClick}>
         Subscribe
       </button>
     </div>

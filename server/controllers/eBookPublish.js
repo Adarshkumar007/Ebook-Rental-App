@@ -85,3 +85,20 @@ export const addcart = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
 }
 }
+export const removeCart = async(req, res) => {
+  const bookIdToRemove = req.params.id;
+  const userId = req.user.userId;
+
+  Cart.updateOne(
+    { user_id: userId }, // Replace 'user_id_here' with the actual user ID
+    { $pull: { bookIds: bookIdToRemove } }
+)
+.then(result => {
+    console.log('Book ID removed from cart:', result);
+    res.status(200).json({ message: 'Book ID removed from cart' });     
+})
+.catch(error => {
+    res.status(500).json({ error: 'Internal server error' });
+});
+
+}

@@ -35,6 +35,7 @@ import MyButton from "./MyComponent/MyButton";
 import UserProfile from "./UserProfile";
 import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalContent";
 import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptionPlan";
+import { CURRENT_BOOKID } from "../redux/actions/types";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -67,7 +68,10 @@ const NavbarComponent = () => {
     dispatch(setActiveModal(null, userType));
     dispatch(clearError());
     dispatch(setOTPError());
-  };
+    dispatch({
+      type: CURRENT_BOOKID,
+      currentBookID: null,
+    });  };
   const handleSellerAC = () => {
     dispatch(setUserTypeAction("seller"));
     navigate("/seller");

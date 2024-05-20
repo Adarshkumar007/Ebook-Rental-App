@@ -191,8 +191,9 @@ export const userProfile=async(req,res)=>{
 }
 export const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  
+  console.log()
   const token = authHeader && authHeader.split(' ')[1];
+  console.log("token",token);
   if (token == null) return res.sendStatus(401); // Unauthorized
 
   jwt.verify(token, 'your_secret_key', (err, user) => {

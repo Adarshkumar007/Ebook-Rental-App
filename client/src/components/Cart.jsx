@@ -6,19 +6,11 @@ import { url } from "../url";
 import { Container } from "react-bootstrap";
 import CartCard from "./CartCard";
 import './MyComponent/MyCSS/Cart.css'
-
-import img1 from './images/built.jpg'
-import img2 from './images/image1.jpg'
-import img3 from './images/image2.jpg'
-import img4 from './images/image3.jpg'
-import img5 from './images/image4.jpg'
-import img6 from './images/image5.jpg'
 import CartEmpty from "./CartEmpty";
-const books=[
-img1,img2,img3,img4,img5,img6
-];
+
 
 const Cart = () => {
+  var flag=0;
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [bookIds, setBookIds] = useState([]);
@@ -34,6 +26,7 @@ const Cart = () => {
         });
 
         setBookIds(response.data.bookIds);
+        console.log("Book ID",response.data.bookIds);
       } catch (error) {
         console.error(
           "Error fetching book ids:",
@@ -42,12 +35,17 @@ const Cart = () => {
       }
     };
 
-    if (isAuthenticated) {
-      fetchBookIds();
+    if (isAuthenticated ) {
+      if(flag===0){
+        flag=1;
+        fetchBookIds();
+        console.log("hiii");
+      }
     } else {
       dispatch(setActiveModal("login", "user"));
+      console.log("helo")
     }
-  }, [dispatch, isAuthenticated]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const fetchBookInfo = async (bookId) => {
@@ -62,16 +60,23 @@ const Cart = () => {
       }
     };
 
-    if (bookIds.length > 0) {
+    if (bookIds.length > 0 && isAuthenticated) {
+      setBookInfos([]);
       bookIds.forEach((bookId) => fetchBookInfo(bookId));
     }
   }, [bookIds]);
-  console.log(bookInfos);
+  const handleCartBooks = (bookIdToRemove) => {
+    const updatedBookIds = bookIds.filter(id => id !== bookIdToRemove);
+    setBookIds(updatedBookIds);
+};
+
   return (
     <Container>
-    {books.length===0 && <CartEmpty/>}
+    {bookIds.length===0 && <CartEmpty/>}
       <div className="cart-container">
-        {books.map((book,index)=><CartCard key={index} book={book} />)}
+      {bookIds.length!==0 && bookInfos.map((book,index)=>
+    <CartCard key={index} book={book} handleCartBooks={() => handleCartBooks(book.id)} />
+)}
         
       </div>
     </Container>

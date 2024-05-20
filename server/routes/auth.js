@@ -3,9 +3,10 @@ import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, se
 import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
-import { addcart, eBookCollection, eBookPublish } from '../controllers/eBookPublish.js';
-import {eBookDisplay, eBookPreImage, getBookInfo, getBooks, getCategories} from '../controllers/eBookUser.js';
+import { addcart, eBookCollection, eBookPublish, removeCart } from '../controllers/eBookPublish.js';
+import {eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBooks, getCategories} from '../controllers/eBookUser.js';
 import { dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, userInfo, user_reviews } from '../controllers/ratings.js';
+import { order, subscribe, verifyPayment } from '../controllers/paymentController.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -25,6 +26,8 @@ router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
+router.get('/ebooksub',eBookSub);
+
 router.get('/collection',authenticateToken,eBookCollection);
 router.post('/addcart',authenticateToken,addcart);
 router.get('/api/getBookIds',authenticateToken,getBooksId);
@@ -37,5 +40,9 @@ router.get('/api/userinfo/:userId',userInfo);
 router.post('/api/bookreview/likes',authenticateToken,likes_Update);
 router.post('/api/bookreview/dislikes',authenticateToken,dislikes_Update);
 router.get('/reviews',authenticateToken,user_reviews);
-router.get('/bookinfo',getBookInfo)
+router.get('/bookinfo',getBookInfo);
+router.get('/removefromcart/:id',authenticateToken,removeCart);
+router.post('/subscribe',authenticateToken,order);
+router.post('/api/verify',verifyPayment);
+router.post('/api/payment-success',subscribe);
 export default router;
