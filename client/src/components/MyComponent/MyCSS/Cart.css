@@ -70,3 +70,15 @@
     opacity: 1; 
   }
 
+  .expire{
+    position: absolute;
+    top: 10px;
+    left: 70%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .cart-card:hover .expire{
+    opacity: 1; 
+  }
