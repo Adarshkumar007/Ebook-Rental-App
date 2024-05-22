@@ -39,11 +39,9 @@ const Cart = () => {
       if(flag===0){
         flag=1;
         fetchBookIds();
-        console.log("hiii");
       }
     } else {
       dispatch(setActiveModal("login", "user"));
-      console.log("helo")
     }
   }, [isAuthenticated]);
 

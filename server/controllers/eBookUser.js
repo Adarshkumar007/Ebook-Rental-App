@@ -1,5 +1,6 @@
 import { eBook } from "../models/ebook.js";
 import pkg from 'pdfjs-dist/build/pdf.js';
+import { Subscription } from "../models/subscription.js";
 const { getDocument, GlobalWorkerOptions } = pkg;
 
 export const eBookPreImage=async (req, res) => {
@@ -57,7 +58,7 @@ export const eBookPreImage=async (req, res) => {
     
 };
 export const eBookSub= async(req, res) => {
-  const key = req.query.bookId; // Get the 'key' query parameter
+  const key = req.query.bookId; 
   console.log("keyasdsa",key);
   try {
   const ebook = await eBook.findById(key);
@@ -121,6 +122,33 @@ export const getBookInfo = async(req, res) => {
       const imageBase64 = Buffer.from(book.bookImage.data).toString('base64');
       const imageSrc = `data:${book.bookImage.contentType};base64,${imageBase64}`;
       res.status(200).json({ _id: book._id, imageSrc: imageSrc ,title:book.title });
+    })
+    .catch(error => {
+      console.error('Error fetching book information:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    });
+}
+
+export const getSubscribedBooksID = async(req,res) =>{
+  const userId = req.user.userId;
+console.log("sdfsd",userId);
+    try {
+      const subscribedBooks = await Subscription.find({user:userId}).select('_id book status end_date');
+      console.log("subscr",subscribedBooks)
+      res.json(subscribedBooks);
+    } catch (error) {
+      res.status(500).send({ message: 'Error fetching books' });
+    }
+  
+}
+export const getBookimage = async(req, res) => {
+  const bookId = req.params.book;
+  console.log(bookId,"sdfsd");
+  eBook.findById(bookId).select('bookImage')
+    .then(book => {    
+      const imageBase64 = Buffer.from(book.bookImage.data).toString('base64');
+      const imageSrc = `data:${book.bookImage.contentType};base64,${imageBase64}`;
+      res.status(200).json({ imageSrc: imageSrc });
     })
     .catch(error => {
       console.error('Error fetching book information:', error);

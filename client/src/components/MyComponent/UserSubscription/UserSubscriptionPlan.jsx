@@ -41,7 +41,7 @@ const UserSubscriptionPlan = () => {
             );
                         console.log("result", result);
             const { id: order_id, amount, currency } = result.data;
-        console.log("con",process.env.REACT_APP_KEY==='rzp_test_ex1uwscMpGjh5L',process.env.REACT_APP_KEY,typeof('rzp_test_ex1uwscMpGjh5L'));
+        // console.log("con",process.env.REACT_APP_KEY==='rzp_test_ex1uwscMpGjh5L',process.env.REACT_APP_KEY,typeof('rzp_test_ex1uwscMpGjh5L'));
         const options = {
             key: process.env.REACT_APP_KEY,
             amount,

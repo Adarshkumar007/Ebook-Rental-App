@@ -1,25 +1,46 @@
 import '../MyCSS/Cart.css'
-import img1 from '../../images/built.jpg'
-import img2 from '../../images/image1.jpg'
-import img3 from '../../images/image2.jpg'
-import img4 from '../../images/image3.jpg'
-import img5 from '../../images/image4.jpg'
-import img6 from '../../images/image5.jpg'
 import CartEmpty from '../../CartEmpty'
 import LibraryCard from './LibraryCard'
 import { Container } from 'react-bootstrap'
-const books=[
-img1,img2,img3,img4,img5,img6
-];
+import { useState ,useEffect } from 'react'
+import axios from 'axios'
+import { url } from '../../../url'
+import { useDispatch, useSelector } from 'react-redux'
+import { setActiveModal } from '../../../redux/actions/authActions'
+const Library = () =>{
+  var flag=0;
+  const [books ,setBooks]=useState([]);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  useEffect(() => {
+    const fetchBookIds = async () => {
+  try {
+    const response = await axios.get(url+'/api/subscriptionbooksIDs', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setBooks(response.data);
+  } catch (error) {
+    console.error('Error fetching book IDs:', error);
+  }
+}
+ if (isAuthenticated ) {
+  if(flag===0){
+    flag=1;
+    fetchBookIds();
+  }
+} else {
+  dispatch(setActiveModal("login", "user"));
+}
+}, [isAuthenticated]);
 
 
-const Library=()=>{
  return(
     <Container>
     {books.length===0 && <CartEmpty/>}
       <div className="cart-container">
-        {books.map((book,index)=><LibraryCard key={index} book={book} />)}
-        
+        {books.map((book,index)=><LibraryCard key={index} book={book}/>)}
       </div>
       </Container>
  )

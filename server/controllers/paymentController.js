@@ -58,7 +58,7 @@ export const order = async(req,res) =>{
 }
 
 export const verifyPayment = async(req, res) => {
-    const secret = 'u8TX9elFOqhwJkSEmgdlkfoG';
+    const secret = process.env.SECRET;
     console.log("verifyed");
     const shasum = crypto.createHmac('sha256', secret);
     shasum.update(JSON.stringify(req.body));
