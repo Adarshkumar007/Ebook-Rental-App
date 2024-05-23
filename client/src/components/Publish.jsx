@@ -43,19 +43,19 @@ function AddEBookForm() {
   }, []);
 
   const handleFileChange = (e) => {
-    if (!e.target.files[0].name) {
+    if (e.target.files[0].name) {
       setFile(e.target.files[0]);
       setFileName(e.target.files[0].name);
     }
   };
   const handlePreFileChange = (e) => {
-    if (!e.target.files[0].name) {
+    if (e.target.files[0].name) {
       setPreFile(e.target.files[0]);
       setPreFileName(e.target.files[0].name);
     }
   };
   const handleImageChange = (e) => {
-    if (!e.target.files[0].name) {
+    if (e.target.files[0].name) {
       setImage(e.target.files[0]);
       setImageName(e.target.files[0].name);
     }
@@ -63,7 +63,7 @@ function AddEBookForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error state
-
+    console.log("handle")
     const formData = new FormData();
     formData.append("title", title);
     formData.append("author", author);
@@ -370,7 +370,7 @@ function AddEBookForm() {
           marginBottom:"10px"
         }}
       >
-        <SuccessButton myval="Add E-Book" type="submit" />
+        <SuccessButton myval="Add E-Book" onClick={handleSubmit} />
       </div>
     </Container>
   );
