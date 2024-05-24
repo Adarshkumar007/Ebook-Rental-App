@@ -12,12 +12,16 @@ const EBookDetails = () => {
   const { key } = useParams();
   const [ebook, setEbook] = useState([]);
   const [ispdfView, handleCloseModal] = useState(false);
+  
+  
   useEffect(() => {
     // Fetch ebook details
+   
     axios
       .get(url + `/ebook?key=${key}`)
       .then((response) => {
         setEbook(response.data);
+        
       })
       .catch((error) => {
         console.error("Error fetching ebook details:", error);
@@ -27,6 +31,7 @@ const EBookDetails = () => {
   return (
     <div>
       <Container>
+      
         <BookDetailsContainer
           bookId={ebook.id}
           image={ebook.imageSrc}
@@ -36,6 +41,7 @@ const EBookDetails = () => {
           description={ebook.description}
           onClick={()=>handleCloseModal(true)} 
         />
+      
 
 { ispdfView &&
             <Container>
@@ -64,10 +70,12 @@ const EBookDetails = () => {
           </Container>
 }
         
-        
+
         </Container>
+        
 </div>
   );
 };
+
 
 export default EBookDetails;

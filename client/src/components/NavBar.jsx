@@ -28,14 +28,14 @@ import { BiSupport } from "react-icons/bi";
 import { FaBookMedical } from "react-icons/fa";
 import { SiBookstack } from "react-icons/si";
 import { MdOutlineReviews } from "react-icons/md";
-import { Col, Container, Modal, Row, Button } from "react-bootstrap";
+import { Col, Container, Modal, Row } from "react-bootstrap";
 import { setOTPError } from "../redux/actions/sendOTPAction";
 
 import MyButton from "./MyComponent/MyButton";
-import UserProfile from "./UserProfile";
 import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalContent";
 import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptionPlan";
 import { CURRENT_BOOKID } from "../redux/actions/types";
+import ProfieModel from "./MyComponent/Model/ProfileModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -377,25 +377,12 @@ const NavbarComponent = () => {
           </Col>
         </Row>
       </Container>
+
       {(activeModal === "profile" || activeModalSeller === "profile") && (
-        <Container>
-          <Row>
-            <Col>
-              <Modal show={true} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Profile</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <UserProfile userType={userType} />
-                </Modal.Body>
-                <Modal.Footer>
-                  <MyButton myval="Close" onClick={handleCloseModal} />
-                </Modal.Footer>
-              </Modal>
-            </Col>
-          </Row>
-        </Container>
+        <ProfieModel closeModel={handleCloseModal} userType={userType}/>
+       
       )}
+      
       {activeModalSeller === "review" && (
         <Container>
           <Row>
