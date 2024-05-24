@@ -61,7 +61,7 @@ export const eBookSub= async(req, res) => {
   const key = req.query.bookId; 
   console.log("keyasdsa",key);
   try {
-  const ebook = await eBook.findById(key);
+  const ebook = await eBook.findById(key).select('_id title bookImage plan');
   if(ebook){
   const imageBase64 = Buffer.from(ebook.bookImage.data).toString('base64');
   const imageSrc = `data:${ebook.bookImage.contentType};base64,${imageBase64}`;
@@ -69,6 +69,7 @@ export const eBookSub= async(req, res) => {
         id:ebook._id,
         title: ebook.title,
         imageSrc: imageSrc,
+        plans:ebook.plan
     };
     res.json(eBookObj);
     }
@@ -155,6 +156,27 @@ export const getBookimage = async(req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     });
 }
+export const isSubscribed = async (req, res) => {
+  const key = req.query.bookId;
+  const userId = req.user.userId;
+  const plan = req.query.plan;
+  console.log("plan",plan);
+  try {
+    const exists = await Subscription.exists({ book: key, user: userId ,plan:plan});
+    if (exists) {
+      console.log("Subscription found");
+      res.status(200).json({ subscribed: true });
+    } else {
+      console.log("Subscription not found");
+      res.status(200).json({ subscribed: false });
+    }
+  } catch (err) {
+    console.error("Error checking for subscription presence:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+  
+
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

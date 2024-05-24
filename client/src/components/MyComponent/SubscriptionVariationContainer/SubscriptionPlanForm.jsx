@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyInput from "../MyInput";
 
-const SubscriptionPlanForm = () => {
+const SubscriptionPlanForm = ({ index, updatePlan }) => {
   const [month, setMonth] = useState("");
   const [price, setPrice] = useState("");
+
+  useEffect(() => {
+    // Update the plan in the parent component when month or price changes
+    updatePlan(index, { month, price });
+  }, [month, price]);
 
   const handleMonthChange = (event) => {
     setMonth(event.target.value);
@@ -13,6 +18,7 @@ const SubscriptionPlanForm = () => {
     setPrice(event.target.value);
   };
 
+ 
   return (
     <div className="SubscriptionPlanForm">
       <MyInput

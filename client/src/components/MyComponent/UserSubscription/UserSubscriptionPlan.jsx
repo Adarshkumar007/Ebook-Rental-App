@@ -8,23 +8,16 @@ import { url } from '../../../url';
 
 
 const UserSubscriptionPlan = () => {
-    const plans = [
-        { month: 1, price: 30.00 },
-        { month: 2, price: 50.00 },
-        { month: 3, price: 70.00 },
-        { month: 6, price: 150.00 },
-        { month: 12, price: 250.00 }
-    ];
-
-    const [ebook, setEbook] = useState({});
+    const [ebook, setEbook] = useState(null);
     const bookId = useSelector((state) => state.currentBookID.currentBookID);
 
     useEffect(() => {
         // Fetch ebook details
-        console.log(bookId);
+        // console.log(bookId);
         axios.get(url + `/ebooksub?bookId=${bookId}`)
             .then((response) => {
                 setEbook(response.data);
+                console.log("plans",response.data);
             })
             .catch((error) => {
                 console.error("Error fetching ebook details:", error);
@@ -85,18 +78,25 @@ const UserSubscriptionPlan = () => {
     };
 
     return (
-        <div className='UserSubscriptionPlan'>
-            <div className='book-title'>
+        <>
+          {ebook ? (
+            <div className='UserSubscriptionPlan'>
+              <div className='book-title'>
                 <img src={ebook.imageSrc || image} alt={ebook.title || 'Book Image'} className='bookImage' />
                 <h5>{ebook.title}</h5>
-            </div>
-            <div className='Plan-list'>
-                {plans.map((plan, index) => (
-                    <Plan key={index} plan={plan} onClick={() => handlesubscribe(plan)} />
+              </div>
+              <div className='Plan-list'>
+                {ebook.plans.map((plan, index) => (
+                  <Plan key={index} plan={plan} onClick={() => handlesubscribe(plan)} />
                 ))}
+              </div>
             </div>
-        </div>
-    );
+          ) : (
+            <></>
+          )}
+        </>
+      );
+      
 }
 
 export default UserSubscriptionPlan;

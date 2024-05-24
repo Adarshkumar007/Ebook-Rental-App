@@ -4,7 +4,9 @@ import { eBook } from "../models/ebook.js";
 
 export const eBookPublish=async(req,res)=>{
     try {
+      console.log("plans",req.body.plans);
       const seller = await Seller.findOne({_id:req.user.userId});
+      console.log(seller);
         const newBook = new eBook({
           title: req.body.title,
           publisherId:req.user.userId,
@@ -23,10 +25,12 @@ export const eBookPublish=async(req,res)=>{
           preFile: {
             data: req.files['prefile'][0].buffer,
             contentType: req.files['prefile'][0].mimetype
-          }
-        });
+          },
+          plan:JSON.parse(req.body.plans)
+      });
     
         await newBook.save();
+        console.log("book saved");
         res.status(201).send('Book saved successfully');
       } catch (error) {
         console.error('Error saving book:', error);

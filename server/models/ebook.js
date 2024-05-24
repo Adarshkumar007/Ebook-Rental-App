@@ -1,5 +1,16 @@
 import mongoose from 'mongoose';
 
+const planSchema = new mongoose.Schema({
+  month: {
+    type: Number,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  }
+});
+
 const ebookSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -22,7 +33,7 @@ const ebookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  category:{
+  category: {
     type: String,
     required: true
   },
@@ -55,8 +66,8 @@ const ebookSchema = new mongoose.Schema({
       type: String,
       required: true
     }
-  }
-  // Other required items
+  },
+  plan: [planSchema] // Add plan field
 }, { timestamps: true });
 
 export const eBook = mongoose.model('Book', ebookSchema);

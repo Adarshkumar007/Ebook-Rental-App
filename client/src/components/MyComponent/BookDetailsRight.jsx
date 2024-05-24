@@ -43,11 +43,16 @@ const BookDetailsRight = ({bookId, title, publisher, category, description ,onCl
 
     }
     const handleSubscribe = () =>{
+      if(isAuthenticated){
       dispatch(setActiveModal("subscribe","user"));
       dispatch({
         type: CURRENT_BOOKID,
         currentBookID: bookId,
       });
+    }
+    else{
+      dispatch(setActiveModal("login","user"));
+    }
     }
     return (
         <div

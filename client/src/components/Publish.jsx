@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +30,12 @@ function AddEBookForm() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [category, handleSetCategory] = useState("");
-
+  const [plans , setPlans] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const fileInputRef = useRef(null);
+  const preFileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
   useEffect(() => {
     dispatch(setUserTypeAction("seller"));
     console.log("user is", userType);
@@ -60,6 +62,10 @@ function AddEBookForm() {
       setImageName(e.target.files[0].name);
     }
   };
+  const handlePlan = (plans) =>{
+    setPlans(plans);
+    console.log("plans",typeof plans);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error state
@@ -72,7 +78,7 @@ function AddEBookForm() {
     formData.append("prefile", preFile);
     formData.append("image", image);
     formData.append("category", category);
-
+    formData.append("plans",JSON.stringify(plans));
     try {
       const response = await axios.post(url + "/publish", formData, {
         params: {
@@ -102,6 +108,9 @@ function AddEBookForm() {
       setPreFile(null);
       setPreFileName("");
       handleSetCategory("");
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      if (preFileInputRef.current) preFileInputRef.current.value = "";
+      if (imageInputRef.current) imageInputRef.current.value = "";
     } catch (error) {
       console.error(
         "Error adding e-book:",
@@ -358,7 +367,7 @@ function AddEBookForm() {
         </button> */}
           </form>
           <div  className="SubscriptionPlanContainer">
-            <SubscriptionVariation />
+            <SubscriptionVariation handlePlan={handlePlan}/>
           </div>
         </div>
       </div>

@@ -1,5 +1,26 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { url } from "../../../url";
+
 const Plan = ({plan , onClick}) => {
+  const [isSubscribed , setIsSubscribed] = useState(false);
     console.log(plan);
+    const bookId = useSelector((state) => state.currentBookID.currentBookID);
+    useEffect(()=>{
+      axios.get(url + `/issubscribed?bookId=${bookId}&plan=${plan.month}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+          // setEbook(response.data);
+          setIsSubscribed(response.data.subscribed);
+      })
+      .catch((error) => {
+          console.error("Error fetching ebook details:", error);
+      });
+    },[])
   return (
     <div className="Plan">
       <div className="month">
@@ -11,9 +32,12 @@ const Plan = ({plan , onClick}) => {
         <div>₹</div>
         <div>{plan.price}</div>
       </div>
-      <button type="button" className="btn btn-danger Subscribe-Button" onClick={onClick}>
+      {!isSubscribed?(<button type="button" className="btn btn-danger Subscribe-Button" onClick={onClick}>
         Subscribe
-      </button>
+      </button>):<button type="button" className="btn btn-success Subscribe-Button">
+        Subscribed
+      </button>}
+      
     </div>
   );
 };

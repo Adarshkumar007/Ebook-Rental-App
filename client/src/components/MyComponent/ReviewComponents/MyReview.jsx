@@ -4,9 +4,10 @@ import axios from 'axios';
 import ReviewDetails from "./ReviewDetails";
 import "../MyCSS/MyReview.css";
 import SuccessButton from "../SuccessButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileImage from "../ProfileImage";
 import { url } from "../../../url";
+import { setActiveModal } from "../../../redux/actions/authActions";
 
 const MyReview = ({bookId}) => {
   const [rating, setRating] = useState(null);
@@ -16,6 +17,7 @@ const MyReview = ({bookId}) => {
   const username =useSelector((state) => state.auth.username);
   const imageSrc = useSelector((state) =>state.auth.imageSrc);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
   const handleRatingChange = (currentRating) => {
     setRating(currentRating);
   };
@@ -48,6 +50,9 @@ const MyReview = ({bookId}) => {
       } catch (err) {
       }
       }
+    }
+    else{
+      dispatch(setActiveModal("login","user"));
     }
   }
   return (

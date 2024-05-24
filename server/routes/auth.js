@@ -4,7 +4,7 @@ import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
 import { addcart, eBookCollection, eBookPublish, removeCart } from '../controllers/eBookPublish.js';
-import {eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBookimage, getBooks, getCategories, getSubscribedBooksID} from '../controllers/eBookUser.js';
+import {eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed} from '../controllers/eBookUser.js';
 import { dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, userInfo, user_reviews } from '../controllers/ratings.js';
 import { order, subscribe, verifyPayment } from '../controllers/paymentController.js';
 const router = express.Router();
@@ -44,5 +44,6 @@ router.post('/api/verify',verifyPayment);
 router.post('/api/payment-success',subscribe);
 router.get('/api/subscriptionbooksIDs',authenticateToken,getSubscribedBooksID);
 router.get('/bookimage/:book',getBookimage);
+router.get('/issubscribed',authenticateToken,isSubscribed);
 
 export default router;
