@@ -7,7 +7,7 @@ export const login = (email, password,userType) => async (dispatch) => {
   
   console.log("user type:",userType);
   if(userType==="seller"){
-     let route=url+"/api/sellerlogin";
+     let route=url+"/api/sellerlogin/";
      try {
       console.log(url);
       console.log(email,password);
