@@ -65,7 +65,7 @@ const SmallFooter = () => {
 
         <div className="footer-options">
           <BiSupport className="footer-icon" />
-          <Link to="">
+          <Link to="/Help">
             <p className="footer-flex-title">Help</p>
           </Link>
         </div>

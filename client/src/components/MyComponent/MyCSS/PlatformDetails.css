@@ -1,0 +1,22 @@
+.aboutus-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 20px !important;
+    margin-bottom: 20px;
+  }
+
+.aboutus-text{
+    text-align: justify !important;
+    font-size: 15px;
+    font-weight: 400;
+}
+.side-heading{
+    text-align: start;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0 5px 0;
+}
+.security-points{
+    margin: 10px 0;
+}
