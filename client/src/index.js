@@ -48,6 +48,11 @@ import './styles.css'; // Import your custom CSS file
 import Cart from './components/Cart';
 import Reviews from './components/Reviews'
 import Library from './components/MyComponent/Library/Library';
+import AboutUs from './components/MyComponent/PlatformDetails/AboutUs';
+import Privacy from './components/MyComponent/PlatformDetails/Privacy';
+import ContactUs from './components/MyComponent/PlatformDetails/ContactUs';
+import Security from './components/MyComponent/PlatformDetails/Security';
+import Help from './components/MyComponent/PlatformDetails/Help';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -66,6 +71,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/collection" element={<Collection/>}/>
               <Route path="/cart" element={<Cart/>}/>
               <Route path="/library" element={<Library/>}/>
+              <Route path="/AboutUs" element={<AboutUs/>}/>
+              <Route path="/Privacy" element={<Privacy/>}/>
+              <Route path="/ContactUs" element={<ContactUs/>}/>
+              <Route path="/Security" element={<Security/>}/>
+              <Route path="/Help" element={<Help/>}/>
             </Routes>
           <FooterComponent />
       </Router>

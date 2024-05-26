@@ -53,7 +53,7 @@ const FooterComponent = () => {
               <ul className="list-unstyled">
                 <li>
                   <Link
-                    to="#"
+                    to="/ContactUs"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Contact Us
@@ -61,7 +61,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <Link
-                    to="#"
+                    to="/AboutUs"
                     className="text-decoration-none all-list-item-style items"
                   >
                     About Us
@@ -69,7 +69,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <Link
-                    to="#"
+                    to="/Privacy"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Privacy
@@ -77,7 +77,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <Link
-                    to="#"
+                    to="/Security"
                     className="text-decoration-none all-list-item-style items"
                   >
                     Security
@@ -175,7 +175,7 @@ const FooterComponent = () => {
                     </li>
                     <li>
                       <Link
-                        to=""
+                        to="/AboutUs"
                         className="text-decoration-none all-list-item-style items"
                       >
                         About Us
@@ -200,7 +200,7 @@ const FooterComponent = () => {
                 )}
                 <li>
                   <Link
-                    to="#"
+                    to="/Help"
                     className="text-decoration-none all-list-item-style items"
                   >
                     24x7 Help

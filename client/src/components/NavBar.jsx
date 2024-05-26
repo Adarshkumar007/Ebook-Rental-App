@@ -8,11 +8,12 @@ import {
   setUserTypeAction,
 } from "../redux/actions/authActions";
 import { logout } from "../redux/actions/authActions";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 import logo from "./images/logo.png";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./MyComponent/MyCSS/PlatformDetails.css";
 
 import { CgProfile } from "react-icons/cg";
 import { FaUserPlus } from "react-icons/fa6";
@@ -109,10 +110,10 @@ const NavbarComponent = () => {
         style={{ fontFamily: '"DM Sans", sans-serif' }}
       >
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <img src={logo} alt="" className="navbar-brand mb-4 main-logo" />
             <span className="title">RentReader</span>
-          </a>
+          </Link>
 
           <button
             className="navbar-toggler"
@@ -317,10 +318,10 @@ const NavbarComponent = () => {
                     </li>
                   )}
                   <li>
-                    <a className="dropdown-item pointer">
+                    <Link className="dropdown-item pointer" to="/Help">
                       <BiSupport className="account-pic" id="list-pics" />
                       <span className="account-options">24x7 Help</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item pointer">
