@@ -5,6 +5,7 @@ import accountReducer from './accoutReducer';
 import sellerAuthReducer from './sellerAuthReducer';
 import ratingReducer from './ratingReducer';
 import bookIDReducer from './currentBookId';
+import isNewSubscribed from './isSubscribed';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   setUserType:accountReducer,
   sellerauth:sellerAuthReducer,
   currentratingvalue:ratingReducer,
-  currentBookID:bookIDReducer
+  currentBookID:bookIDReducer,
+  isNewSubscribed:isNewSubscribed
 });
 
 export default rootReducer;

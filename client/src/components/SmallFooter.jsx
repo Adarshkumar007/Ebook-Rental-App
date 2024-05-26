@@ -17,6 +17,7 @@ const SmallFooter = () => {
   const userType = useSelector((state) => state.setUserType.USER_TYPE);
 
   const handleProfile = () => {
+    console.log("userTypesds",userType)
     dispatch(setActiveModal("profile", userType));
   };
 
@@ -74,9 +75,8 @@ const SmallFooter = () => {
           isAuthenticated ? (
             <div className="footer-options" onClick={handleProfile}>
               <FaUserCircle className="footer-icon" />
-              <Link to="">
                 <p className="footer-flex-title">MyProfile</p>
-              </Link>
+              
             </div>
           ) : (
             <div
@@ -84,17 +84,14 @@ const SmallFooter = () => {
               onClick={() => handleShowModal("login")}
             >
               <FaUserCircle className="footer-icon" />
-              <Link to="">
                 <p className="footer-flex-title">Login</p>
-              </Link>
+              
             </div>
           )
         ) : isSellerAuthenticated ? (
           <div className="footer-options" onClick={handleProfile}>
             <FaUserCircle className="footer-icon" />
-            <Link to="">
               <p className="footer-flex-title">MyProfile</p>
-            </Link>
           </div>
         ) : (
           <div
@@ -102,9 +99,7 @@ const SmallFooter = () => {
             onClick={() => handleShowModal("login")}
           >
             <FaUserCircle className="footer-icon" />
-            <Link to="">
               <p className="footer-flex-title">Login</p>
-            </Link>
           </div>
         )}
       </div>

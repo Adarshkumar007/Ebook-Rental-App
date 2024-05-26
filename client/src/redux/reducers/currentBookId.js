@@ -7,7 +7,6 @@ const initialState = {
 const bookIDReducer = (state = initialState, action) => {
   switch (action.type) {
     case CURRENT_BOOKID:
-        console.log("got");
         return {
             ...state,
             currentBookID:action.currentBookID,

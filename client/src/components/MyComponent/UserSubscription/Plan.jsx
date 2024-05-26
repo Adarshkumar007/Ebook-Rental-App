@@ -7,7 +7,26 @@ const Plan = ({plan , onClick}) => {
   const [isSubscribed , setIsSubscribed] = useState(false);
     console.log(plan);
     const bookId = useSelector((state) => state.currentBookID.currentBookID);
+    const isnewSubscribed = useSelector((state) => state.isNewSubscribed.isSubscribed);
+
     useEffect(()=>{
+      if(isnewSubscribed){
+      console.log("second");
+        axios.get(url + `/issubscribed?bookId=${bookId}&plan=${plan.month}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+          setIsSubscribed(response.data.subscribed);
+      })
+      .catch((error) => {
+          console.error("Error fetching ebook details:", error);
+      });
+    }
+    },[isnewSubscribed])
+    useEffect(()=>{
+      console.log("first");
       axios.get(url + `/issubscribed?bookId=${bookId}&plan=${plan.month}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`

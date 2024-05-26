@@ -1,16 +1,18 @@
 import '../MyCSS/UserSubscriptionPlan.css';
 import image from "../../images/built.jpg";
 import Plan from './Plan';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { url } from '../../../url';
+import { ISSUBSCRIBED } from '../../../redux/actions/types';
+import isNewSubscribed from '../../../redux/reducers/isSubscribed';
 
 
 const UserSubscriptionPlan = () => {
     const [ebook, setEbook] = useState(null);
     const bookId = useSelector((state) => state.currentBookID.currentBookID);
-
+    const dispatch =useDispatch();
     useEffect(() => {
         // Fetch ebook details
         // console.log(bookId);
@@ -47,6 +49,10 @@ const UserSubscriptionPlan = () => {
                     order_id: response.razorpay_order_id
                 }).then(() => {
                     console.log("Success.");
+                    dispatch({
+                        type:ISSUBSCRIBED,
+                        isSubscribed:true
+                    })
                 }).catch(error => {
                     console.error("Error verifying payment:", error);
                 });
