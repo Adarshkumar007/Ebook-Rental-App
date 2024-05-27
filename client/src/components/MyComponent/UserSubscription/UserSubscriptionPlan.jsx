@@ -5,24 +5,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { url } from '../../../url';
-import { ISSUBSCRIBED } from '../../../redux/actions/types';
-import isNewSubscribed from '../../../redux/reducers/isSubscribed';
+import { useNavigate } from 'react-router-dom';
+import { logout, setActiveModal } from '../../../redux/actions/authActions';
 
 
 const UserSubscriptionPlan = () => {
     const [ebook, setEbook] = useState(null);
     const bookId = useSelector((state) => state.currentBookID.currentBookID);
+    const Navigate = useNavigate();
     const dispatch =useDispatch();
     useEffect(() => {
-        // Fetch ebook details
-        // console.log(bookId);
-        axios.get(url + `/ebooksub?bookId=${bookId}`)
+        
+        axios.get(url + `/ebooksub?bookId=${bookId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            } 
+          })
             .then((response) => {
                 setEbook(response.data);
                 console.log("plans",response.data);
             })
             .catch((error) => {
-                console.error("Error fetching ebook details:", error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    if (error.response.status === 403) {
+                      console.error('Error 403: Forbidden');
+                      dispatch(logout("user"));
+                      dispatch(setActiveModal("login","user"));
+                    } else {
+                      console.error(`Error ${error.response.status}: ${error.response.statusText}`);
+                      // Handle other errors
+                    }
+                  } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error('No response received', error.request);
+                  } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.error('Error', error.message);
+                  }
             });
     }, [bookId]);
 
@@ -49,10 +70,7 @@ const UserSubscriptionPlan = () => {
                     order_id: response.razorpay_order_id
                 }).then(() => {
                     console.log("Success.");
-                    dispatch({
-                        type:ISSUBSCRIBED,
-                        isSubscribed:true
-                    })
+                    Navigate('/library');
                 }).catch(error => {
                     console.error("Error verifying payment:", error);
                 });

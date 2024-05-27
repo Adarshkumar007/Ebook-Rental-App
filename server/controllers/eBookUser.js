@@ -162,7 +162,14 @@ export const isSubscribed = async (req, res) => {
   const plan = req.query.plan;
   console.log("plan",plan);
   try {
-    const exists = await Subscription.exists({ book: key, user: userId ,plan:plan});
+    let exists=false;
+    if(plan){
+     exists = await Subscription.exists({ book: key, user: userId ,plan:plan});
+    }
+    else{
+     exists = await Subscription.exists({ book: key, user: userId});
+
+    }
     if (exists) {
       console.log("Subscription found");
       res.status(200).json({ subscribed: true });
@@ -175,7 +182,7 @@ export const isSubscribed = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
-  
+
 
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 

@@ -7,17 +7,16 @@ import SuccessButton from "../SuccessButton";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileImage from "../ProfileImage";
 import { url } from "../../../url";
-import { setActiveModal } from "../../../redux/actions/authActions";
+import { logout, setActiveModal } from "../../../redux/actions/authActions";
 
 const MyReview = ({bookId}) => {
   const [rating, setRating] = useState(null);
   const [review , setReview] = useState("");
   const [hover, setHover] = useState(null);
-  const [currentRating ,setCurrentRating] = useState(5);
   const username =useSelector((state) => state.auth.username);
-  const imageSrc = useSelector((state) =>state.auth.imageSrc);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const [isSubscribed , setIsSubscribed] = useState(false);
   const handleRatingChange = (currentRating) => {
     setRating(currentRating);
   };
@@ -27,9 +26,44 @@ const MyReview = ({bookId}) => {
   const handleSetFile = () =>{
   }
   
-  
+  useEffect(()=>{
+    if(bookId){
+      axios.get(url + `/issubscribed?bookId=${bookId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        } 
+      })
+      .then((response) => {
+          // setEbook(response.data);
+          setIsSubscribed(response.data.subscribed);
+          
+      })
+        .catch(error => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            if (error.response.status === 403) {
+              console.error('Error 403: Forbidden');
+              dispatch(logout("user"));
+              dispatch(setActiveModal("login","user"));
+            } else {
+              console.error(`Error ${error.response.status}: ${error.response.statusText}`);
+              // Handle other errors
+            }
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error('No response received', error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error', error.message);
+          }
+      });
+    }
+    
+  },[isAuthenticated,bookId])
   const handleOnClick = async () =>{
     if(isAuthenticated){
+      if(isSubscribed){
       if(!rating){
           console.log("invalid rating");
       }
@@ -50,6 +84,10 @@ const MyReview = ({bookId}) => {
       } catch (err) {
       }
       }
+    }
+    else{
+      console.log("Subscription required");
+    }
     }
     else{
       dispatch(setActiveModal("login","user"));

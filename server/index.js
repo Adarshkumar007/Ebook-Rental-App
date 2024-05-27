@@ -2,6 +2,7 @@ import  express  from 'express';
 import  mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import './controllers/cron-job.js'
 import  router from "./routes/auth.js";
 const app = express();
 

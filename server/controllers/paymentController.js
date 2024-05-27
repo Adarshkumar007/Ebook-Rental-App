@@ -94,14 +94,14 @@ export const subscribe = async (req, res) => {
         const orderInfo = await Order.findOne({ order_id: order_id });
     const startDate = new Date();
     const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + orderInfo.plan, startDate.getDate());
-
+    const newEndDate = new Date(endDate.toISOString().split('T')[0]);
     const subInfo = {
         order: orderInfo._id,
         user: orderInfo.user,
         book: orderInfo.book,
         plan: orderInfo.plan,
         amount: orderInfo.amount,
-        end_date: endDate
+        end_date: newEndDate    
     };
 
     const subscription = new Subscription(subInfo);

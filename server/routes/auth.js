@@ -24,7 +24,7 @@ router.get('/orders', authenticateToken);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
-router.get('/ebooksub',eBookSub);
+router.get('/ebooksub',authenticateToken, eBookSub);
 router.get('/collection',authenticateToken,eBookCollection);
 router.post('/addcart',authenticateToken,addcart);
 router.get('/api/getBookIds',authenticateToken,getBooksId);
