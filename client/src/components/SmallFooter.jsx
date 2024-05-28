@@ -73,7 +73,7 @@ const SmallFooter = () => {
 
         {userType === "user" ? (
           isAuthenticated ? (
-            <div className="footer-options" onClick={handleProfile}>
+            <div className="footer-options" onClick={handleProfile} style={{cursor:"pointer"}}>
               <FaUserCircle className="footer-icon" />
                 <p className="footer-flex-title">MyProfile</p>
               
@@ -82,6 +82,7 @@ const SmallFooter = () => {
             <div
               className="footer-options"
               onClick={() => handleShowModal("login")}
+              style={{cursor:"pointer"}}
             >
               <FaUserCircle className="footer-icon" />
                 <p className="footer-flex-title">Login</p>
@@ -89,7 +90,7 @@ const SmallFooter = () => {
             </div>
           )
         ) : isSellerAuthenticated ? (
-          <div className="footer-options" onClick={handleProfile}>
+          <div className="footer-options" onClick={handleProfile} style={{cursor:"pointer"}}>
             <FaUserCircle className="footer-icon" />
               <p className="footer-flex-title">MyProfile</p>
           </div>
@@ -97,6 +98,7 @@ const SmallFooter = () => {
           <div
             className="footer-options"
             onClick={() => handleShowModal("login")}
+            style={{cursor:"pointer"}}
           >
             <FaUserCircle className="footer-icon" />
               <p className="footer-flex-title">Login</p>

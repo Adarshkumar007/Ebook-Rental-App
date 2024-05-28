@@ -4,6 +4,7 @@ import ProfileImage from './MyComponent/ProfileImage';
 import ProfileInput from './MyComponent/ProfileInput';
 import SuccessButton from './MyComponent/SuccessButton';
 import ProfileInputEmail from './MyComponent/ProfileInputEmail';
+import Loading from './MyComponent/Loading'
 import {url} from '../../src/url'; 
 
 function UserProfile({userType}) {
@@ -38,7 +39,7 @@ function UserProfile({userType}) {
   if (!profile) {
     return (
       <>
-        {error ? <h3><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error.message}</div></h3> : <div>Loading...</div>}
+        {error ? <h3><div className="error" style={{ display:"flex",justifyContent:"center",alignItems:"center",color: "red"}}>{error.message}</div></h3> : <div><Loading/></div>}
       </>
     );
   }
@@ -82,7 +83,7 @@ function UserProfile({userType}) {
   } 
 
   const handleProfileClick = async () =>{
-    let url;
+  
     const formData = new FormData();
   formData.append('username', profile.username);
   formData.append('email', profile.email);
