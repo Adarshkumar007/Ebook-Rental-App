@@ -21,7 +21,7 @@ function UserProfile({userType}) {
             userType: userType
           },
       headers: {
-        'Authorization': `Bearer ${userType==="seller"?localStorage.getItem('sellertoken'):localStorage.getItem('token')}` // Assuming the token is stored in local storage
+        'Authorization': `Bearer ${userType==="seller"?localStorage.getItem('sellertoken'):localStorage.getItem('token')}` 
       }
     })
     .then(response =>{ 
@@ -83,7 +83,6 @@ function UserProfile({userType}) {
   } 
 
   const handleProfileClick = async () =>{
-  
     const formData = new FormData();
   formData.append('username', profile.username);
   formData.append('email', profile.email);
