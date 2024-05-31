@@ -1,0 +1,144 @@
+.Order-Contaier {
+  width: 100%;
+  border-radius: 15px; /* Curved edges */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  background-color: white; /* Optional: Set a background color */
+  padding: 20px; /* Optional: Add some padding */
+  margin: 10px 0; /* Optional: Add some margin */
+  perspective: 1000px;
+  display: flex;
+  gap: 10px;
+}
+.Ordered-Book {
+  width: 5rem;
+  height: 6rem;
+}
+.Ordered-Book-container {
+  width: 10%;
+}
+.Ordered-Book-image {
+  width: 100%;
+  height: 100%;
+}
+
+.OrderDetails-Main-Container {
+  width: 80%;
+}
+
+@media (max-width: 992px) {
+  .Ordered-Book-container {
+    width: 15%;
+  }
+  .Order-Detail {
+    font-size: 12px;
+  }
+  .Ordered-Book {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .Ordered-Book-container {
+    width: 20%;
+  }
+
+  .Ordered-Book {
+    width: 6rem;
+    height: 9rem;
+  }
+  .Order-Details-Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .Order-Details {
+    flex-direction: column;
+  }
+  .Order-Detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .Order-Library-Button {
+    width: 50% !important;
+    font-size: 12px !important;
+    margin-top: 5px !important;
+  }
+}
+@media (max-width: 530px) {
+  .Ordered-Book-container {
+    width: 25%;
+  }
+}
+@media (max-width: 420px) {
+  .Order-Contaier {
+    padding: 10px; /* Optional: Add some padding */
+
+    gap: 15px;
+  }
+}
+
+@media (max-width: 420px) {
+   
+    .Order-Contaier {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .OrderDetails-Main-Container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .Ordered-Book-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .Order-Library-Button {
+        width: 100% !important;
+        
+      }
+    
+  }
+
+  
+@media (max-width: 300px) {
+      
+    .OrderDetails-Main-Container {
+        width: 100%;
+        overflow: scroll;
+    }
+    
+  }
+
+
+
+.Order-Details-Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.Order-Details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.Order-Detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.order-detais-heading {
+  color: #777777;
+  font-weight: bold;
+}
+.order-detais-heading-content {
+  color: #000d42;
+}

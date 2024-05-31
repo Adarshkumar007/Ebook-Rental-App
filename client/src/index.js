@@ -41,7 +41,6 @@ import store from './redux/store';
 import NavbarComponent from './components/NavBar';
 import FooterComponent from './components/FooterComponent';
 import AddEBookForm from './components/Publish';
-import Orders from './components/Order';
 import EBookDetails from './components/EBookDetails';
 import Collection from './components/Collection';
 import './styles.css'; // Import your custom CSS file
@@ -53,6 +52,7 @@ import Privacy from './components/MyComponent/PlatformDetails/Privacy';
 import ContactUs from './components/MyComponent/PlatformDetails/ContactUs';
 import Security from './components/MyComponent/PlatformDetails/Security';
 import Help from './components/MyComponent/PlatformDetails/Help';
+import Order from './components/MyComponent/Order/Order';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -63,7 +63,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
          
             <Routes>
               <Route path="/" element={<App />} />
-              <Route path="/orders" element={<Orders />} />
+              <Route path="/orders" element={<Order/>} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/publish" element={<AddEBookForm />} />
               <Route path="/seller" element={<SellerPage />} />
