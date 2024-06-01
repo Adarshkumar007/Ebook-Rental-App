@@ -35,7 +35,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
-import SellerPage from './components/SellerPage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import NavbarComponent from './components/NavBar';
@@ -53,6 +52,7 @@ import ContactUs from './components/MyComponent/PlatformDetails/ContactUs';
 import Security from './components/MyComponent/PlatformDetails/Security';
 import Help from './components/MyComponent/PlatformDetails/Help';
 import Order from './components/MyComponent/Order/Order';
+import SellerPage from './components/SellerPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

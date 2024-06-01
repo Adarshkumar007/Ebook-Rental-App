@@ -85,3 +85,11 @@
     align-items: center;
     gap:10px;
 }
+.EditReviewButton:hover, .DeleteReviewButton:hover {
+    cursor: pointer;
+    color:yellowgreen ;
+}
+
+.EditReviewContainer{
+    margin: 0 auto !important;
+}

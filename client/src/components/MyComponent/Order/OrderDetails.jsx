@@ -1,7 +1,7 @@
 const OrderDetails = ({myorder}) => {
   return (
     <div className="Order-Details-Container">
-      <h4 style={{color:" #000d42",fontWeight:"bold"}}>{myorder.name}</h4>
+      <h4 style={{color:" #000d42",fontWeight:"bold"}} className="Order-Book-Name">{myorder.name}</h4>
       <div className="Order-Details">
         <div className="Order-Detail ">
           <div><span className="order-detais-heading">Order Id :</span><span className="order-detais-heading-content">{myorder.orderId}</span></div>

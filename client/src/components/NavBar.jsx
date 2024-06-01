@@ -37,6 +37,7 @@ import ReviewModalContent from "./MyComponent/SellerBookReview/ReviewModalConten
 import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptionPlan";
 import { CURRENT_BOOKID } from "../redux/actions/types";
 import ProfieModel from "./MyComponent/Model/ProfileModel";
+import UserReviewEditModel from "./MyComponent/Model/UserReviewEditModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -430,6 +431,11 @@ const NavbarComponent = () => {
             </Col>
           </Row>
         </Container>
+      )}
+      
+      {(activeModal === "ReviewEdit" ) && (
+        <UserReviewEditModel closeModel={handleCloseModal} userType={userType}/>
+       
       )}
     </>
   );
