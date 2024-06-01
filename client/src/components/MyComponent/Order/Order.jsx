@@ -1,54 +1,43 @@
-import { Container } from "react-bootstrap"
+import { Container } from "react-bootstrap";
 import SingleOrderDetails from "./SingleOrderDetails";
-import './Order.css'
+import './Order.css';
+import { useEffect, useState } from "react";
+import { url } from "../../../url";
+import axios from "axios";
 
-import img1 from '../../images/image1.jpg'
+const Order = () => {
+    const [orders, setOrders] = useState([]);
 
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get(url + "/api/orders", {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+                if (response.data) {
+                    setOrders(response.data);
+                } else {
+                    console.error("No bookIds found in the response data");
+                }
+            } catch (error) {
+                console.error(
+                    "Error fetching orders:",
+                    error.response ? error.response.data : error.message
+                );
+            }
+        };
+        fetchOrders();
+    }, []);
 
-const MyOrder=[
-    {
-        image:img1,
-        name:"The Way life",
-        orderId:"6656c7bc0c6d951645f2c3b2",
-        amount:450,
-        orderDate:'29/05/2024',
-        ExpireDate:'29/07/2024',
-    },
-    {
-        image:img1,
-        name:"The Way life",
-        orderId:"6656c7bc0c6d951645f2c3b2",
-        amount:450,
-        orderDate:'29/05/2024',
-        ExpireDate:'29/07/2024',
-    },
-    {
-        image:img1,
-        name:"The Way life",
-        orderId:"6656c7bc0c6d951645f2c3b2",
-        amount:450,
-        orderDate:'29/05/2024',
-        ExpireDate:'29/07/2024',
-    },
-    {
-        image:img1,
-        name:"The Way life",
-        orderId:"6656c7bc0c6d951645f2c3b2",
-        amount:450,
-        orderDate:'29/05/2024',
-        ExpireDate:'29/07/2024',
-    },
-
-]
-
-const Order=()=>{
-    return(
+    return (
         <Container>
-         
-            {MyOrder.map((myorder)=><SingleOrderDetails key={myorder.orderId} myorder={myorder}/>)}
-            
+            {orders && orders.map((order) => (
+                <SingleOrderDetails key={order.orderId} order={order} />
+            ))}
         </Container>
-    )
+    );
 }
 
 export default Order;

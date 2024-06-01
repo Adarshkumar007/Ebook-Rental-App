@@ -7,6 +7,7 @@ import { addcart, eBookCollection, eBookPublish, removeCart } from '../controlle
 import {eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed} from '../controllers/eBookUser.js';
 import { dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, userInfo, user_reviews } from '../controllers/ratings.js';
 import { order, subscribe, verifyPayment } from '../controllers/paymentController.js';
+import { orderDetails } from '../controllers/orderController.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -20,7 +21,7 @@ router.post('/api/verifyotp',validateOTP);
 router.post('/api/resetpassword',newPasswordController);
 router.post('/publish', authenticateToken,  upload.fields([{ name: 'file', maxCount: 1 },{ name: 'prefile', maxCount: 1 }, { name: 'image', maxCount: 1 }]) , eBookPublish);
 router.get('/profile', authenticateToken, userProfile);
-router.get('/orders', authenticateToken);
+router.get('/api/orders', authenticateToken,orderDetails);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);

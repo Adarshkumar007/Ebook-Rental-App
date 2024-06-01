@@ -11,7 +11,7 @@ const BankAccount = ({editable}) => {
         alt="Your Photo"
         className="BankProfileImage SubContainer"
       />
-      <AccountDetails editable={editable}/>
+      {/* <AccountDetails editable={editable}/> */}
     </div>
   );
 };

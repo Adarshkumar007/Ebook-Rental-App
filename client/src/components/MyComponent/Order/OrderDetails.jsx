@@ -1,23 +1,15 @@
-const OrderDetails = ({myorder}) => {
+const OrderDetails = ({order}) => {
   return (
     <div className="Order-Details-Container">
-      <h4 style={{color:" #000d42",fontWeight:"bold"}} className="Order-Book-Name">{myorder.name}</h4>
+      <h4 style={{color:" #000d42",fontWeight:"bold"}} className="Order-Book-Name">{order.name}</h4>
       <div className="Order-Details">
         <div className="Order-Detail ">
-          <div><span className="order-detais-heading">Order Id :</span><span className="order-detais-heading-content">{myorder.orderId}</span></div>
-          <div><span className="order-detais-heading">Amount  :₹</span><span className="order-detais-heading-content">{myorder.amount}</span> </div>
+          <div><span className="order-detais-heading">Order Id :</span><span className="order-detais-heading-content">{order.receipt}</span></div>
+          <div><span className="order-detais-heading">Amount  :₹</span><span className="order-detais-heading-content">{(order.amount/100)}</span> </div>
         </div>
         <div className="Order-Detail">
-          <div><span className="order-detais-heading">Order Date :</span><span className="order-detais-heading-content">{myorder.orderDate}</span></div>
-          <div><span className="order-detais-heading">Expire Date :</span><span className="order-detais-heading-content">{myorder.ExpireDate}</span></div>
-        </div>
-        <div className="Go-to-Library">
-          <button
-            class="btn btn-primary rounded-pill px-3 Order-Library-Button"
-            type="button"
-          >
-            Go to Library
-          </button>
+          <div><span className="order-detais-heading">Status :</span><span className="order-detais-heading-content">{order.status}</span></div>
+          <div><span className="order-detais-heading">Subscription Plan:</span><span className="order-detais-heading-content">{order.plan} month</span></div>
         </div>
       </div>
     </div>

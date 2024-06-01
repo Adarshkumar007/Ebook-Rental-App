@@ -66,6 +66,7 @@ const UserSubscriptionPlan = () => {
             name: 'RentReader',
             description: 'Test Transaction',
             handler: function (response) {
+              dispatch(setActiveModal(null,"user"));
                 axios.post(url+'/api/payment-success', {
                     order_id: response.razorpay_order_id
                 }).then(() => {
