@@ -12,6 +12,7 @@ const BankAccount = ({editable,setWarning}) => {
         className="BankProfileImage SubContainer"
       />
       {/* <AccountDetails editable={editable}/> */}
+      <AccountDetails editable={editable} setWarning={setWarning}/>
     </div>
   );
 };
