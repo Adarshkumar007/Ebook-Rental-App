@@ -2,7 +2,7 @@ import img1 from "../../images/officialphoto.jpg";
 import img2 from "../../images/NoImage.png";
 import AccountDetails from "./AccountDetails";
 
-const BankAccount = ({editable}) => {
+const BankAccount = ({editable,setWarning}) => {
   const image = img1;
   return (
     <div className="BankAccount">

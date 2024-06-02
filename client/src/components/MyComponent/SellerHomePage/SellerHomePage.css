@@ -30,6 +30,7 @@
     display:  flex;
     width: 100%;
     gap:10px;
+    height: 25rem;
 }
 
 
@@ -40,9 +41,10 @@
 }
 .Rank{
     width: 35%;
+    flex: 1;
 }
 
-.Wallet{
+.Wallet,.Rank{
     display: flex;
     gap:2px;
     flex-direction: column;
@@ -60,7 +62,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+   
 }
 
 .BankDetails-Title{
@@ -112,4 +114,261 @@
     display: flex;
     flex-direction: column;
     width: 80%;
+}
+
+.withdrwal-component{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Earning-Details{
+    width: 100%;
+    gap:5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Earning-Subdetails{
+    width: 100%;
+    display: flex;
+}
+.Earning-Subdetail{
+    width: 50%;
+    display: flex;
+   justify-content: center;
+   gap:10px;
+}
+.WithdrawButton{
+    height: 28px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Rank */
+.RankDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    overflow-y: scroll;
+    scrollbar-width:none;
+
+}
+
+
+.RankCard{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.RankCardImage{
+    width: 2.5rem;
+    height: 3rem;
+    border: 0 !important;
+}
+.rankimage{
+    width: 100%;
+    height: 100%;
+}
+.RankCardInfo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.BookStats{
+    display: flex;
+   justify-content: space-between;
+   font-size: 12px;
+   color: #000d42;
+}
+.RankNo{
+    display: flex;
+    padding: 0;
+    font-size: 20px;
+   
+}
+
+.Rank-Book-Name{
+    font-size: 15px;
+    font-weight: bold;
+    color: #000d42;
+}
+
+@media  (max-width:1200px){
+
+    .FirstSellerComponent{
+        display:  flex;
+        width: 100%;
+        gap:10px;
+        height: fit-content;
+        flex-direction: column;
+    }
+    .Wallet,.Rank{
+        width: 100%;
+       
+    }
+    .RankDetails{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        width: 100%;
+       
+       
+    }
+    .RankCard{
+       width: 50% !important;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .RankCardImage {
+        width: 3rem;
+        height: 4rem;
+       
+    }
+
+    .BookStats {
+      
+        flex-direction: column;
+        width: 13rem;
+    }
+
+}
+@media  (max-width:992px) {
+    .BookStats {
+      
+        flex-direction: column;
+        width: 15rem;
+    }
+}
+
+@media (max-width:768px) {
+    .FirstSellerComponent {
+
+        height: 68rem;
+    }
+
+    .BankAccount {
+        flex-direction: column;
+    }
+
+    .AccountDetails {
+        width: 100%;
+    }
+    .AccountDetails-values {
+        width: 50%;
+        align-items: center;
+    }
+
+    .AccountDetails-side-Heading {
+        width: 50%;
+       
+    }
+    .bank-form{
+      
+        width: 100%;
+    }
+    .Earning-Subdetails {
+        flex-direction: column;
+        align-items: center;
+       
+       
+    }
+    .Earning-Subdetail {
+        width: 60%;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .RankDetails {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1 1;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        height: 10rem !important;
+    }
+    .Wallet,.Rank{
+        width: 100%;
+       
+    }
+    .Wallet{
+      height: fit-content;
+    }
+    .Rank{
+        height: 16rem;
+       
+    }
+  
+    .RankDetails{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+        overflow-y: scroll;
+        scrollbar-width:none;
+    
+    }
+    .RankCard{
+        width: 100% !important;
+     
+    }
+
+}
+
+@media (max-width:768px) {
+    .Earning-Subdetail {
+        width: 100%;
+     
+    }
+}
+
+@media (max-width:358px) {
+    .AccountDetails-side-Heading {
+        font-size: 11px;
+        gap: 13px;
+        font-weight: bold;
+    }
+    .custominput::placeholder {
+        font-size: 12px !important;
+    }
+    .earning-subdetails{
+        flex-direction: column;
+        gap: 2px;
+    }
+    .amount{
+        width: 100%;
+    }
+   
+    .BookStats {
+       
+        width: 10rem;
+    }
+}
+@media (max-width:280px) {
+.RankCardImage{
+    width: 2rem;
+    height: 3rem;
+    border: 0 !important;
+}
+.BookStats {
+       
+    width:8rem;
+}
+}
+
+@media (max-width:245px){
+    .RankCardImage{
+       visibility: hidden;
+    } 
+}
+@media (max-width:220px) {
+    .BankProfileImage{
+        width: 4rem;
+        height: 5rem;
+        border: 0 !important;
+    }
 }
