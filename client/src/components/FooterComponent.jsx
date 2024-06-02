@@ -25,6 +25,9 @@ const FooterComponent = () => {
   const handleProfile = () => {
     dispatch(setActiveModal("profile", userType));
   };
+  const handleNotification = () => {
+    dispatch(setActiveModal("notification", userType));
+  };
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isSellerAuthenticated = useSelector(
@@ -206,7 +209,7 @@ const FooterComponent = () => {
                     24x7 Help
                   </Link>
                 </li>
-                <li>
+                <li onClick={handleNotification}>
                   <Link
                     to="#"
                     className="text-decoration-none all-list-item-style items"

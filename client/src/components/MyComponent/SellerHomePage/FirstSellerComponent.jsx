@@ -3,7 +3,7 @@ import Wallet from "./Wallet";
 
 const FirstSellerComponent = () => {
   return (
-  <div className="FirstSellerComponent">
+  <div className="FirstSellerComponent ">
     <Wallet/>
     <Rank/>
   </div>
