@@ -2,6 +2,7 @@ import { eBook } from "../models/ebook.js";
 import pkg from 'pdfjs-dist/build/pdf.js';
 import { Subscription } from "../models/subscription.js";
 const { getDocument, GlobalWorkerOptions } = pkg;
+import mongoose from 'mongoose';
 
 export const eBookPreImage=async (req, res) => {
     try {
@@ -183,7 +184,27 @@ export const isSubscribed = async (req, res) => {
   }
 }
 
-
+export const getBookRank = async(req,res)=>{
+  const userId = req.user.userId;
+  try {
+    const result = await Subscription.aggregate([
+      { $match: { seller: new mongoose.Types.ObjectId(userId) } },
+      { $group: {
+          _id: '$book',
+          count: { $sum: 1 },
+          totalAmount: { $sum: '$amount' }
+      }},
+      { $sort: { count: -1 } } // Sort by count in descending order
+  ]);
+  
+    console.log("result:",result);
+    res.json(result);
+    
+} catch (error) {
+    console.error('Error getting subscription counts by user:', error);
+    throw error;
+}
+}
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

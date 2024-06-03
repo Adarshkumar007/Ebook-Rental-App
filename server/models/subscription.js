@@ -4,6 +4,8 @@ const SubscriptionSchema = new mongoose.Schema({
     order: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller', required: true },
+
     plan: { type: String, required: true },
     amount: { type: Number, required: true },
     start_date: { type: Date, default: () => {

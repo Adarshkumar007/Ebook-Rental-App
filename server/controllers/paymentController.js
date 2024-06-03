@@ -95,15 +95,18 @@ export const subscribe = async (req, res) => {
     const startDate = new Date();
     const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + orderInfo.plan, startDate.getDate());
     const newEndDate = new Date(endDate.toISOString().split('T')[0]);
+    const seller = await eBook.findById(orderInfo.book).select('publisherId');
+    console.log("seller id",seller);
     const subInfo = {
         order: orderInfo._id,
         user: orderInfo.user,
+        seller:seller.publisherId,
         book: orderInfo.book,
         plan: orderInfo.plan,
         amount: orderInfo.amount,
         end_date: newEndDate    
     };
-
+   
     const subscription = new Subscription(subInfo);
     const response = await subscription.save();
 
