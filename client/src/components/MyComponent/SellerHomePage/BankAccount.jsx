@@ -2,7 +2,7 @@ import img1 from "../../images/officialphoto.jpg";
 import img2 from "../../images/NoImage.png";
 import AccountDetails from "./AccountDetails";
 
-const BankAccount = ({editable}) => {
+const BankAccount = ({editable,setWarning}) => {
   const image = img1;
   return (
     <div className="BankAccount">
@@ -12,6 +12,7 @@ const BankAccount = ({editable}) => {
         className="BankProfileImage SubContainer"
       />
       {/* <AccountDetails editable={editable}/> */}
+      <AccountDetails editable={editable} setWarning={setWarning}/>
     </div>
   );
 };

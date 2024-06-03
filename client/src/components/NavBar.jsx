@@ -38,6 +38,7 @@ import UserSubscriptionPlan from "./MyComponent/UserSubscription/UserSubscriptio
 import { CURRENT_BOOKID } from "../redux/actions/types";
 import ProfieModel from "./MyComponent/Model/ProfileModel";
 import UserReviewEditModel from "./MyComponent/Model/UserReviewEditModel";
+import NotificationModel from "./MyComponent/Model/NotificationModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -73,7 +74,8 @@ const NavbarComponent = () => {
     dispatch({
       type: CURRENT_BOOKID,
       currentBookID: null,
-    });  };
+    });
+  };
   const handleSellerAC = () => {
     dispatch(setUserTypeAction("seller"));
     navigate("/seller");
@@ -81,13 +83,16 @@ const NavbarComponent = () => {
   const handleProfile = () => {
     dispatch(setActiveModal("profile", userType));
   };
+  const handleNotification = () => {
+    dispatch(setActiveModal("notification", userType));
+  };
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLibrary=()=>{
+  const handleLibrary = () => {
     navigate("/library");
-  }
+  };
   const handlePublish = () => {
     navigate("/publish");
   };
@@ -227,8 +232,10 @@ const NavbarComponent = () => {
                             </a>
                           </li>
                           <li>
-                            <a className="dropdown-item pointer"
-                            onClick={handleLibrary}>
+                            <a
+                              className="dropdown-item pointer"
+                              onClick={handleLibrary}
+                            >
                               <IoLibrary
                                 className="account-pic"
                                 id="list-pics"
@@ -325,7 +332,10 @@ const NavbarComponent = () => {
                     </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item pointer">
+                    <a
+                      className="dropdown-item pointer"
+                      onClick={handleNotification}
+                    >
                       <IoIosNotificationsOutline
                         className="account-pic"
                         id="list-pics"
@@ -353,9 +363,7 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-                  {/* <Button variant="secondary" onClick={handleCloseModal}>
-                    Close
-                  </Button> */}
+                 
                 </Modal.Footer>
               </Modal>
             )}
@@ -370,9 +378,7 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-                  {/* <Button variant="secondary" onClick={handleCloseModal}>
-                    Close
-                  </Button> */}
+               
                 </Modal.Footer>
               </Modal>
             )}
@@ -381,10 +387,9 @@ const NavbarComponent = () => {
       </Container>
 
       {(activeModal === "profile" || activeModalSeller === "profile") && (
-        <ProfieModel closeModel={handleCloseModal} userType={userType}/>
-       
+        <ProfieModel closeModel={handleCloseModal} userType={userType} />
       )}
-      
+
       {activeModalSeller === "review" && (
         <Container>
           <Row>
@@ -414,15 +419,12 @@ const NavbarComponent = () => {
         <Container>
           <Row>
             <Col>
-              <Modal
-                show={true}
-                onHide={handleCloseModal}
-              >
+              <Modal show={true} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                   <Modal.Title>Subscription Plans </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                 <UserSubscriptionPlan/>
+                  <UserSubscriptionPlan />
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
@@ -432,11 +434,27 @@ const NavbarComponent = () => {
           </Row>
         </Container>
       )}
-      
-      {(activeModal === "ReviewEdit" ) && (
-        <UserReviewEditModel closeModel={handleCloseModal} userType={userType}/>
-       
+
+      {activeModal === "ReviewEdit" && (
+        <UserReviewEditModel
+          closeModel={handleCloseModal}
+          userType={userType}
+        />
       )}
+      {activeModal === "notification" &&(
+        <NotificationModel
+          closeModel={handleCloseModal}
+          userType={userType}
+        />
+      )}
+      {
+        activeModalSeller === "notification"&&(
+          <NotificationModel
+            closeModel={handleCloseModal}
+            userType={userType}
+          />
+        )
+      }
     </>
   );
 };
