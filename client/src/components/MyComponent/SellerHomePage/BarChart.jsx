@@ -1,21 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ApexCharts from 'apexcharts';
+import { useDispatch } from 'react-redux';
+import { logout, setActiveModal } from '../../../redux/actions/authActions';
+import axios from 'axios';
+import { url } from '../../../url';
 
 const BarChart = () => {
+    const dispatch =useDispatch();
+    const [bookCategories, setBookCategories] = useState([]);
+    const [earnings, setEarnings] = useState([]);   
+     useEffect(()=>{
+        const fetchData = async () => {
+        try {
+          const response = await axios.get(url+'/bookchart', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("sellertoken")}`
+            }
+        });
+        const data = response.data;
+        const categories = data.map(item => item._id);
+        const earnings = data.map(item => item.totalAmount/100);
+
+        setBookCategories(categories);
+        setEarnings(earnings);
+        console.log("ssdssjjhjhjjd",response);
+      } catch (error) {
+          if (error.response) {
+              if (error.response.status === 403) {
+                console.error('Error 403: Forbidden');
+                dispatch(logout("seller"));
+                dispatch(setActiveModal("login","seller"));
+              } else {
+                console.error(`Error ${error.response.status}: ${error.response.statusText}`);
+                // Handle other errors
+              }
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.error('No response received', error.request);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.error('Error', error.message);
+            }
+        } 
+      }
+      fetchData();
+    },[]);
     useEffect(() => {
-        const bookCategories = [
-            "Fiction", "Non-Fiction", "Mystery", "Thriller", 
-            "Science Fiction", "Fantasy", "Romance", "Horror", 
-            "Historical Fiction", "Literary Fiction", "Young Adult", 
-            "Children's Books", "Biography", "Autobiography", 
-            "Memoir"
-        ];
-
-        const earnings = [
-            44000, 55000, 57000, 56000, 61000, 58000, 63000, 60000, 66000,
-            59000, 52000, 49000, 48000, 47000, 46000
-        ];
-
+       if(earnings){
+        console.log("bxgd",earnings,bookCategories)
         var options = {
             series: [{
                 name: 'Earnings',
@@ -73,14 +105,15 @@ const BarChart = () => {
                 }
             }
         };
-
+        
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
 
         return () => {
             chart.destroy();
         };
-    }, []);
+       }
+    }, [earnings]);
 
     return (
         <div className='SubContainer barchart'>

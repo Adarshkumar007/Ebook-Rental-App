@@ -8,11 +8,12 @@ const SubscriptionSchema = new mongoose.Schema({
 
     plan: { type: String, required: true },
     amount: { type: Number, required: true },
-    start_date: { type: Date, default: () => {
+    start_date: { type: Date, default: () => {  
         const date = new Date();
         return date.toISOString().split('T')[0]; 
     } },
     end_date: { type: Date, required: true },
+    dispatch: { type: String, enum: ['true', 'false'], default: 'false' },
     status: { type: String, enum: ['active', 'expired'], default: 'active' },
     created_at: { type: Date, default: Date.now }
 });

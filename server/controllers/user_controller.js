@@ -53,6 +53,7 @@ export const logIn = async (req, res) => {
     try {
       const user = await User.findOne({ email });
       if (!user) {
+        console.log("worng");
         return res.status(401).json({ message: 'Invalid email or password' });
       }
   

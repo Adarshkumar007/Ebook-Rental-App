@@ -205,6 +205,116 @@ export const getBookRank = async(req,res)=>{
     throw error;
 }
 }
+export const bookChart = async(req,res)=>{
+  const publisherId = req.user.userId;
+ 
+  try {
+    const result = await Subscription.aggregate([
+      {
+        $lookup: {
+          from: 'books',
+          localField: 'book',
+          foreignField: '_id',
+          as: 'bookDetails'
+        }
+      },
+      { $unwind: '$bookDetails' },
+      {
+        $match: {
+          'bookDetails.publisherId':new mongoose.Types.ObjectId(publisherId)
+        }
+      },
+      {
+        $group: {
+          _id: '$bookDetails.category',
+          totalAmount: { $sum: '$amount' }
+        }
+      }
+    ]);
+    
+    res.json(result);
+
+  }
+  catch(error){
+    console.error('Error in chart by user:', error);
+  }
+}
+
+export const cEarnings = async(req,res)=>{
+  const publisherId = req.user.userId;
+ 
+  try {
+    const result = await Subscription.aggregate([
+      // Match documents where the seller matches userId and dispatch is true
+      { $match: { seller: new mongoose.Types.ObjectId(publisherId), dispatch: "false" } },
+      // Group to calculate the total sum of amount
+      {
+          $group: {
+              _id: null,
+              totalSum: { $sum: '$amount' }
+          }
+      },
+      // Optionally, project the final output to remove _id if not needed
+      {
+          $project: {
+              _id: 0,
+              totalSum: 1
+          }
+      }
+  ]);
+  
+  const totalSum = result.length > 0 ? result[0].totalSum : 0; // Handle case when result is empty
+
+    
+    res.json(totalSum);
+
+  }
+  catch(error){
+    console.error('Error in chart by user:', error);
+  }
+}
+export const lEarnings = async(req,res)=>{
+  const publisherId = req.user.userId;
+ 
+  try {
+    const result = await Subscription.aggregate([
+      // Match documents where the seller matches userId and dispatch is true
+      { $match: { seller: new mongoose.Types.ObjectId(publisherId) } },
+      // Group to calculate the total sum of amount and the count of documents
+      {
+          $group: {
+              _id: null,
+              totalSum: { $sum: '$amount' },
+              count: { $sum: 1 }
+          }
+      },
+      // Optionally, project the final output to remove _id if not needed
+      {
+          $project: {
+              _id: 0,
+              totalSum: 1,
+              count: 1
+          }
+      }
+  ]);
+  
+  // Handle the case when result is empty
+  const { totalSum = 0, count = 0 } = result.length > 0 ? result[0] : {};
+  
+    
+  res.status(200).json({
+    success: true,
+    data: {
+        totalSum,
+        count
+    }
+});
+
+  }
+  catch(error){
+    console.error('Error in chart by user:', error);
+  }
+}
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

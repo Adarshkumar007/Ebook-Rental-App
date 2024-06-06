@@ -3,9 +3,12 @@ import RankCard from "./RankCard";
 import { Book } from "./Books";
 import axios from "axios";
 import { url } from "../../../url";
+import { logout, setActiveModal } from "../../../redux/actions/authActions";
+import { useDispatch } from "react-redux";
 
 const Rank = () => {
   const [rank , setRank] = useState([]);
+  const dispatch = useDispatch();
   useEffect(()=>{
     const fetchData = async () => {
     try {
@@ -18,7 +21,22 @@ const Rank = () => {
     setRank(response.data);
     console.log("ssdssd",response);
   } catch (error) {
-      
+      if (error.response) {
+          if (error.response.status === 403) {
+            console.error('Error 403: Forbidden');
+            dispatch(logout("seller"));
+            dispatch(setActiveModal("login","seller"));
+          } else {
+            console.error(`Error ${error.response.status}: ${error.response.statusText}`);
+            // Handle other errors
+          }
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error('No response received', error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error('Error', error.message);
+        }
     } 
   }
   fetchData();
