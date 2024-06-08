@@ -8,6 +8,7 @@ import SecondSellerComponent from "./MyComponent/SellerHomePage/SecondSellerComp
 
 const  Seller =()=>{
   const dispatch=useDispatch();
+ 
   useEffect(()=>{
       dispatch(setUserTypeAction("seller"));
   },[]);;

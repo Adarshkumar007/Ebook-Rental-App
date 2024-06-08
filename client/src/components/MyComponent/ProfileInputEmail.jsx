@@ -15,6 +15,7 @@ const ProfileInputEmail = ({ value, type, label ,handleInput}) => {
           value={value}
           placeholder={label}
           readOnly
+          required
           onChange={(e)=>handleInput(e.target.value)}
           style={{
             fontFamily: '"DM Sans", sans-serif',

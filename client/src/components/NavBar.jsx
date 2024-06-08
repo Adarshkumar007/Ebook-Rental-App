@@ -39,6 +39,7 @@ import { CURRENT_BOOKID } from "../redux/actions/types";
 import ProfieModel from "./MyComponent/Model/ProfileModel";
 import UserReviewEditModel from "./MyComponent/Model/UserReviewEditModel";
 import NotificationModel from "./MyComponent/Model/NotificationModel";
+import AddToCartModal from "./MyComponent/Model/AddToCartModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -447,6 +448,12 @@ const NavbarComponent = () => {
           userType={userType}
         />
       )}
+       {activeModal === "addedToCart" &&(
+        <AddToCartModal
+          closeModel={handleCloseModal}
+          userType={userType}
+        />
+      )}
       {
         activeModalSeller === "notification"&&(
           <NotificationModel
@@ -455,6 +462,7 @@ const NavbarComponent = () => {
           />
         )
       }
+      
     </>
   );
 };
