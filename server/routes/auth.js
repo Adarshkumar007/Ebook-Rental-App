@@ -5,7 +5,7 @@ import { validateOTP } from '../controllers/OTPController.js';
 import multer from 'multer';
 import { addcart, eBookCollection, eBookPublish, removeCart } from '../controllers/eBookPublish.js';
 import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBookRank, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed, lEarnings} from '../controllers/eBookUser.js';
-import { dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, userInfo, user_reviews } from '../controllers/ratings.js';
+import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
 import { order, subscribe, verifyPayment } from '../controllers/paymentController.js';
 import { orderDetails } from '../controllers/orderController.js';
 const router = express.Router();
@@ -50,5 +50,6 @@ router.get('/bookrank',authenticateToken,getBookRank);
 router.get('/bookchart',authenticateToken,bookChart);
 router.get('/cearnings',authenticateToken,cEarnings);
 router.get('/learnings',authenticateToken,lEarnings);
-
+router.post('/reviewupdate',authenticateToken,update_reviews);
+router.post('/reviewdelete',authenticateToken,delete_reviews)
 export default router;

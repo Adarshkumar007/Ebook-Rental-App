@@ -178,3 +178,57 @@ export const user_reviews = async(req , res) =>{
   
 
 }
+
+export const update_reviews = async (req, res) => {
+  const userId = req.user.userId;
+  const { review, rating, reviewID } = req.body;
+
+  try {
+      const reviewExists = await RatingReview.exists({ userId: userId, _id: reviewID });
+      
+      if (reviewExists) {
+          const updateData = { review, rating };
+          const updatedReview = await RatingReview.findOneAndUpdate(
+              { userId: userId, _id: reviewID },
+              { $set: updateData },
+              { new: true, useFindAndModify: false }
+          );
+          
+          if (updatedReview) {
+              console.log('Review updated successfully:', updatedReview);
+              res.status(200).json({ message: "Review updated successfully", updatedReview });
+          } else {
+              res.status(404).json({ message: "Review not found" });
+          }
+      } else {
+          res.status(404).json({ message: "Review not found" });
+      }
+  } catch (error) {
+      console.error('Error updating review:', error);
+      res.status(500).json({ message: "Updating review failed" });
+  }
+};
+export const delete_reviews = async (req, res) => {
+  const userId = req.user.userId;
+  const { reviewID } = req.body;
+
+  try {
+      const reviewExists = await RatingReview.exists({ userId: userId, _id: reviewID });
+      
+      if (reviewExists) {
+        const updatedReview = await RatingReview.findByIdAndDelete(reviewID);
+          
+          if (updatedReview) {
+              console.log('Review deleted successfully:');
+              res.status(200).json({ message: "Review deleted successfully" });
+          } else {
+              res.status(404).json({ message: "Review not found" });
+          }
+      } else {
+          res.status(404).json({ message: "Review not found" });
+      }
+  } catch (error) {
+      console.error('Error updating review:', error);
+      res.status(500).json({ message: "Updating review failed" });
+  }
+};

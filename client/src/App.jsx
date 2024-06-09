@@ -17,8 +17,9 @@ const App = () => {
   dispatch(setUserTypeAction("user"));
 
   const categoryTypes = useMemo(() => [
-    "fiction", "non-fiction", "mystery", "thriller", "science-fiction", "fantasy", "romance", "horror", "historical-fiction", "literary-fiction", "young-adult", "children", "biography", "autobiography", "memoir", "self-help", "business", "finance", "health", "cooking", "travel", "history", "science", "mathematics", "technology", "engineering", "art", "music", "photography", "sports", "gardening", "crafts", "religion", "philosophy", "psychology", "sociology", "political", "environmental", "education", "language", "reference", "fiction-classics", "poetry", "short-stories", "drama", "essays", "anthology", "comics", "manga", "satire", "tragedy", "fantasy-epic", "fantasy-urban", "fantasy-historical", "fantasy-dark", "fantasy-light", "fantasy-mythical"
+    "Fiction", "Non-Fiction", "Mystery", "Thriller", "Science-Fiction", "Fantasy", "Romance", "Horror", "Historical-Fiction", "Literary-Fiction", "Young-Adult", "Children", "Biography", "Autobiography", "Memoir", "Self-Help", "Business", "Finance", "Health", "Cooking", "Travel", "History", "Science", "Mathematics", "Technology", "Engineering", "Art", "Music", "Photography", "Sports", "Gardening", "Crafts", "Religion", "Philosophy", "Psychology", "Sociology", "Political", "Environmental", "Education", "Language", "Reference", "Fiction-Classics", "Poetry", "Short-Stories", "Drama", "Essays", "Anthology", "Comics", "Manga", "Satire", "Tragedy", "Fantasy-Epic", "Fantasy-Urban", "Fantasy-Historical", "Fantasy-Dark", "Fantasy-Light", "Fantasy-Mythical"
   ], []);
+  
 
   useEffect(() => {
     let isMounted = true;
@@ -26,7 +27,6 @@ const App = () => {
     const fetchCategories = async (index) => {
       if (isMounted && index < categoryTypes.length) {
         const category = categoryTypes[index];
-        console.log("cat", category, index);
         try {
           const categoryResponse = await axios.get(url + `/api/home/${category}`);
           if (categoryResponse.data.length !== 0) {
@@ -35,14 +35,14 @@ const App = () => {
         } catch (error) {
           console.error('Error fetching categories:', error);
         }
-        fetchCategories(index + 1); // Call fetchCategories recursively with the next index
+        fetchCategories(index + 1); 
       }
     };
 
-    fetchCategories(0); // Start with index 0
+    fetchCategories(0); 
 
     return () => {
-      isMounted = false; // This will prevent fetchCategories from executing after the component is unmounted or when the effect is cleaned up
+      isMounted = false; 
     };
   }, [categoryTypes]);
 

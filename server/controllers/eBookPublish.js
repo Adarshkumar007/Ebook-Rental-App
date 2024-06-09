@@ -75,7 +75,7 @@ export const addcart = async (req, res) => {
   try {
     const existingCartItem = await Cart.findOne({ user_id: userId });
 
-    if (existingCartItem) {
+    if (!existingCartItem.bookIds.includes(bookId)) {
         existingCartItem.bookIds.push(bookId);
         await existingCartItem.save();
     } else {

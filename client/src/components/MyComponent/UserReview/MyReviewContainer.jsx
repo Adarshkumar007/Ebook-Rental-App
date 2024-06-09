@@ -29,7 +29,7 @@ const MyReviewContainer = ({ review }) => {
       <div className="Name-rating-review-share-options">
         <BookNameStar bookInfo={bookInfo} review={review} />
         <MyComment comment={review.review} />
-        <LikeDislikeOptions />
+        <LikeDislikeOptions review={review}/>
       </div>
     </div>
   );

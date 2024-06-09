@@ -25,14 +25,11 @@ const Cart = () => {
           },
         });
         setBookIds(response.data.bookIds);
-        console.log("Book IDs:", response.data.bookIds);
       } catch (error) {
         console.error(
           "Error fetching book ids:",
           error.response ? error.response.data : error.message
         );
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -51,6 +48,7 @@ const Cart = () => {
         );
         const bookInfoResponses = await Promise.all(bookInfoPromises);
         const bookInfos = bookInfoResponses.map((response) => response.data);
+        setLoading(false);
         setBookInfos(bookInfos);
       } catch (error) {
         console.error(
@@ -60,11 +58,11 @@ const Cart = () => {
       }
     };
 
-    if (bookIds.length > 0 && isAuthenticated) {
+    if (bookIds.length > 0) {
       setBookInfos([]);
       fetchBookInfo();
     }
-  }, [bookIds, isAuthenticated]);
+  }, [bookIds]);
 
   const handleCartBooks = (bookIdToRemove) => {
     const updatedBookIds = bookIds.filter(id => id !== bookIdToRemove);

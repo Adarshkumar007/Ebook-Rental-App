@@ -1,10 +1,10 @@
  import EditDelete from "./EditDelete";
  import MyLikeDislike from "./MyLikeDislike";
- const LikeDislikeOptions=()=>{
+ const LikeDislikeOptions=({review})=>{
     return(
         <div className="LikeDislikeOptions">
-            <EditDelete/>
-            {/* <MyLikeDislike /> */}
+            <EditDelete review={review}/>
+            <MyLikeDislike review={review}/>
         </div>
 
     )
