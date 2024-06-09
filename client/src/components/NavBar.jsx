@@ -40,6 +40,8 @@ import ProfieModel from "./MyComponent/Model/ProfileModel";
 import UserReviewEditModel from "./MyComponent/Model/UserReviewEditModel";
 import NotificationModel from "./MyComponent/Model/NotificationModel";
 import AddToCartModal from "./MyComponent/Model/AddToCartModel";
+import ReviewSubmitModel from "./MyComponent/Model/ReviewSubmitModel";
+import SubscribedModel from "./MyComponent/Model/SubscribedModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -454,6 +456,19 @@ const NavbarComponent = () => {
           userType={userType}
         />
       )}
+       {activeModal === "myreview" &&(
+        <ReviewSubmitModel
+          closeModel={handleCloseModal}
+          userType={userType}
+        />
+      )}
+       {activeModal === "subscribed" &&(
+        <SubscribedModel
+          closeModel={handleCloseModal}
+          userType={userType}
+        />
+      )}
+
       {
         activeModalSeller === "notification"&&(
           <NotificationModel
