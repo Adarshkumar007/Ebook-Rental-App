@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mantine/core": "^7.10.1",
+    "@mantine/hooks": "^7.10.1",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@reduxjs/toolkit": "^2.2.1",

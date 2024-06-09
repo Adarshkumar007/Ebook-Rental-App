@@ -232,7 +232,7 @@ export const profileUpdate = async (req,res) => {
       { new: true }
     );
   }
-  res.status(200).json({ message: 'Update success' });
+  res.status(200).json({ message: 'Updated Successfully' });
 }
 catch (error){
   console.log(error)
