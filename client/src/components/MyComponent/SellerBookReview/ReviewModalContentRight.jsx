@@ -30,11 +30,14 @@ const ReviewModalContentRight = ({ setCommentLoading }) => {
     }
   }, [bookId, currentRating, setCommentLoading]);
 
-  return reviews.map((review, index) => (
-    <div key={index} className="all-reviews">
-      <ReviewModalIndividualReview review={review} />
+  return (
+    <div className="all-reviews">
+      {reviews.map((review, index) => (
+        <ReviewModalIndividualReview key={index} review={review} />
+      ))}
     </div>
-  ));
+  );
+  
 };
 
 export default ReviewModalContentRight;

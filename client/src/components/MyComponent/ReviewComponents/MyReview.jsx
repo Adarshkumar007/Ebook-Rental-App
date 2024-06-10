@@ -91,6 +91,10 @@ const MyReview = ({ bookId }) => {
         }
       } else {
         console.log("Subscription required");
+        dispatch(setActiveModal("subscriberequired","user"));
+        setRating(null);
+        setHover(null);
+        setReview("");
       }
     } else {
       dispatch(setActiveModal("login", "user"));

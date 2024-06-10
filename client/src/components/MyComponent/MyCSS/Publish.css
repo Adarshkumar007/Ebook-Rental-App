@@ -1,7 +1,12 @@
-.Publish-Container{
+.Publish-Container {
     display: flex;
-    flex-Direction: column;
+    flex-direction: column;
+    margin: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 29%), 0 6px 20px rgb(0 0 0 / 20%);
+    background-color: white;
 }
+
 
 .Publish-Title{
     width: 100%;

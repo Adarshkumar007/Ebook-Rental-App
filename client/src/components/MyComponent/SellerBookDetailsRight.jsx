@@ -32,6 +32,10 @@ const SellerBookDetailsRight = ({
     });
   };
 
+  const handleEdit=()=>{
+    dispatch(setActiveModal("editBook","seller"));
+  }
+
 
 
   return (
@@ -70,6 +74,7 @@ const SellerBookDetailsRight = ({
           type="button"
           className="btn btn-info"
           style={{ width: "5rem", border: "2px solid #000d42" }}
+          onClick={handleEdit}
         >
           Edit
         </button>

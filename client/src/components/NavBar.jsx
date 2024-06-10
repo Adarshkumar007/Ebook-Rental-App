@@ -42,6 +42,8 @@ import NotificationModel from "./MyComponent/Model/NotificationModel";
 import AddToCartModal from "./MyComponent/Model/AddToCartModel";
 import ReviewSubmitModel from "./MyComponent/Model/ReviewSubmitModel";
 import SubscribedModel from "./MyComponent/Model/SubscribedModel";
+import SubscriptionRequired from "./MyComponent/Model/SubscriptionRequired";
+import EditBookModel from "./MyComponent/Model/EditBookModel";
 
 const NavbarComponent = () => {
   const activeModal = useSelector((state) => state.auth.activeModal);
@@ -366,7 +368,6 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-                 
                 </Modal.Footer>
               </Modal>
             )}
@@ -381,7 +382,6 @@ const NavbarComponent = () => {
                 </Modal.Body>
                 <Modal.Footer>
                   <MyButton myval="Close" onClick={handleCloseModal} />
-               
                 </Modal.Footer>
               </Modal>
             )}
@@ -444,40 +444,31 @@ const NavbarComponent = () => {
           userType={userType}
         />
       )}
-      {activeModal === "notification" &&(
-        <NotificationModel
-          closeModel={handleCloseModal}
-          userType={userType}
-        />
+      {activeModal === "notification" && (
+        <NotificationModel closeModel={handleCloseModal} userType={userType} />
       )}
-       {activeModal === "addedToCart" &&(
-        <AddToCartModal
-          closeModel={handleCloseModal}
-          userType={userType}
-        />
+      {activeModal === "addedToCart" && (
+        <AddToCartModal closeModel={handleCloseModal} userType={userType} />
       )}
-       {activeModal === "myreview" &&(
-        <ReviewSubmitModel
-          closeModel={handleCloseModal}
-          userType={userType}
-        />
+      {activeModal === "myreview" && (
+        <ReviewSubmitModel closeModel={handleCloseModal} userType={userType} />
       )}
-       {activeModal === "subscribed" &&(
-        <SubscribedModel
+      {activeModal === "subscribed" && (
+        <SubscribedModel closeModel={handleCloseModal} userType={userType} />
+      )}
+      {activeModal === "subscriberequired" && (
+        <SubscriptionRequired
           closeModel={handleCloseModal}
           userType={userType}
         />
       )}
 
-      {
-        activeModalSeller === "notification"&&(
-          <NotificationModel
-            closeModel={handleCloseModal}
-            userType={userType}
-          />
-        )
-      }
-      
+      {activeModalSeller === "notification" && (
+        <NotificationModel closeModel={handleCloseModal} userType={userType} />
+      )}
+      {activeModalSeller === "editBook" && (
+        <EditBookModel closeModel={handleCloseModal} userType={userType} />
+      )}
     </>
   );
 };
