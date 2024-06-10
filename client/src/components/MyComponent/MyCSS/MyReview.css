@@ -118,27 +118,27 @@ input[type=radio]{
     margin-right: 3rem;
 }
 
-@media screen and (max-width:360px) {
-    .Like-DisLike{
-        flex-direction: column;
-        gap: 0;
-        margin-right: 0;
+@media screen and (max-width:412px)  {
+    .Pic-Name {
         
-    }
-}
-@media screen and (max-width:241px) {
-    .Pic-Name{
-        display: flex;
         flex-direction: column;
-        gap:2px;
-        align-items: center;
     }
-
-    .Like-DisLike{
-        flex-direction: row;
-        justify-content: space-between;
-        margin-left: 0;
+    .name-rating {
+       
         width: 100%;
-        
+        align-items: center;
+       
+    }
+    .Like-DisLike {
+        gap: 0;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .MyLikeDislike {
+        gap: 0;
+        width: 100%;
+        justify-content: space-between;
     }
 }
+
+
