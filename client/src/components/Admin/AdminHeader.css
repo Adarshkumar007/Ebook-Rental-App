@@ -15,6 +15,9 @@
   bottom: auto;
   top: 0;
   width: 100%;
+  z-index: 5;
+
+  
 }
 .admin-title{
     font-size: 25px;
@@ -79,34 +82,37 @@
     }
 }
 
-/* model */
-.modal.show .modal-dialog {
+/* Scoped modal styles for AdminHeader modals */
+.admin-modal .modal.show .modal-dialog {
   display: flex !important;
   align-items: center !important;
-  justify-content: center;
+  justify-content: center !important;
 }
-.modal-content {
+
+.admin-modal .modal-content  {
   background-color: #00061c !important;
   width: 70% !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
- border:2px solid #f1c80d ;
+  border: 2px solid #f1c80d;
   color: #fff !important;
+  margin: auto !important;
 }
 
-@media (max-width:992px){
-  .modal-content {
+@media (max-width: 992px) {
+  .admin-modal .modal-content {
     width: 100% !important;
   }
 }
 
-.modal-header{
+.admin-modal .modal-header {
   justify-content: center;
   width: 100%;
   border-bottom-color: #f1c80d;
 }
-.modal-body {
+
+.admin-modal .modal-body {
   width: 100%;
   align-items: center;
   flex-direction: column;
@@ -114,7 +120,7 @@
   justify-content: center;
 }
 
-.modal-footer {
+.admin-modal .modal-footer {
   width: 100%;
   border-top-color: #f1c80d;
   justify-content: center;

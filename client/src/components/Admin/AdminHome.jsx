@@ -1,12 +1,14 @@
-
+import { Container } from "react-bootstrap";
+import "./AdminHome.css";
+import AdminHomeCardContainer from "./AdminHomeCardContainer";
 
 const AdminHome = () => {
-  
-
   return (
-    <div>
-      
-    </div>
+    <Container>
+      <div className="AdminHome">
+        <AdminHomeCardContainer/>
+      </div>
+    </Container>
   );
 };
 

@@ -36,7 +36,7 @@ const AdminHeader = () => {
     setOnline(true); // Set online to true when "Save" button is clicked
     setModalShow(false); // Close the modal after saving
     setShowAlert(true); // Show alert after saving
-    setTimeout(()=>setShowAlert(false),1000);
+    setTimeout(() => setShowAlert(false), 1000);
   };
 
   const handleAlertClose = () => setShowAlert(false); // Close alert
@@ -77,10 +77,11 @@ const AdminHeader = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   as={Link}
-                  to="/seller-approval"
+                  to="ApproveSeller"
                   className="admin-dropdown-item"
                 >
                   Seller Approval
+                  
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   as={Link}
@@ -102,18 +103,21 @@ const AdminHeader = () => {
         </Container>
       </Navbar>
       <LoginModal
+        className="admin-modal" // Add a unique class
         key={modalShow ? "modal-open" : "modal-closed"}
         show={modalShow}
         onHide={handleModalClose}
         onSave={handleSave} // Pass onSave handler to LoginModal
       />
       <AdminLoginAlert
+        className="admin-modal" // Add a unique class
         show={showAlert}
         onHide={handleAlertClose}
         alerttype="error"
         message="Invalid Credentials"
       />
       <AdminAccountModel
+        className="admin-modal" // Add a unique class
         key={showAccount ? "modal-open" : "modal-closed"}
         show={showAccount}
         onHide={handleAccountClose}
