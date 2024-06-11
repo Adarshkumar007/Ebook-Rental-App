@@ -24,6 +24,7 @@ import SellerPage from "./components/SellerPage";
 import AdminLayout from "./components/Admin/AdminLayout";
 import AdminHome from "./components/Admin/AdminHome";
 import ApproveSeller from "./components/Admin/ApproveSeller";
+import AdminSellerDetails from "./components/Admin/AdminSellerDetails";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="contactus" element={<ContactUs />} />
             <Route path="security" element={<Security />} />
             <Route path="ApproveSeller" element={<ApproveSeller />} />
+            <Route path="SellerDetails/:userId" element={<AdminSellerDetails />} />
           </Route>
           <Route
             path="/*"

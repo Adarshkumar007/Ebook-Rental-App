@@ -67,8 +67,8 @@
 .seller-card {
   display: inline-block;
   perspective: 1000px;
-  transition: transform 0.5s;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 26%), 0 6px 20px rgb(0 0 0 / 26%);
+  transition: transform 0.5s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26), 0 6px 20px rgba(0, 0, 0, 0.26);
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
@@ -81,6 +81,7 @@
 .seller-card:hover {
   transform: scale(0.95);
 }
+
 
 .seller-image-container {
   width: 100%;

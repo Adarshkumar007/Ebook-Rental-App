@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   MdOutlineMail,
@@ -8,8 +9,14 @@ import {
 import { IoLocationOutline } from "react-icons/io5";
 
 const AdminHomeCard = ({ newseller }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/admin/SellerDetails/${newseller.userId}`);
+  };
+
   return (
-    <div className="seller-card Seller-Card-Home">
+    <div className="seller-card Seller-Card-Home" onClick={handleCardClick}>
       <div className="seller-image-container">
         <div className="seller-image-rounded">
           <img
@@ -41,4 +48,5 @@ const AdminHomeCard = ({ newseller }) => {
     </div>
   );
 };
+
 export default AdminHomeCard;
