@@ -1,0 +1,50 @@
+
+.Admin-Footer {
+    position: fixed;
+    bottom: 0;
+    top:auto ;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif !important;
+    box-shadow: 0px -4px 6px rgb(0 0 0 / 44%); /* 3D shadow applied to the top */
+    height: 4rem;
+    background-color: #00061c !important;
+    font-weight: bold !important;
+    border-top: 2px solid #f1c80d;
+    border-right: 2px solid #f1c80d;
+    border-left: 2px solid #f1c80d;
+    color: #f1c80d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+   
+  }
+  .AdminFooterOption{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .admin-footer-options{
+    display: flex;
+    gap:2px;
+   align-items: center;
+  }
+
+  .admin-footer-icon{
+    display: flex;
+    align-items: center;
+    color: #f1c80d;
+  }
+  .admin-footer-text{
+    margin: auto;
+    color: #f1c80d;
+    font-size: 12px;
+  }
+
+  .admin-footer-icon:hover,.admin-footer-text:hover{
+    color:#85d320;
+  }
+  
