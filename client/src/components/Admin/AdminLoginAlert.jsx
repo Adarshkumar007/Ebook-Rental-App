@@ -2,10 +2,11 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { FaRegCheckCircle } from "react-icons/fa";
+import './AdminHeader.css'
 
 const AdminLoginAlert = (props) => {
   return (
-    <Modal show={props.show} onHide={props.onHide} animation={false}>
+    <Modal show={props.show} onHide={props.onHide} animation={false} className="admin-modal">
       <Modal.Body>
         <div
           style={{

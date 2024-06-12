@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+
+.AdminSellerDetails {
+  font-family: "DM Sans", sans-serif !important;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 46%), 0 6px 20px rgb(0 0 0 / 46%);
+  /* 3D curved shadow */
+  border-radius: 15px;
+  /* Rounded corners for the curved effect */
+  padding: 10px;
+  /* Some padding to add space inside the element */
+  background-color: #fff;
+  /* Background color for visibility */
+  width: 100%;
+  flex-direction: column;
+  margin: 5rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Seller Personal Details */
+.shadows {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 25%), 0px 6px 20px rgb(0 0 0 / 0%);
+}
+
+.AdminSellerPersonalDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 14rem;
+  gap: 2rem;
+  border: 2px solid #f1c80d;
+  padding: 5px;
+}
+
+.Photo-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.Seller-Image {
+  width: 9rem;
+  height: 11rem;
+}
+
+.Seller-Image-pic {
+  width: 100%;
+  height: 100%;
+}
+
+.AdminAllrDetails {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Personaldetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.single-Personaldetails {
+  display: flex;
+}
+
+.what-details {
+  width: 30%;
+}
+
+.personal-content {
+  width: 70%;
+}
+
+@media (max-width: 1200px) {
+  .Personaldetails {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 992px) {
+  .AdminSellerPersonalDetails {
+    height: fit-content;
+    gap: 1rem;
+  }
+
+  .AdminAllrDetails {
+    flex-direction: column;
+  }
+
+  .Personaldetails {
+    width: 100%;
+  }
+
+  .Seller-Image {
+    width: 9rem;
+    height: 12rem;
+  }
+
+  .Photo-button {
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .AdminSellerPersonalDetails {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Photo-button {
+    width: 100%;
+    height: 15rem;
+  }
+
+  .Seller-Image {
+    width: 9rem;
+    height: 12rem;
+  }
+
+  .AdminAllrDetails {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .block-button {
+    width: 32% !important;
+  }
+
+  .what-details {
+    width: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .what-details {
+    width: 33%;
+  }
+}
+
+@media (max-width: 377px) {
+  .Personaldetails {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 304px) {
+  .Personaldetails {
+    font-size: 8px;
+  }
+}
+
+/* Books */
+
+.seller-books {
+  width: 100%;
+  height: 30rem;
+  border: 2px solid #f1c80d;
+  padding: 15px;
+  z-index: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+@media (max-width: 992px) {
+  .seller-books {
+    gap: 75px;
+  }
+}
+
+@media (max-width: 768px) {
+  .seller-books {
+    gap: 100px;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 539px) {
+  .seller-books {
+    gap: 65px;
+  }
+}
+
+@media (max-width: 504px) {
+  .seller-books {
+    gap: 45px;
+    padding: 15px 10px;
+  }
+}
+
+@media (max-width: 444px) {
+  .seller-books {
+    gap: 36px;
+    padding: 15px 5px;
+  }
+}
+
+@media (max-width: 425px) {
+  .seller-books {
+    gap: 5px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.seller-books::-webkit-scrollbar {
+  width: 12px;
+}
+
+.seller-books::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.Seller-Book-Card {
+  width: 10rem;
+  height: 16rem;
+  perspective: 1000px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(14 14 14 / 89%);
+  overflow: hidden;
+}
+
+.Seller-Book-Card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.Seller-Book-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ensure image covers the container */
+}
+
+/* AdminRankWithdraw */
+.Admin-Rank-Withdraw {
+  width: 100%;
+  display: flex;
+  border: 2px solid #f1c80d;
+  height: 30rem;
+}
+
+.AdminRankContainer,
+.AdminWithdrawConatiner {
+  width: 50%;
+  margin: 0;
+}
+
+.AdminRankContainer,
+.AdminWithdrawConatiner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.Admin-Rank-Title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: #000d42;
+  font-size: 25px;
+  text-shadow: 2px 2px 2px #0000006e;
+  padding: 10px 0; /* Add padding to give space around the title */
+}
+
+.AdminRankPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  height: 26rem;
+  gap: 10px;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* Firefox: set scrollbar width to thin */
+  scrollbar-color: transparent transparent; /* Firefox: set scrollbar colors to transparent */
+  cursor: pointer;
+}
+
+/* For WebKit browsers (Chrome, Safari, etc.) */
+.AdminRankPanel::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+.AdminRankPanel::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background for the track */
+}
+
+.AdminRankPanel::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Transparent color for the thumb */
+  border-radius: 10px; /* Optional: rounded corners for the thumb */
+  border: 2px solid transparent; /* Optional: adds space around the thumb */
+}
+
+/* For Internet Explorer and Edge */
+.AdminRankPanel {
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Auto-hiding scrollbar for IE/Edge */
+}
+
+.AdminRankCard {
+  width: 100%;
+  height: 5rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 40%), 0 10px 20px rgb(0 0 0 / 40%);
+  background-color: #fff;
+  border: 1px solid #f1c80d;
+  padding: 10px; /* Optional: Add padding inside the card */
+  flex-shrink: 0; /* Prevent shrinking */
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-book-rank-image {
+  width: 3rem;
+  height: 100%;
+}
+.book-rank-image {
+  width: 100%;
+  height: 100%;
+}
+.Admin-Book-Rank-Details-Container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.Admin-Book-Rank-Details {
+  width: 100%;
+  display: flex;
+}
+.dmin-Book-earning {
+  width: 50%;
+  display: flex;
+  font-size: 15px;
+}
+.rank-book-title {
+  font-weight: bold;
+  color: #000d42;
+  font-size: 20px;
+  text-shadow: 2px 2px 2px #0000006e;
+}
+
+.AdminRequestCard {
+  width: 100%;
+  height: 4rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 40%), 0 10px 20px rgb(0 0 0 / 40%);
+  background-color: #fff;
+  border: 1px solid #f1c80d;
+  padding: 10px; /* Optional: Add padding inside the card */
+  flex-shrink: 0; /* Prevent shrinking */
+  display: flex;
+  align-items: center;
+}
+.amount-requested {
+  width: 50%;
+}
+.action-button {
+  flex: 1 1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+
+@media (max-width: 1200px) {
+  .Admin-Book-Rank-Details {
+    flex-direction: column;
+  }
+  .dmin-Book-earning {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .Admin-Rank-Withdraw {
+    border: 0;
+    height: 61rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .AdminRankContainer,
+  .AdminWithdrawConatiner {
+    width: 100%;
+    margin: 0;
+    border: 2px solid #f1c80d;
+  }
+}
+@media (max-width: 992px) {
+  .dmin-Book-earning {
+    width: 100%;
+    font-size: 12px;
+  }
+  .rank-book-title {
+    font-weight: bold;
+    color: #000d42;
+    font-size: 15px;
+    text-shadow: 2px 2px 2px #0000006e;
+  }
+}
+
+@media (max-width: 412px) {
+  .action-button-button{
+    height: 2rem !important;
+    width: 3rem !important;
+    font-size: 9px;
+    font-weight: bold;
+  }
+  .amount-req-msg{
+    font-size: 12px;
+  }
+}

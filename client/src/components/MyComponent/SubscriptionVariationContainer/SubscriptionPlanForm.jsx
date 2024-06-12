@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MyInput from "../MyInput";
+import { MdDeleteForever } from "react-icons/md";
 
 const SubscriptionPlanForm = ({ index, updatePlan }) => {
   const [month, setMonth] = useState("");
@@ -36,6 +37,7 @@ const SubscriptionPlanForm = ({ index, updatePlan }) => {
         value={price}
         onChange={handlePriceChange}
       />
+      <MdDeleteForever size={50} style={{color:"red",cursor:"pointer"}}/>
     </div>
   );
 };

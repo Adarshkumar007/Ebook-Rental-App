@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+.ApproveSeller {
+  width: 100%;
+  height: 35rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  overflow-y: auto;
+  margin: 5rem 0;
+  padding: 10px;
+  z-index: 0;
+}
+
+.ApproveSeller::-webkit-scrollbar {
+  width: 12px;
+}
+
+.ApproveSeller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ApproveSeller::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.ApproveSeller::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.ApproveSeller::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.AdminSellerApprove {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 11px;
+}
+
+@media (max-width: 1400px) {
+  .AdminSellerApprove {
+    gap: 34px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .AdminSellerApprove {
+    gap: 80px;
+  }
+}
+@media (max-width: 992px) {
+  .AdminSellerApprove {
+    gap: 0;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 768px) {
+    .AdminSellerApprove {
+        gap: 4px;
+        padding: 10px 0;
+    }
+}
+
+.seller-card {
+  display: inline-block;
+  perspective: 1000px;
+  transition: transform 0.5s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26), 0 6px 20px rgba(0, 0, 0, 0.26);
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  width: 15rem;
+  border: 1px solid red;
+  z-index: 1;
+}
+
+.seller-card:hover {
+  transform: scale(0.95);
+}
+
+
+.seller-image-container {
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  justify-content: center;
+}
+.seller-image {
+  width: 7rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 1px solid red;
+}
+.seller-image-rounded {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+.seller-card-body {
+  background-color: #00061c;
+  color: #fff;
+  padding: 10px 2px;
+  border-top: 1px solid red;
+  font-weight: 300;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 14px;
+}
+.seller-card-name {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.seller-details {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.seller-approve-button {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+.AdminApproveButton {
+  width: 60%;
+  font-size: 12px;
+}
