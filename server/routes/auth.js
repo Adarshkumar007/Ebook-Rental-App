@@ -3,7 +3,7 @@ import { getHome, signUp, logIn, sendotp, newPasswordController, sellerLogIn, se
 import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
-import { addcart, eBookCollection, eBookPublish, removeCart } from '../controllers/eBookPublish.js';
+import { addcart, eBookCollection, eBookPublish, eBookUpdate, removeCart } from '../controllers/eBookPublish.js';
 import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, getBookInfo, getBookRank, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed, lEarnings} from '../controllers/eBookUser.js';
 import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
 import { order, subscribe, verifyPayment } from '../controllers/paymentController.js';
@@ -51,5 +51,6 @@ router.get('/bookchart',authenticateToken,bookChart);
 router.get('/cearnings',authenticateToken,cEarnings);
 router.get('/learnings',authenticateToken,lEarnings);
 router.post('/reviewupdate',authenticateToken,update_reviews);
-router.post('/reviewdelete',authenticateToken,delete_reviews)
+router.post('/reviewdelete',authenticateToken,delete_reviews);
+router.post('/api/ebookupdate',authenticateToken,upload.fields([{ name: 'file', maxCount: 1 },{ name: 'prefile', maxCount: 1 }, { name: 'image', maxCount: 1 }]),eBookUpdate);
 export default router;

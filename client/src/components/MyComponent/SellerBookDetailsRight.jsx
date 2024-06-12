@@ -6,7 +6,7 @@ import { setActiveModal } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewModalContent from "./SellerBookReview/ReviewModalContent";
 import MyButton from "./MyButton";
-import { CURRENT_BOOKID } from "../../redux/actions/types";
+import { CURRENT_BOOKID, CURRENT_BOOKINFO } from "../../redux/actions/types";
 
 const SellerBookDetailsRight = ({
   id,
@@ -14,6 +14,7 @@ const SellerBookDetailsRight = ({
   category,
   publisher,
   description,
+  plan
 }) => {
   // const [showModal, setShowModal] = useState(false);
   const activeModal = useSelector((state) => state.sellerauth.activeModal);
@@ -33,6 +34,14 @@ const SellerBookDetailsRight = ({
   };
 
   const handleEdit=()=>{
+    dispatch({
+      type: CURRENT_BOOKINFO,
+      bookinfo: {id,
+        title,
+        category,
+        publisher,
+        description,plan},
+    });
     dispatch(setActiveModal("editBook","seller"));
   }
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import MyInput from "../MyInput";
 import { MdDeleteForever } from "react-icons/md";
 
-const SubscriptionPlanForm = ({ index, updatePlan }) => {
-  const [month, setMonth] = useState("");
-  const [price, setPrice] = useState("");
+const SubscriptionPlanForm = ({ plan=[],index, updatePlan }) => {
+  const [month, setMonth] = useState(plan.month || "");
+  const [price, setPrice] = useState(plan.price ||"");
 
   useEffect(() => {
     // Update the plan in the parent component when month or price changes

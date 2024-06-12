@@ -24,7 +24,7 @@ const SellerSwipper = ({ books, onClick }) => {
           publisher={ebook.publisherName}
           category={ebook.category}
           description={ebook.description}
-          
+          plan={ebook.plan}
         />
         
       ))}

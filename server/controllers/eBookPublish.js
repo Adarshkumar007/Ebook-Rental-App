@@ -38,6 +38,63 @@ export const eBookPublish=async(req,res)=>{
       }
 
 }
+export const eBookUpdate = async (req, res) => {
+  try {
+    console.log("plans", req.body);
+    
+    // Find the eBook by ID
+    const eBookId = req.body.id;
+    const existingBook = await eBook.findById(eBookId);
+    if (!existingBook) {
+      return res.status(404).send('E-Book not found');
+    }
+
+    const seller = await Seller.findOne({ _id: req.user.userId });
+    if (!seller) {
+      return res.status(404).send('Seller not found');
+    }
+
+    // Update the eBook fields
+    existingBook.title = req.body.title;
+    existingBook.publisherId = req.user.userId;
+    existingBook.publisherName = seller.username;
+    existingBook.authorName = req.body.author;
+    existingBook.description = req.body.description;
+    existingBook.category = req.body.category;
+
+    if (req.files &&req.files['image']) {
+      existingBook.bookImage = {
+        data: req.files['image'][0].buffer,
+        contentType: req.files['image'][0].mimetype,
+      };
+    }
+
+    if (req.files &&req.files['file']) {
+      existingBook.bookFile = {
+        data: req.files['file'][0].buffer,
+        contentType: req.files['file'][0].mimetype,
+      };
+    }
+
+    if (req.files &&req.files['prefile']) {
+      existingBook.preFile = {
+        data: req.files['prefile'][0].buffer,
+        contentType: req.files['prefile'][0].mimetype,
+      };
+    }
+
+    existingBook.plan = JSON.parse(req.body.plan);
+
+    // Save the updated eBook
+    await existingBook.save();
+    console.log("book updated");
+    res.status(200).send('Book updated successfully');
+  } catch (error) {
+    console.error('Error updating book:', error);
+    res.status(500).send('Internal server error');
+  }
+}
+
 export const eBookCollection = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -57,6 +114,7 @@ export const eBookCollection = async (req, res) => {
            imageSrc: imageSrc,
            preFileSrc: preFileSrc,
            fileSrc:fileSrc,
+           plan:item.plan,
            description: item.description };
       });
       return res.status(200).send({ books: updatedEbook });

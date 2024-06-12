@@ -47,6 +47,7 @@ function AddEBookForm() {
   const handleFileChange = (e) => {
     if (e.target.files[0].name) {
       setFile(e.target.files[0]);
+      console.log("file",e.target.files[0]);
       setFileName(e.target.files[0].name);
     }
   };
