@@ -115,3 +115,29 @@
 .text-primary{
   color: #000d42 !important;
 }
+.otpinput{
+  width: 97% !important;
+  padding-left: 12px;
+}
+
+@media (max-width:500px){
+  .otpinput{
+    width: 97% !important;
+    padding-left: 6px;
+  }
+  
+}
+.signUpAlert{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
+.FormErrorDisplay{
+  width: 90%;
+  padding: 0 5px;
+  text-align: justify;
+  font-size: small;
+  font-weight: bold;
+}

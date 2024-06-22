@@ -53,9 +53,9 @@ const EBookDetails = () => {
                     <Modal
                       show={true}
                       onHide={() => setIspdfView(false)}
-                      className="custom-modal"
+                      className="custom-modal bookPreview"
                     >
-                      <Modal.Header closeButton>
+                      <Modal.Header closeButton className="bookPreviewHeader">
                         <Modal.Title>Preview</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>

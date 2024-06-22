@@ -28,7 +28,7 @@ function PdfViewer({ pdfUrl }) {
     <div style={{ maxWidth: '100%', overflow: 'auto' }}>
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.from(new Array(numPages), (el, index) => (
-          <Page
+          <><Page
             key={`page_${index + 1}`}
             pageNumber={index + 1}
             width={windowDimensions.width}
@@ -36,6 +36,8 @@ function PdfViewer({ pdfUrl }) {
             renderTextLayer={false}
             renderAnnotationLayer={false}
           />
+          <div style={{display:"flex",justifyContent:"center",fontSize:"15px",fontWeight:"bold"}}>{index+1}</div>
+          </>
         ))}
       </Document>
     </div>

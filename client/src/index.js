@@ -25,6 +25,7 @@ import AdminLayout from "./components/Admin/AdminLayout";
 import AdminHome from "./components/Admin/AdminHome";
 import ApproveSeller from "./components/Admin/ApproveSeller";
 import AdminSellerDetails from "./components/Admin/AdminSellerDetails";
+import ReadBook from "./components/MyComponent/Library/ReadBook";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -59,6 +60,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <Route path="/contactus" element={<ContactUs />} />
                   <Route path="/security" element={<Security />} />
                   <Route path="/help" element={<Help />} />
+                  <Route path="/read" element={<ReadBook />} />
                 </Routes>
                 <FooterComponent />
               </>

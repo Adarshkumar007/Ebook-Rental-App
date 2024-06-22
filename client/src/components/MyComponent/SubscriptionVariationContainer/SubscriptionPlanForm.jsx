@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import MyInput from "../MyInput";
 import { MdDeleteForever } from "react-icons/md";
 
-const SubscriptionPlanForm = ({ plan=[],index, updatePlan }) => {
+const SubscriptionPlanForm = ({ plan = {}, index, updatePlan, onDelete }) => {
   const [month, setMonth] = useState(plan.month || "");
-  const [price, setPrice] = useState(plan.price ||"");
+  const [price, setPrice] = useState(plan.price || "");
 
   useEffect(() => {
     // Update the plan in the parent component when month or price changes
@@ -19,13 +19,16 @@ const SubscriptionPlanForm = ({ plan=[],index, updatePlan }) => {
     setPrice(event.target.value);
   };
 
- 
+  const handleDelete = () => {
+    onDelete(index); // Notify parent to delete this plan form
+  };
+
   return (
     <div className="SubscriptionPlanForm">
       <MyInput
         type="number"
         label=""
-        placeholder="Enter Number of Month"
+        placeholder="Enter Number of Months"
         value={month}
         onChange={handleMonthChange}
       />
@@ -37,7 +40,13 @@ const SubscriptionPlanForm = ({ plan=[],index, updatePlan }) => {
         value={price}
         onChange={handlePriceChange}
       />
-      <MdDeleteForever size={50} style={{color:"red",cursor:"pointer"}}/>
+      {index > 0 && (
+        <MdDeleteForever
+          size={40}
+          style={{ color: "red", cursor: "pointer" }}
+          onClick={handleDelete}
+        />
+      )}
     </div>
   );
 };

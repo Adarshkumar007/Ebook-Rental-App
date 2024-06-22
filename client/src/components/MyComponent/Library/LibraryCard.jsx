@@ -5,6 +5,7 @@ import axios from "axios";
 import { url } from "../../../url";
 import moment from "moment";
 import LoadingSpinner from "../LoadingSpinner";
+import { Link } from "react-router-dom";
 const LibraryCard = ({ book }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [date, setDate] = useState(null);
@@ -37,9 +38,9 @@ const LibraryCard = ({ book }) => {
               <Expire end_date={date} />
             </div>
 
-            <a href="#" className="details btn btn-primary">
+            <Link to="/read" className="details btn btn-primary">
               Read
-            </a>
+            </Link>
           </div>
         </>
       )}

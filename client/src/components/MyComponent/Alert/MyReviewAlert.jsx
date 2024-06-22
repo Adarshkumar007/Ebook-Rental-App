@@ -1,7 +1,7 @@
 import check from "../../images/check.png";
 import { IoClose } from "react-icons/io5";
-import './AddTocartAlert.css'
-const MyReviewAlert = ({closeModel}) => {
+import "./AddTocartAlert.css";
+const MyReviewAlert = ({ closeModel }) => {
   return (
     <div className="AddTocartAlert">
       <div className="AddTocartAlertIcon">

@@ -11,6 +11,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import "./Login.css";
 import { SET_OTP_ERROR } from "../redux/actions/types";
+import FormErrorDisplay from "./MyComponent/FormErrorDisplay";
 
 const Login = ({ userType }) => {
   const dispatch = useDispatch();
@@ -21,12 +22,11 @@ const Login = ({ userType }) => {
   const OTPerror = useSelector((state) => state.sendOTP.error) || "";
   const otpSent = useSelector((state) => state.sendOTP.otpSent) || "";
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isForgotPassword) {
       console.log(email);
-      dispatch(sendOTP(email,userType));
+      dispatch(sendOTP(email, userType));
     } else {
       dispatch(login(email, password, userType));
     }
@@ -37,12 +37,16 @@ const Login = ({ userType }) => {
       {!otpSent && (
         <Form onSubmit={handleSubmit}>
           {!isForgotPassword && error && (
-            <div className="error" style={{ color: "red" }}>
-              {error}
+            <div className="signUpAlert">
+              <FormErrorDisplay message={error} type="error" />
             </div>
           )}
           {isForgotPassword && OTPerror && (
-            <div className="error"><div className="error" style={{ color: "red" }}>{OTPerror}</div></div>
+            <div className="error">
+              <div className="signUpAlert">
+                <FormErrorDisplay message={OTPerror} type="error" />
+              </div>
+            </div>
           )}
           {isForgotPassword && !otpSent && (
             <Form.Group controlId="email">
@@ -97,20 +101,23 @@ const Login = ({ userType }) => {
                 /> */}
               </Form.Group>
 
-
               <SuccessButton myval="Login" type="submit" />
               {/* <MyButton myval="Login" type="submit" /> */}
               {/* <Button variant="primary" type="submit">
                
                </Button> */}
-              <Button variant="link" onClick={() => setIsForgotPassword(true)} className="signin-signup-nav-link">
+              <Button
+                variant="link"
+                onClick={() => setIsForgotPassword(true)}
+                className="signin-signup-nav-link"
+              >
                 Forgot Password?
               </Button>
             </>
           )}
 
           {isForgotPassword && !otpSent && (
-              <SuccessButton myval="Send OTP"type="submit" marginTop={20}/>
+            <SuccessButton myval="Send OTP" type="submit" marginTop={20} />
             // <MyButton myval="Send OTP" type="submit" marginTop={20} />
 
             // <Button variant="primary" type="submit">
@@ -118,15 +125,20 @@ const Login = ({ userType }) => {
             // </Button>
           )}
           {isForgotPassword && (
-         
-            <Button variant="link" className="signin-signup-nav-link"  onClick={() => {
-              setIsForgotPassword(false);
-              dispatch({
-                type:SET_OTP_ERROR,
-              })
-            }}>
+            <Button
+              variant="link"
+              className="signin-signup-nav-link"
+              onClick={() => {
+                setIsForgotPassword(false);
+                
+                
+                dispatch({
+                  type: SET_OTP_ERROR,
+                });
+              }}
+            >
               <AiOutlineArrowLeft className="pl-2" />
-                Back to Login
+              Back to Login
             </Button>
           )}
         </Form>
