@@ -12,7 +12,7 @@ const transferSchema = new Schema({
       },
       status: {
         type: String,
-        enum: ['pending', 'completed', 'failed'],
+        enum: ['pending', 'accepted', 'rejected'],
         default: 'pending'
       }
 });

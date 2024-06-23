@@ -1,8 +1,27 @@
-const AdminApproveButton=()=>{
+const AdminApproveButton = ({ status, onClick }) => {
+    return (
+      <>
+        {status === "verifing" ? (
+          <button 
+            type="button" 
+            className="AdminApproveButton btn btn-primary btn-sm" 
+            onClick={onClick}
+          >
+            Approve
+          </button>
+        ):
+        <button 
+            type="button" 
+            className="AdminApproveButton btn btn-primary btn-sm" 
+            
+          >
+            {status}
+          </button>
+        }
 
-    return(
-        <button type="button" className="AdminApproveButton btn btn-primary btn-sm">Approve</button>
-    )
-
-}
-export default AdminApproveButton;
+      </>
+    );
+  };
+  
+  export default AdminApproveButton;
+  

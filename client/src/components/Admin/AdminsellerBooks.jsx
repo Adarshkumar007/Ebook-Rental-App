@@ -37,7 +37,7 @@ const AdminsellerBooks = ({sellerId}) => {
             sellerId: sellerId 
           }
         });      setbookinfo(response.data);
-        console.log("response",response);
+        console.log("response boooksww",response);
       } catch (error) {
       } finally {
       }

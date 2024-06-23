@@ -14,7 +14,7 @@ function UserProfile({ userType }) {
   const [success, setSuccess] = useState("");
   const [editFields, setEditFields] = useState({});
   var x = 0;
-
+  const [imageURL,setImageURL] =useState("");
   useEffect(() => {
     if (x === 0) {
       x++;
@@ -31,6 +31,7 @@ function UserProfile({ userType }) {
         })
         .then((response) => {
           setProfile(response.data);
+          setImageURL(response.data.profile_image);
         })
         .catch((error) => {
           console.error("Error fetching profile:", error);
@@ -65,8 +66,12 @@ function UserProfile({ userType }) {
     );
   }
 
-  const handleSetFile = (file) =>
+  const handleSetFile = (file) =>{
+    const imageURL = URL.createObjectURL(file);
+    setImageURL(imageURL);
     setProfile({ ...profile, profile_image: file });
+  }
+
   const handleSetUsername = (value) =>
     setProfile({ ...profile, username: value });
   const handleSetEmail = (value) => setProfile({ ...profile, email: value });
@@ -185,7 +190,7 @@ function UserProfile({ userType }) {
         </div>
       )}
       <ProfileImage
-        image={profile.profile_image ? profile.profile_image : ""}
+        image={imageURL}
         handleSetFile={handleSetFile}
       />
       <ProfileInputEmail

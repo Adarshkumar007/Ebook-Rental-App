@@ -15,32 +15,71 @@ const razorpay = new Razorpay({
 });
 export const adminlogin = async (req, res) => {
     const { username, password } = req.body;
-    console.log("hello admin",username);
+    console.log("hello admin",username,password);
     // Find admin by username
-    const admin = Admin.find({username:username,password:password});
+    const admin = await Admin.find({username:username,password:password});
     if (!admin) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
-    console.log("hello")
-    // Check password
-    // const isMatch = await bcrypt.compare(password, admin.password);
-    // if (!isMatch) {
-    //   return res.status(401).json({ message: 'Invalid username or password' });
-    // }
-  
-    // Generate JWT
+    console.log("hello",admin)
+    
     const token = jwt.sign({ id: admin.id, username: admin.username }, "SECRET_KEY", { expiresIn: '1h' });
   
     res.json({ token });
 }
 export const gettransferinfo=async(req,res) =>{
   try {
-    const pendingPublisher = await Transfer.find({ status: 'pending' });
-    console.log("data",pendingPublisher);
-    res.status(200).json({pendingPublisher})
+     const uniquePublishers = await Transfer.aggregate([
+      { $match: { status: 'pending' } },
+      { $group: {
+          _id: "$publisherId",
+          doc: { $first: "$$ROOT" }
+        }
+      },
+      { $replaceRoot: { newRoot: "$doc" } }
+    ]);
+    
+    res.status(200).json({uniquePublishers})
   } catch (error) {
     console.log('No publishers with pending status found.');
   }
+}
+export const getnewseller=async(req,res) =>{
+  try {
+      const uniquePublishers = await Seller.find({status:"verifing"}).select('_id');
+      if(uniquePublishers){
+        console.log(uniquePublishers,"ASDsdfsdfsdf");
+        // const imageBase64 = Buffer.from(uniquePublishers.profile_image.data).toString('base64');
+        // const profile_image = `data:${uniquePublishers.profile_image.contentType};base64,${imageBase64}`;
+        // uniquePublishers=[...uniquePublishers,profile_image];
+        return res.status(200).json({uniquePublishers});
+
+      }
+      else{
+        return res.status(200).json({})
+
+      }
+
+  } catch (error) {
+    console.log('No publishers with pending status found.',error);
+  }
+}
+export const updateStatus=async(req,res)=>{
+  const { Id } = req.body;
+  const result = await Seller.updateMany(
+    { _id: Id, status: "verifing" },  // Filter condition using _id field
+    { $set: { status: "verified" } }  // Update operation
+  );
+  console.log(result,"result");
+  // Check if any documents were updated
+  if (result.modifiedCount > 0) {
+    return res.status(200).json({result});
+  } else {
+   return res.status(400).json({message:"error while approving"});
+  }
+  
+   // Output the result of the update operation
+  
 }
 export const getSellerInfo=async(req,res)=>{
   try {
@@ -157,53 +196,90 @@ export const getBookRankAdmin = async(req,res)=>{
 export const gettransferrequests=async(req,res) =>{
   const sellerId=req.query.sellerId;
   try {
-    const pendingPublisher = await Transfer.find({publisherId:sellerId, status: 'pending' });
+    const pendingPublisher = await Transfer.find({publisherId:sellerId});
     console.log("data",pendingPublisher);
     res.status(200).json({pendingPublisher})
   } catch (error) {
     console.log('No publishers with pending status found.');
   }
 }
+export const handleRejection = async(req,res)=>{
+  const requestId=req.body.requestId;
+  const request = await Transfer.findById(requestId);
+  const { _id } = request;
+  const result = await Transfer.updateMany(
+    { _id: _id, status: "pending" },  // Filter condition using _id field and status "pending"
+    { $set: { status: "rejected" } }  // Update operation to set status to "accepted"
+  );
+
+  
+
+// Check if any documents were updated
+if (result.modifiedCount > 0) {
+  res.status(200).json({message:"accepted"})
+} else {
+  res.status(404).json({message:"not found"})
+}
+}
 export const handleTransfer = async(req,res)=>{
   const requestId=req.body.requestId;
   const request = await Transfer.findById(requestId);
-  const fund_account=await AccountDetailsModel.find({publisherId:request.publisherId});
-  console.log("function",fund_account);
-  console.log(razorpay)
-  if(request){
-    const data = {
-      account_number: process.env.account_number,
-      fund_account_id: fund_account.fundAccount,
-      amount: 100,
-      currency: "INR",
-      mode: "UPI",
-      purpose: "refund",
-      queue_if_low_balance: true,
-      reference_id: "Acme Transaction ID 12345",
-      narration: "Acme Corp Fund Transfer",
-      notes: {
-        notes_key_1: "Tea, Earl Grey, Hot",
-        notes_key_2: "Tea, Earl Grey… decaf."
-      }
-    };
-    const authString = Buffer.from(`${razorpay.key_id}:${razorpay.key_secret}`).toString('base64');
-    
-    axios.post('https://api.razorpay.com/v1/payouts', data, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${authString}`,
-      },
-    })
-    .then(response => {
-      console.log('Payout created:', response.data);
-    })
-    .catch(error => {
-      console.error('Error creating payout:', error.response ? error.response.data : error);
-    });
-  
-  }
-  else{
-    console.log('No publishers with pending status found.');
+  const { _id } = request;
+  const result = await Transfer.updateMany(
+    { _id: _id, status: "pending" },  // Filter condition using _id field and status "pending"
+    { $set: { status: "accepted" } }  // Update operation to set status to "accepted"
+  );
 
-  }
+  
+
+// Check if any documents were updated
+if (result.modifiedCount > 0) {
+  res.status(200).json({message:"accepted"})
+} else {
+  res.status(404).json({message:"not found"})
+}
+
+  // const fund_account=await AccountDetailsModel.find({publisherId:request.publisherId});
+  // console.log("function",fund_account);
+  // console.log(razorpay)
+  // if(request){
+  //   const data = {
+  //     account_number: process.env.account_number,
+  //     fund_account_id: fund_account.fundAccount,
+  //     amount: 100,
+  //     currency: "INR",
+  //     mode: "UPI",
+  //     purpose: "refund",
+  //     queue_if_low_balance: true,
+  //     reference_id: "Acme Transaction ID 12345",
+  //     narration: "Acme Corp Fund Transfer",
+  //     notes: {
+  //       notes_key_1: "Tea, Earl Grey, Hot",
+  //       notes_key_2: "Tea, Earl Grey… decaf."
+  //     }
+  //   };
+  //   const authString = Buffer.from(`${razorpay.key_id}:${razorpay.key_secret}`).toString('base64');
+    
+  //   axios.post('https://api.razorpay.com/v1/payouts', data, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Basic ${authString}`,
+  //     },
+  //   })
+  //   .then(response => {
+  //     console.log('Payout created:', response.data);
+  //   res.status(200).json({data:response.data})
+
+  //   })
+  //   .catch(error => {
+  //     console.error('Error creating payout:', error.response ? error.response.data : error);
+  //   res.status(500).json({error:error})
+      
+  //   });
+  
+  // }
+  // else{
+  //   console.log('No publishers with pending status found.');
+
+  // }
 }

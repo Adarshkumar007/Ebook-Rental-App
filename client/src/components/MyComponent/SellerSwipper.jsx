@@ -11,7 +11,7 @@ const SellerSwipper = ({ books, onClick }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
+  console.log("bookInfo",books)
   return (
     <div className="slider-container">
     <Slider {...settings}>
@@ -21,7 +21,7 @@ const SellerSwipper = ({ books, onClick }) => {
           id={ebook._id}
           image={ebook.imageSrc}
           title={ebook.title}
-          publisher={ebook.publisherName}
+          publisher={ebook.authorName}
           category={ebook.category}
           description={ebook.description}
           plan={ebook.plan}

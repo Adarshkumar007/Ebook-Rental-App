@@ -14,7 +14,7 @@ useEffect(()=>{
   const fetchPendingTransfers = async () => {
     try {
       const response= await axios.get(url+'/transfer_request');
-      setSeller(response.data.pendingPublisher);
+      setSeller(response.data.uniquePublishers);
       console.log("response",response);
     } catch (error) {
       setError(error);

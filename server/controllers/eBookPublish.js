@@ -109,7 +109,7 @@ export const eBookCollection = async (req, res) => {
         const fileSrc = `data:${item.bookFile.contentType};base64,${fileBase64}`;
         return { _id: item._id,
            title:item.title,
-           publisherName: item.publisherName,
+           publisherName: item.authorName,
            category: item.category,
            imageSrc: imageSrc,
            preFileSrc: preFileSrc,

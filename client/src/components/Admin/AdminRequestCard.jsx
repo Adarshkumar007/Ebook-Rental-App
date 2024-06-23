@@ -5,11 +5,12 @@ import { url } from "../../url";
 const AdminRequestCard = ({ amt,tstatus ,id}) => {
   const [status, setStatus] = useState(tstatus);
   const handleAccept = async () => {
+    setStatus("accepted");
+    console.log("status payment",tstatus);
     try {
       const response = await axios.post(url+"/api/transfer", {
         requestId:id
       });
-      setStatus("accepted");
       if (response.data.success) {
         console.log("Transfer successful", response.data.transfer);
 
@@ -22,8 +23,22 @@ const AdminRequestCard = ({ amt,tstatus ,id}) => {
 
   };
 
-  const handleReject = () => {
+  const handleReject = async () => {
     setStatus("rejected");
+    console.log("status payment",tstatus);
+    try {
+      const response = await axios.post(url+"/api/transferrejected", {
+        requestId:id
+      });
+      if (response.data.success) {
+        console.log("Transfer successful", response.data.transfer);
+
+      } else {
+        console.error("Transfer failed", response.data.error);
+      }
+    } catch (error) {
+      console.error("Error in transfer", error);
+    }
   };
 
   return (
