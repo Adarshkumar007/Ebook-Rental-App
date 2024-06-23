@@ -5,8 +5,9 @@ import { eBook } from "../models/ebook.js";
 export const eBookPublish=async(req,res)=>{
     try {
       console.log("plans",req.body.plans);
-      const seller = await Seller.findOne({_id:req.user.userId});
+      const seller = await Seller.findOne({_id:req.user.userId,status:"verified"});
       console.log(seller);
+      if(seller){
         const newBook = new eBook({
           title: req.body.title,
           publisherId:req.user.userId,
@@ -32,6 +33,11 @@ export const eBookPublish=async(req,res)=>{
         await newBook.save();
         console.log("book saved");
         res.status(201).send('Book saved successfully');
+    }
+    else{
+      res.status(201).send('Invalid Account');
+
+    }
       } catch (error) {
         console.error('Error saving book:', error);
         res.status(500).send('Internal server error');

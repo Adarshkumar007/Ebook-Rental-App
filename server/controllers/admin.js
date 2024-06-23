@@ -81,11 +81,29 @@ export const updateStatus=async(req,res)=>{
    // Output the result of the update operation
   
 }
+export const updateStatusBlock=async(req,res)=>{
+  const { Id,status } = req.body;
+  console.log(Id,status);
+  const result = await Seller.updateMany(
+    { _id: Id },  // Filter condition using _id field
+    { $set: { status: status==="block"?"blocked":"verified" } }  // Update operation
+  );
+  console.log(result,"result");
+  // Check if any documents were updated
+  if (result.modifiedCount > 0) {
+    return res.status(200).json({result});
+  } else {
+   return res.status(400).json({message:"error while approving"});
+  }
+  
+   // Output the result of the update operation
+  
+}
 export const getSellerInfo=async(req,res)=>{
   try {
     const sellerId = req.query.sellerId;
     console.log("seller id",sellerId);
-    const sellerinfo = await Seller.findById(sellerId).select('profile_image username address email phone pin');
+    const sellerinfo = await Seller.findById(sellerId).select('profile_image username address email phone pin status');
     const imageBase64 = Buffer.from(sellerinfo.profile_image.data).toString('base64');
     const imageSrc = `data:${sellerinfo.profile_image.contentType};base64,${imageBase64}`;
     res.status(200).json({imageSrc:imageSrc,

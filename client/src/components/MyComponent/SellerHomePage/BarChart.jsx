@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ApexCharts from 'apexcharts';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout, setActiveModal } from '../../../redux/actions/authActions';
 import axios from 'axios';
 import { url } from '../../../url';
@@ -8,7 +8,9 @@ import { url } from '../../../url';
 const BarChart = () => {
     const dispatch =useDispatch();
     const [bookCategories, setBookCategories] = useState([]);
-    const [earnings, setEarnings] = useState([]);   
+    const [earnings, setEarnings] = useState([]);
+  const isSellerAuthenticated=useSelector((state)=>state.sellerauth.isAuthenticated)
+    
      useEffect(()=>{
         const fetchData = async () => {
         try {
@@ -44,7 +46,7 @@ const BarChart = () => {
         } 
       }
       fetchData();
-    },[]);
+    },[isSellerAuthenticated]);
     useEffect(() => {
        if(earnings){
         console.log("bxgd",earnings,bookCategories)

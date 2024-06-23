@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import myimage from '../images/officialphoto.jpg';
+import { url } from '../../url';
+import axios from "axios";
 
-const AdminSellerPhoto = () => {
+
+const AdminSellerPhoto = ({image,seller,sStatus}) => {
+  const [status,setStatus] = useState(sStatus);
+
+  const handleOnClick=async ()=>{
+    console.log("sdfsdfsdfsdfsdff",seller);
+    try {
+      const response = await axios.post(`${url}/updatesellerStatusblock`,{Id:seller,status:status} );
+      setStatus(status==="unblock"?"block":"unblock")
+      console.log("response",response);
+    } catch (error) {
+    } finally {
+    }
+  }
   return (
     <div className="Photo-button">
       <div className="Seller-Image shadows" >
-        <img src={myimage} className="Seller-Image-pic" alt="sellerphoto" />
+        <img src={image} className="Seller-Image-pic" alt="sellerphoto" />
       </div>
       <button
         type="button"
+        onClick={handleOnClick}
         className="btn btn-primary block-button"
         style={{ 
           '--bs-btn-padding-y': '.25rem', 
@@ -20,7 +36,7 @@ const AdminSellerPhoto = () => {
           backgroundColor:"red"
         }}
       >
-        Block
+        {status}
       </button>
     </div>
   );

@@ -12,6 +12,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import "./Login.css";
 import { SET_OTP_ERROR } from "../redux/actions/types";
 import FormErrorDisplay from "./MyComponent/FormErrorDisplay";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ userType }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Login = ({ userType }) => {
   const error = useSelector((state) => state.auth.error) || "";
   const OTPerror = useSelector((state) => state.sendOTP.error) || "";
   const otpSent = useSelector((state) => state.sendOTP.otpSent) || "";
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isForgotPassword) {

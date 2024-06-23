@@ -53,6 +53,7 @@ const sellerAuthReducer = (state = initialState, action) => {
           case SELLER_LOGOUT:
             localStorage.removeItem('sellertoken');
             localStorage.removeItem('sellername');
+            localStorage.removeItem('sellerimageSrc');
             return{
               ...state,
               isAuthenticated:false,

@@ -1,6 +1,6 @@
 import { GiMoneyStack } from "react-icons/gi";
 import WithdrawButton from "./WithdrawButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { url } from "../../../url";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { logout, setActiveModal } from "../../../redux/actions/authActions";
 const WithdrawalComponent = () => {
   const [learnings , setLEarnings] = useState([]);
   const [cearnings , setCEarnings] = useState([]);
+  const isSellerAuthenticated=useSelector((state)=>state.sellerauth.isAuthenticated)
 
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -41,7 +42,7 @@ const WithdrawalComponent = () => {
     } 
   }
   fetchData();
-},[]);
+},[isSellerAuthenticated]);
 useEffect(()=>{
   const fetchData = async () => {
   try {
@@ -73,7 +74,7 @@ useEffect(()=>{
   } 
 }
 fetchData();
-},[]);
+},[isSellerAuthenticated]);
   return (
     <div className="withdrwal-component SubContainer">
       <div className="BankDetails-Title My-Title-Style">

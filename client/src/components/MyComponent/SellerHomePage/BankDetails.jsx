@@ -6,12 +6,15 @@ import MyFormButton from "./MyFormButton";
 import AlertBadge from "./AlertBadge";
 import axios from "axios";
 import { url } from "../../../url";
+import { useSelector } from "react-redux";
 
 const BankDetails = () => {
   
   const [editable, setEditable] = useState(false);
   const [warning, setWarning] = useState("");
   const [success, setSuccess] = useState("");
+  const isSellerAuthenticated=useSelector((state)=>state.sellerauth.isAuthenticated)
+
   const [formValues, setFormValues] = useState({
     name: "",
     bankname: "",
@@ -47,7 +50,7 @@ const BankDetails = () => {
       }
     }
     fetchData();
-  },[])
+  },[isSellerAuthenticated])
   const handleBankDetailsEdit = () => {
     setEditable(true);
     setWarning("");

@@ -8,7 +8,7 @@ import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, ebookFile, 
 import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
 import { getSellerStatus, order, setAccountInfo, subscribe, verifyPayment } from '../controllers/paymentController.js';
 import { orderDetails } from '../controllers/orderController.js';
-import { adminlogin, cEarningsadmin, getBookRankAdmin, getSellerInfo, getnewseller, gettransferinfo, gettransferrequests, handleRejection, handleTransfer, lEarningsadmin, updateStatus } from '../controllers/admin.js';
+import { adminlogin, cEarningsadmin, getBookRankAdmin, getSellerInfo, getnewseller, gettransferinfo, gettransferrequests, handleRejection, handleTransfer, lEarningsadmin, updateStatus, updateStatusBlock } from '../controllers/admin.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -75,4 +75,6 @@ router.post('/setaccountinfo',authenticateToken,setAccountInfo);
 router.get('/getsellerstatus',authenticateToken,getSellerStatus);
 router.get('/selleraprove',getnewseller);
 router.post('/updatesellerStatus',updateStatus);
+router.post('/updatesellerStatusblock',updateStatusBlock);
+
 export default router;

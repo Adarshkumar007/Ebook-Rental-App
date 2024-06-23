@@ -4,11 +4,13 @@ import { Book } from "./Books";
 import axios from "axios";
 import { url } from "../../../url";
 import { logout, setActiveModal } from "../../../redux/actions/authActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Rank = () => {
   const [rank , setRank] = useState([]);
   const dispatch = useDispatch();
+            
+  const isSellerAuthenticated=useSelector((state)=>state.sellerauth.isAuthenticated)
   useEffect(()=>{
     const fetchData = async () => {
     try {
@@ -25,6 +27,7 @@ const Rank = () => {
           if (error.response.status === 403) {
             console.error('Error 403: Forbidden');
             dispatch(logout("seller"));
+            localStorage.setItem("sellerimageSrc",null);
             dispatch(setActiveModal("login","seller"));
           } else {
             console.error(`Error ${error.response.status}: ${error.response.statusText}`);
@@ -40,7 +43,7 @@ const Rank = () => {
     } 
   }
   fetchData();
-},[]);
+},[isSellerAuthenticated]);
   return (
     <div className="shadows Rank">
       <div className="Wallet-Main-Title My-Title-Style">Book Rank</div>

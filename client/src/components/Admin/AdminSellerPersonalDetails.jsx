@@ -24,7 +24,7 @@ const AdminSellerPersonalDetails = ({learnings,cearnings,sellerId}) => {
   },[]);
   return (
     <div className="AdminSellerPersonalDetails">
-      <AdminSellerPhoto image={seller.imageSrc}/>
+      <AdminSellerPhoto image={seller.imageSrc} seller={sellerId} sStatus={seller.status}/>
       <AdminAllrDetails learnings={learnings} cearnings={cearnings} seller={seller}/>
     </div>
   );
