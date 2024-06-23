@@ -86,7 +86,8 @@ export const ebookFile= async(req, res) => {
     
       // const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
       const eBookObj = {
-          pages: fileSrc,  
+          pages: fileSrc,
+          title:ebook.title
       };
       res.json(eBookObj);
       }

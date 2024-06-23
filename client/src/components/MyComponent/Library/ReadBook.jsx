@@ -9,6 +9,8 @@ const ReadBook = () => {
   const { key } = useParams();
 console.log("key",key);
 const [file,setFile]=useState("");
+const [title,setTitle]=useState("");
+
 useEffect(()=>{
     const fetchData=async ()=>{
       const response = await axios.get(url + "/getfile", {
@@ -21,6 +23,8 @@ useEffect(()=>{
       });
       
       setFile(response.data.pages);
+      setTitle(response.data.title);
+
       console.log("pages",response.data);
     }
     fetchData();
@@ -28,7 +32,7 @@ useEffect(()=>{
   return (
     <Container>
       <div className="ReadBook">
-        <div className="BookTitle">The Book Title</div>
+        <div className="BookTitle">{title}</div>
         {file!==""&&<PdfViewer pdfUrl={file} />}
       </div>
     </Container>
