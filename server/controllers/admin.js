@@ -108,7 +108,7 @@ export const getSellerInfo=async(req,res)=>{
     const imageSrc = `data:${sellerinfo.profile_image.contentType};base64,${imageBase64}`;
     res.status(200).json({imageSrc:imageSrc,
       name:sellerinfo.username,
-      address:sellerinfo.address,email:sellerinfo.email,phone:sellerinfo.phone,pin:sellerinfo.pin
+      address:sellerinfo.address,email:sellerinfo.email,phone:sellerinfo.phone,pin:sellerinfo.pin,status:sellerinfo.status
     })
   } catch (error) {
     console.log('No publishers with pending status found.');
