@@ -8,6 +8,7 @@ import axios from "axios";
 import { url } from "../../../url";
 
 const BankDetails = () => {
+  
   const [editable, setEditable] = useState(false);
   const [warning, setWarning] = useState("");
   const [success, setSuccess] = useState("");
