@@ -68,6 +68,43 @@ export const eBookPreImage=async (req, res) => {
   
     
 };
+export const ebookFile= async(req, res) => {
+  const key = req.query.key; // Get the 'key' query parameter
+  const publisherId = req.user.userId;
+
+  try {
+  console.log("keasdsay",key);
+  const isSubscribed=await Subscription.findOne({book:key,user:publisherId});
+  if(isSubscribed){
+  const ebook = await eBook.findById(key);
+  if(ebook){
+ 
+    const fileBase64 = Buffer.from(ebook.bookFile.data).toString('base64');
+     const fileSrc = `data:${ebook.bookFile.contentType};base64,${fileBase64}`;
+    //const pdfBuffer =ebook.bookFile.data;
+    //const pageNumbers = [1, 2, 3]
+    
+      // const pages = await extractPagesFromPdfBuffer(pdfBuffer, pageNumbers);
+      const eBookObj = {
+          pages: fileSrc,  
+      };
+      res.json(eBookObj);
+      }
+      else {
+        res.status(404).json({ error: 'Ebook not found' });
+    }
+  }
+  else{
+    console.log("not subscribed")
+  }
+  
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to extract pages from PDF' });
+}
+
+  
+};
 export const eBookSub= async(req, res) => {
   const key = req.query.bookId; 
   console.log("keyasdsa",key);

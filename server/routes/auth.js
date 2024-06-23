@@ -4,7 +4,7 @@ import { validateOTP } from '../controllers/OTPController.js';
 // import User from '../models/User';
 import multer from 'multer';
 import { addcart, eBookCollection, eBookPublish, eBookUpdate, removeCart } from '../controllers/eBookPublish.js';
-import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, getAccountInfo, getBookInfo, getBookRank, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed, lEarnings, setadminbook, withdraw} from '../controllers/eBookUser.js';
+import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, ebookFile, getAccountInfo, getBookInfo, getBookRank, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed, lEarnings, setadminbook, withdraw} from '../controllers/eBookUser.js';
 import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
 import { getSellerStatus, order, setAccountInfo, subscribe, verifyPayment } from '../controllers/paymentController.js';
 import { orderDetails } from '../controllers/orderController.js';
@@ -26,6 +26,8 @@ router.get('/api/orders', authenticateToken,orderDetails);
 router.post('/profileupdate',authenticateToken,upload.fields([{ name: 'profile_image', maxCount: 1 }]),profileUpdate);
 router.get('/api/home',eBookPreImage);
 router.get('/ebook',eBookDisplay);
+router.get('/getfile',authenticateToken,ebookFile);
+
 router.get('/ebooksub',authenticateToken, eBookSub);
 router.get('/collection',authenticateToken,eBookCollection);
 router.post('/addcart',authenticateToken,addcart);
