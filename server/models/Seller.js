@@ -31,5 +31,10 @@ const sellerSchema = new Schema({
     data: Buffer,
     contentType: String
   },
+  status: {
+    type: String,
+    enum: ['verified', 'verifying', 'blocked'],
+    default: 'verifying'
+  }
 });
 export const Seller = mongoose.model('Seller', sellerSchema);

@@ -190,3 +190,15 @@ export const setAccountInfo = async (req, res) => {
     }
   
   };
+  export const getSellerStatus=async(req,res)=>{
+    const publisherId = req.user.userId;
+      try {
+        const status=await Seller.findById(publisherId).select('status');
+        console.log("statsus",status)
+      res.status(200).json({status:status.status});
+
+      } catch (error) {
+      res.status(500).json({ message: 'Error processing request', error });
+        console.log(error);
+      }
+  };

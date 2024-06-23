@@ -43,9 +43,9 @@ const LibraryCard = ({ book }) => {
               <Expire end_date={date} />
             </div>
 
-            {/* <Link to= `/read/${book.book}` className="details btn btn-primary" >
-              Read
-            </Link> */}
+            <Link to={`/read/${book.book}`} className="details btn btn-primary">
+        Read
+      </Link>
           </div>
         </>
       )}

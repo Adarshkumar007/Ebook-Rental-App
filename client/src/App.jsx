@@ -19,13 +19,11 @@ const App = () => {
   const categoryTypes = useMemo(() => [
     "Fiction", "Non-Fiction", "Mystery", "Thriller", "Science-Fiction", "Fantasy", "Romance", "Horror", "Historical-Fiction", "Literary-Fiction", "Young-Adult", "Children", "Biography", "Autobiography", "Memoir", "Self-Help", "Business", "Finance", "Health", "Cooking", "Travel", "History", "Science", "Mathematics", "Technology", "Engineering", "Art", "Music", "Photography", "Sports", "Gardening", "Crafts", "Religion", "Philosophy", "Psychology", "Sociology", "Political", "Environmental", "Education", "Language", "Reference", "Fiction-Classics", "Poetry", "Short-Stories", "Drama", "Essays", "Anthology", "Comics", "Manga", "Satire", "Tragedy", "Fantasy-Epic", "Fantasy-Urban", "Fantasy-Historical", "Fantasy-Dark", "Fantasy-Light", "Fantasy-Mythical"
   ], []);
-  
+  var flag=0;
 
   useEffect(() => {
-    let isMounted = true;
-
+    
     const fetchCategories = async (index) => {
-      if (isMounted && index < categoryTypes.length) {
         const category = categoryTypes[index];
         try {
           const categoryResponse = await axios.get(url + `/api/home/${category}`);
@@ -36,15 +34,15 @@ const App = () => {
           console.error('Error fetching categories:', error);
         }
         fetchCategories(index + 1); 
-      }
+      
     };
+    if(flag===0){
+      fetchCategories(0); 
+      flag++;
+    }
 
-    fetchCategories(0); 
-
-    return () => {
-      isMounted = false; 
-    };
-  }, [categoryTypes]);
+    
+  }, []);
 
   return (
     <Container>

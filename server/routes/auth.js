@@ -6,7 +6,7 @@ import multer from 'multer';
 import { addcart, eBookCollection, eBookPublish, eBookUpdate, removeCart } from '../controllers/eBookPublish.js';
 import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, getAccountInfo, getBookInfo, getBookRank, getBookimage, getBooks, getCategories, getSubscribedBooksID, isSubscribed, lEarnings, setadminbook, withdraw} from '../controllers/eBookUser.js';
 import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
-import { order, setAccountInfo, subscribe, verifyPayment } from '../controllers/paymentController.js';
+import { getSellerStatus, order, setAccountInfo, subscribe, verifyPayment } from '../controllers/paymentController.js';
 import { orderDetails } from '../controllers/orderController.js';
 import { adminlogin, cEarningsadmin, getBookRankAdmin, getSellerInfo, gettransferinfo, gettransferrequests, handleTransfer, lEarningsadmin } from '../controllers/admin.js';
 const router = express.Router();
@@ -68,5 +68,6 @@ router.get('/gettransferrequests',gettransferrequests);
 router.get('/get_sellerinfo',getSellerInfo);
 router.post('/api/transfer',handleTransfer);
 router.get('/getaccountinfo',authenticateToken,getAccountInfo);
-router.post('/setaccountinfo',authenticateToken,setAccountInfo)
+router.post('/setaccountinfo',authenticateToken,setAccountInfo);
+router.get('/getsellerstatus',authenticateToken,getSellerStatus);
 export default router;
