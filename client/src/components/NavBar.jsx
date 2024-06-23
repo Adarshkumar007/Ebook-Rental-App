@@ -454,7 +454,10 @@ const NavbarComponent = () => {
         <ReviewSubmitModel closeModel={handleCloseModal} userType={userType} />
       )}
       {activeModal === "subscribed" && (
-        <SubscribedModel closeModel={handleCloseModal} userType={userType} />
+        <SubscribedModel closeModel={handleCloseModal} userType={userType} msg="You Successfully Subscribed To The Book"/>
+      )}
+      {activeModal === "SignUpSuccess" && (
+        <SubscribedModel closeModel={handleCloseModal} userType={userType} msg="Account Created Successfully"/>
       )}
       {activeModal === "subscriberequired" && (
         <SubscriptionRequired

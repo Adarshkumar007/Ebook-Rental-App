@@ -3,4 +3,16 @@
     --bs-modal-padding: 2px;
     --bs-modal-margin: 0rem;
   }
-  
+  .bookPreview{
+    margin: 5rem auto !important;
+  }
+  .react-pdf__Page{
+    display: flex !important;
+    justify-content: center !important;
+
+  }
+  .react-pdf__Page__canvas{
+    width: 90% !important;
+    border: 2px solid black;
+    margin-top: 10px;
+  }

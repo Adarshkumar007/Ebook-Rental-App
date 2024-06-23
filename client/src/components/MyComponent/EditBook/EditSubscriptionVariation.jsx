@@ -1,20 +1,21 @@
 import AddVariationButton from "../SubscriptionVariationContainer/AddVariationButton";
-import SubscriptionPlanForm from "../SubscriptionVariationContainer/SubscriptionPlanForm";
+import EditSubscriptionPlanForm from "../SubscriptionVariationContainer/EditSubscriptionPlanForm";
 import { useEffect, useState } from "react";
 
 const EditSubscriptionVariation = ({ plan = [], handlePlan }) => {
-  const [planForms, setPlanForms] = useState([...Array(plan.length).keys()]);
   const [plans, setPlans] = useState(plan);
 
   const handleAddVariation = () => {
-    setPlanForms((prevForms) => [...prevForms, prevForms.length]);
-    setPlans((prevPlans) => [...prevPlans, {}]); // Add an empty object for the new plan
+    setPlans((prevPlans) => [...prevPlans, { month: "", price: "" }]);
   };
 
   const updatePlan = (index, updatedPlan) => {
-    const updatedPlans = [...plans];
-    updatedPlans[index] = updatedPlan;
+    const updatedPlans = plans.map((p, i) => (i === index ? updatedPlan : p));
     setPlans(updatedPlans);
+  };
+
+  const handleDeletePlan = (indexToDelete) => {
+    setPlans((prevPlans) => prevPlans.filter((_, index) => index !== indexToDelete));
   };
 
   useEffect(() => {
@@ -23,8 +24,14 @@ const EditSubscriptionVariation = ({ plan = [], handlePlan }) => {
 
   return (
     <div className="SubscriptionVariation">
-      {planForms.map((index) => (
-        <SubscriptionPlanForm key={index} plan={plans[index]} index={index} updatePlan={updatePlan} />
+      {plans.map((plan, index) => (
+        <EditSubscriptionPlanForm
+          key={index}
+          plan={plan}
+          index={index}
+          updatePlan={updatePlan}
+          onDelete={handleDeletePlan}
+        />
       ))}
       <AddVariationButton addVariation={handleAddVariation} />
     </div>

@@ -75,10 +75,14 @@ function UserProfile({ userType }) {
   const handleSetAddress = (value) =>
     setProfile({ ...profile, address: value });
 
+  // Validation functions
+  const validateName = (name) => /^[A-Za-z\s]+$/.test(name.trim());
+  const validatePin = (pin) => /^[0-9]{6}$/.test(pin);
+  const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
+
   const handleProfileClick = async () => {
     if (
       !profile.username ||
-      !profile.email ||
       !profile.address ||
       !profile.pin ||
       !profile.phone
@@ -88,15 +92,19 @@ function UserProfile({ userType }) {
       return;
     }
 
-    const pinRegex = /^[0-9]{6}$/;
-    if (!pinRegex.test(profile.pin)) {
+    if (!validateName(profile.username)) {
+      setError("Username should contain only alphabets and spaces.");
+      setSuccess("");
+      return;
+    }
+
+    if (!validatePin(profile.pin)) {
       setError("Invalid PIN code.");
       setSuccess("");
       return;
     }
 
-    const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(profile.phone)) {
+    if (!validatePhone(profile.phone)) {
       setError("Invalid phone number.");
       setSuccess("");
       return;
@@ -145,14 +153,13 @@ function UserProfile({ userType }) {
   return (
     <div>
       {error && (
-     
         <div
           className="error"
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginBottom:"5px"
+            marginBottom: "5px",
           }}
         >
           <AlertBadge
@@ -168,7 +175,7 @@ function UserProfile({ userType }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginBottom:"5px"
+            marginBottom: "5px",
           }}
         >
           <AlertBadge
