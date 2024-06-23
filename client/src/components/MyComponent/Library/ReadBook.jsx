@@ -5,36 +5,45 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../../../url";
 import PdfViewer from "../PdfViewer";
+import Loading from "../Loading";
 const ReadBook = () => {
   const { key } = useParams();
-console.log("key",key);
-const [file,setFile]=useState("");
-const [title,setTitle]=useState("");
+  console.log("key", key);
+  const [file, setFile] = useState("");
+  const [title, setTitle] = useState("");
+  const [load, setLoad] = useState(false);
 
-useEffect(()=>{
-    const fetchData=async ()=>{
+  useEffect(() => {
+    setLoad(true);
+    const fetchData = async () => {
       const response = await axios.get(url + "/getfile", {
         params: {
-          key: key
+          key: key,
         },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
-      
+
       setFile(response.data.pages);
       setTitle(response.data.title);
+      setLoad(false);
 
-      console.log("pages",response.data);
-    }
+      console.log("pages", response.data);
+    };
     fetchData();
-},[])
+  }, []);
   return (
     <Container>
       <div className="ReadBook">
         <div className="BookTitle">{title}</div>
-        {file!==""&&<PdfViewer pdfUrl={file} />}
+        {load ? (
+        <Loading />
+      ) : (
+        <div>{file !== "" && <PdfViewer pdfUrl={file} />}</div>
+      )}
       </div>
+      
     </Container>
   );
 };

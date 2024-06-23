@@ -122,9 +122,14 @@ export const logIn = async (req, res) => {
     const otp = Math.floor(Math.random() * 10000);
      sendEmail(
       req.body.email,
-      'Reset Password OTP',
-      `Your OTP is: ${otp} `,
-      `<p>Your OTP is: <b> ${otp}</b></p>`,
+      'Verification Mail',
+`Your One-Time Password (OTP) for RentReader is: ${otp}`,
+`<p>Dear User,</p>
+ <p>Thank you for using RentReader. To complete your verification, please use the following One-Time Password (OTP):</p>
+ <h2>${otp}</h2>
+ <p>This OTP is valid for the next 5 minutes. Do not share this OTP with anyone for security reasons.</p>
+ <p>If you did not request this OTP, please ignore this email.</p>
+ <p>Best regards,<br>The RentReader Team</p>`,
       otp,
       (error, info) => {
         console.log("ddf",error);
