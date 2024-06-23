@@ -19,10 +19,10 @@ const LoginModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <AdminLoginForm/>
+        <AdminLoginForm onChange={props.onChange}/>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onSave}>Save</Button>
+        <Button onClick={props.onSave}>Login</Button>
       </Modal.Footer>
     </Modal>
   );

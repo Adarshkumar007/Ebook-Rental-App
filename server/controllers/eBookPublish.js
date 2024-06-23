@@ -132,14 +132,19 @@ export const addcart = async (req, res) => {
 
   try {
     const existingCartItem = await Cart.findOne({ user_id: userId });
-
-    if (!existingCartItem.bookIds.includes(bookId)) {
+    if(existingCartItem){
+      if (!existingCartItem.bookIds.includes(bookId)) {
         existingCartItem.bookIds.push(bookId);
         await existingCartItem.save();
     } else {
         const newCartItem = new Cart({ user_id: userId, bookIds: [bookId] }); // Initialize bookIds as an array
         await newCartItem.save();
     }
+    }else{
+      const newCartItem = new Cart({ user_id: userId, bookIds: [bookId] }); // Initialize bookIds as an array
+      await newCartItem.save();
+  }
+    
 
     res.status(200).json({ message: 'Book added to cart' });
 } catch (error) {

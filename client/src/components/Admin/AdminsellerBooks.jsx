@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import book1 from "../images/image1.jpg";
 import book2 from "../images/image2.jpg";
 import book3 from "../images/image3.jpg";
@@ -10,6 +10,8 @@ import book8 from "../images/image8.jpg";
 import book9 from "../images/image9.jpg";
 import book10 from "../images/image10.jpg";
 import SingleSellerBook from "./SingleSellerBook";
+import { url } from "../../url";
+import axios from "axios";
 
 const books = [
   { id: 1, image: book1 },
@@ -24,11 +26,29 @@ const books = [
   { id: 10, image: book10 },
 ];
 
-const AdminsellerBooks = () => {
+const AdminsellerBooks = ({sellerId}) => {
+  const [bookinfo,setbookinfo] =useState([]);
+  // /admin/bookinfo
+  useEffect(()=>{
+    const fetchbooks = async () => {
+      try {
+        const response = await axios.get(`${url}/admin/bookinfo`, {
+          params: {
+            sellerId: sellerId 
+          }
+        });      setbookinfo(response.data);
+        console.log("response",response);
+      } catch (error) {
+      } finally {
+      }
+    }
+    fetchbooks();
+  
+  },[]);
   return (
     <div className="seller-books">
-      {books.map((book) => (
-        <SingleSellerBook key={book.id} book={book} />
+      {bookinfo.map((book) => (
+        <SingleSellerBook key={book._id} book={book} />
       ))}
     </div>
   );

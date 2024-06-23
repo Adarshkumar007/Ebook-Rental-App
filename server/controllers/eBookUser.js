@@ -1,9 +1,19 @@
 import { eBook } from "../models/ebook.js";
 import pkg from 'pdfjs-dist/build/pdf.js';
 import { Subscription } from "../models/subscription.js";
-const { getDocument, GlobalWorkerOptions } = pkg;
 import mongoose from 'mongoose';
+import { Transfer } from "../models/request.js";
+import  { AccountDetailsModel } from "../models/acoount.js";
+import { Seller } from "../models/Seller.js";
+import Razorpay from 'razorpay';  
+import axios from 'axios';
 
+import dotenv from 'dotenv';
+dotenv.config();
+const razorpay = new Razorpay({
+    key_id: process.env.KEY,
+    key_secret: process.env.SECRET
+});
 export const eBookPreImage=async (req, res) => {
     try {
       const ebook = await eBook.find({}).select('_id bookImage');
@@ -130,7 +140,24 @@ export const getBookInfo = async(req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     });
 }
+export const setadminbook = async(req, res) => {
+  const publisherId = req.query.sellerId;
 
+  try {
+    const books = await eBook.find({ publisherId: publisherId }).select('_id title bookImage');
+
+    const bookDetails = books.map(book => {
+      const imageBase64 = Buffer.from(book.bookImage.data).toString('base64');
+      const imageSrc = `data:${book.bookImage.contentType};base64,${imageBase64}`;
+      return { _id: book._id, imageSrc: imageSrc, title: book.title };
+    });
+
+    res.status(200).json(bookDetails);
+  } catch (error) {
+    console.error('Error fetching book information:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
 export const getSubscribedBooksID = async(req,res) =>{
   const userId = req.user.userId;
 console.log("sdfsd",userId);
@@ -315,6 +342,64 @@ export const lEarnings = async(req,res)=>{
     console.error('Error in chart by user:', error);
   }
 }
+
+export const withdraw =async(req,res)=>{
+  const publisherId = req.user.userId;
+  console.log("reached");
+  try {
+    const result = await Subscription.aggregate([
+      // Match documents where the seller matches userId and dispatch is true
+      { $match: { seller: new mongoose.Types.ObjectId(publisherId), dispatch: "false" } },
+      // Group to calculate the total sum of amount
+      {
+          $group: {
+              _id: null,
+              totalSum: { $sum: '$amount' }
+          }
+      },
+      // Optionally, project the final output to remove _id if not needed
+      {
+          $project: {
+              _id: 0,
+              totalSum: 1
+          }
+      }
+  ]);
+  await Subscription.updateMany(
+    { seller: new mongoose.Types.ObjectId(publisherId), dispatch: "false" },
+    { $set: { dispatch: "true" } }
+  );
+  const totalSum = result.length > 0 ? result[0].totalSum : 0; // Handle case when result is empty
+  const newTransfer = new Transfer({ publisherId, amount:totalSum });
+  console.log("reached",totalSum);
+
+  newTransfer.save()
+    .then(transfer => res.json(transfer))
+    .catch(err => res.status(400).json('Error: ' + err));
+  
+}
+catch(error){
+  console.error('Error in chart by user:', error);
+}
+
+}
+export const getAccountInfo=async(req,res)=>{
+  const publisherId = req.user.userId;
+  try {
+    const accountInfo = await AccountDetailsModel.find({ publisherId: publisherId }).select('name bankname accountnumber branch ifsc micr upi phone');
+    if(accountInfo){
+      res.status(200).json(accountInfo);
+
+    }
+    else{
+      res.status(200).json({});
+    }
+  } catch (error) {
+    
+  }
+}
+
+
 // GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.js';
 
 // async function extractPagesFromPdfBuffer(pdfBuffer, pageNumbers) {

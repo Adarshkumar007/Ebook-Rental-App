@@ -1,12 +1,14 @@
+import { useEffect } from "react";
 import AdminRequistCardContainer from "./AdminRequistCardContainer";
 
-const AdminWithdrawConatiner=()=>{
+const AdminWithdrawConatiner=({sellerId})=>{
+   
     return(
         <div className="AdminWithdrawConatiner">
             <div className="Admin-Rank-Title">
                 Withdraw Request
             </div>
-            <AdminRequistCardContainer/>
+            <AdminRequistCardContainer sellerId={sellerId}/>
         
         </div>
 

@@ -1,4 +1,4 @@
-const MyFormInputs = ({ editable,values, focus }) => {
+const MyFormInputs = ({ editable,values,value, focus ,onChange }) => {
   return (
     <input
       type="text"
@@ -7,7 +7,9 @@ const MyFormInputs = ({ editable,values, focus }) => {
       required
       readOnly={!editable}
       onFocus={focus}
+      value={value}
       className="custominput"
+      onChange={onChange}
     />
   );
 };

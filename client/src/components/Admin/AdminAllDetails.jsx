@@ -1,12 +1,12 @@
 import PersonalAccountDetails from "./PersonalAccountDetails";
 import Personaldetails from "./PersonalDetails";
 
-const AdminAllrDetails=()=>{
+const AdminAllrDetails=({learnings,cearnings,seller})=>{
 
     return(
         <div className="AdminAllrDetails">
-            <Personaldetails/>
-            <PersonalAccountDetails/>
+            <Personaldetails learnings={learnings}seller={seller} cearnings={cearnings}/>
+            <PersonalAccountDetails />
 
         </div>
     )

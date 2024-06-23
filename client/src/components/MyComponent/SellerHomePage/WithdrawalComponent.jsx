@@ -97,15 +97,6 @@ fetchData();
             <div>{cearnings/100}</div>
           </div>
           <div className="Earning-Subdetail earning-subdetails">
-            <div >
-              <input
-                type="text"
-                name="amount"
-                placeholder="Enter the amount"
-                required
-                className="amount"
-              />
-            </div>
             <WithdrawButton />
           </div>
         </div>

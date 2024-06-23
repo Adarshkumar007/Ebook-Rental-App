@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -7,12 +7,32 @@ import {
   MdOutlineDateRange,
 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import axios from "axios";
+import { url } from "../../url";
 
 const AdminHomeCard = ({ newseller }) => {
   const navigate = useNavigate();
+  const [seller ,setSeller] = useState([]);
+  
 
+useEffect(()=>{
+  const fetchPendingTransfers = async () => {
+    try {
+      const response = await axios.get(`${url}/get_sellerinfo`, {
+        params: {
+          sellerId: newseller.publisherId 
+        }
+      });      setSeller(response.data);
+      console.log("response",response);
+    } catch (error) {
+    } finally {
+    }
+  }
+  fetchPendingTransfers();
+
+},[]);
   const handleCardClick = () => {
-    navigate(`/admin/SellerDetails/${newseller.userId}`);
+    navigate(`/admin/SellerDetails/${newseller.publisherId}`);
   };
 
   return (
@@ -20,7 +40,7 @@ const AdminHomeCard = ({ newseller }) => {
       <div className="seller-image-container">
         <div className="seller-image-rounded">
           <img
-            src={newseller.myImage}
+            src={seller.imageSrc}
             className="seller-image seller-image-home card-img-top"
             alt="..."
           />
@@ -30,19 +50,19 @@ const AdminHomeCard = ({ newseller }) => {
         <div className="seller-card-name">{newseller.name}</div>
         <div className="seller-details">
           <MdOutlineMail />
-          <span>{newseller.email}</span>
+          <span>{seller.email}</span>
         </div>
         <div className="seller-details">
           <MdOutlineLocalPhone />
-          <span>{newseller.phone}</span>
+          <span>{seller.phone}</span>
         </div>
         <div className="seller-details">
           <MdOutlineDateRange />
-          <span>{newseller.date}</span>
+          <span>{seller.username}</span>
         </div>
         <div className="seller-details">
           <IoLocationOutline />
-          <span>{newseller.address}</span>
+          <span>{seller.address}</span>
         </div>
       </div>
     </div>

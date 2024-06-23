@@ -6,9 +6,12 @@ import {User} from '../models/User.js'
 import { Order } from '../models/orders.js';
 import { Subscription } from '../models/subscription.js';
 import dotenv from 'dotenv';
+import axios from 'axios';
+import { Seller } from '../models/Seller.js';
+import { AccountDetailsModel } from '../models/acoount.js';
 dotenv.config();
 const razorpay = new Razorpay({
-    key_id: process.env.KEY,
+    key_id: process.env.KEY,    
     key_secret: process.env.SECRET
 });
 export const order = async(req,res) =>{
@@ -117,3 +120,73 @@ export const subscribe = async (req, res) => {
     }
     
 };
+
+export const setAccountInfo = async (req, res) => {
+    const publisherId = req.user.userId;
+    const formValues = { ...req.body, publisherId };
+  
+    try {
+      // Fetch seller information
+      const seller = await Seller.findOne({ _id: publisherId }).select('email username');
+     
+
+      if (!seller) {
+        return res.status(404).json({ message: 'Seller not found' });
+      }
+      const authString = Buffer.from(`${razorpay.key_id}:${razorpay.key_secret}`).toString('base64');
+      // Log seller information (for debugging)
+      console.log("Email:", seller.email);
+      console.log("Username:", seller.username);
+      console.log("Form values:", formValues.name);
+      const contactData = {
+        name: seller.username,
+        email: seller.email,
+        contact: formValues.phone,
+        type: 'customer',
+        reference_id: '12345',
+        notes: {
+          notes_key_1: 'Some notes here',
+          notes_key_2: 'More notes here',
+        },
+      };
+      // Create Razorpay contact
+      const contactResponse = await axios.post('https://api.razorpay.com/v1/contacts', contactData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${authString}`,
+        },
+      });
+      console.log('Contact created:', contactResponse.data);
+  
+      // Step 2: Create fund account
+      const fundAccountResponse = await razorpay.fundAccount.create({
+        contact_id: contactResponse.data.id,
+        account_type: "bank_account",
+        bank_account: {
+            account_number: formValues.accountnumber,
+            ifsc: formValues.ifsc,
+            name: formValues.name,
+            // Add other bank account details as required by Razorpay API
+          },
+      });
+      console.log("Fund Account Response:", fundAccountResponse);
+  
+      // Step 3: Update or insert AccountDetailsModel
+      const updatedValues = {
+        ...formValues,
+        fundAccount: fundAccountResponse.id,
+      };
+  
+      const result = await AccountDetailsModel.findOneAndUpdate(
+        { publisherId: publisherId }, // Filter
+        updatedValues, // Update
+        { new: true, upsert: true, setDefaultsOnInsert: true } // Options
+      );
+  
+      res.status(200).json({ message: 'Information Saved Successfully', data: result });
+    } catch (error) {
+      console.error('Error creating contact or fund account:', error);
+      res.status(500).json({ message: 'Error processing request', error });
+    }
+  
+  };

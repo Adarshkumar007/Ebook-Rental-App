@@ -1,28 +1,40 @@
+import axios from "axios";
 import { useState } from "react";
+import { url } from "../../url";
 
-const AdminRequestCard = ({ amt }) => {
-  const [accepted, setAccepted] = useState(false);
-  const [rejected, setRejected] = useState(false);
+const AdminRequestCard = ({ amt,tstatus ,id}) => {
+  const [status, setStatus] = useState(tstatus);
+  const handleAccept = async () => {
+    try {
+      const response = await axios.post(url+"/api/transfer", {
+        requestId:id
+      });
+      setStatus("accepted");
+      if (response.data.success) {
+        console.log("Transfer successful", response.data.transfer);
 
-  const handleAccept = () => {
-    setAccepted(true);
-    setRejected(false);
+      } else {
+        console.error("Transfer failed", response.data.error);
+      }
+    } catch (error) {
+      console.error("Error in transfer", error);
+    }
+
   };
 
   const handleReject = () => {
-    setAccepted(false);
-    setRejected(true);
+    setStatus("rejected");
   };
 
   return (
     <div className="AdminRequestCard">
       <div className="amount-requested amount-req-msg">
         <span style={{ color: "green" }} >
-          <strong>₹ {amt} </strong>
+          <strong>₹ {amt/100} </strong>
         </span>
         is requested
       </div>
-      {!accepted && !rejected && (
+      {status==="pending" && (
         <div className="action-button">
           <button type="button" className="btn btn-success action-button-button" onClick={handleAccept}>
             Accept
@@ -32,8 +44,8 @@ const AdminRequestCard = ({ amt }) => {
           </button>
         </div>
       )}
-      {accepted && <div className="action-button"><span className="badge bg-success">Accepted</span></div>}
-      {rejected && <div className="action-button"><span className="badge bg-danger">Rejected</span></div>}
+      { status==="accepted" && <div className="action-button"><span className="badge bg-success">Accepted</span></div>}
+      { status==="rejected" && <div className="action-button"><span className="badge bg-danger">Rejected</span></div>}
     </div>
   );
 };

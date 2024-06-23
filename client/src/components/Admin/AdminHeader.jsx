@@ -9,13 +9,21 @@ import logo from "../images/logo.png";
 import LoginModal from "../MyComponent/Model/LoginModal";
 import AdminLoginAlert from "./AdminLoginAlert";
 import AdminAccountModel from "../MyComponent/Model/AdminAccountModel";
+import { useSelector } from "react-redux";
+import axios from 'axios';
+import { url } from "../../url";
 
 const AdminHeader = () => {
   const [modalShow, setModalShow] = useState(false);
   const [online, setOnline] = useState(true); // Initialize online state
   const [showAlert, setShowAlert] = useState(false); // Modal for user message
   const [showAccount, setShowAccount] = useState(false);
-
+  const [isAuthenticated,setIsauthenticated]=useState(localStorage.getItem('adminToken')?true:false);
+  console.log("auth",localStorage.getItem("admintoken"),isAuthenticated)
+  const [adminCredentials, setAdminCredentials] = useState({
+    username: '',
+    password: ''
+  });
   useEffect(() => {
     // Check if user is online on component mount
     if (!online) {
@@ -25,18 +33,37 @@ const AdminHeader = () => {
 
   const handleLogout = () => {
     setOnline(false); // Set online to false
+    localStorage.removeItem("adminToken");
+    setIsauthenticated(false);
     setModalShow(true); // Show the modal
-  };
 
+  };
+  const onchange=(credentials)=>
+  {
+
+    setAdminCredentials(credentials);
+
+  }
   const handleModalClose = () => {
     setModalShow(false); // Close the modal
   };
-
-  const handleSave = () => {
-    setOnline(true); // Set online to true when "Save" button is clicked
-    setModalShow(false); // Close the modal after saving
-    setShowAlert(true); // Show alert after saving
-    setTimeout(() => setShowAlert(false), 1000);
+  console.log("admin",adminCredentials)
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      
+      const response = await axios.post(url+'/api/admin/login', adminCredentials);
+      const { token } = response.data;
+      localStorage.setItem('adminToken', token);
+      // Store the token in localStorage or state
+      setIsauthenticated(true);
+      setOnline(true); // Set online to true when "Save" button is clicked
+      setModalShow(false); // Close the modal after saving
+      // Redirect or perform any other action
+    } catch (err) {
+      setShowAlert('Invalid username or password');
+    }
+    
   };
 
   const handleAlertClose = () => setShowAlert(false); // Close alert
@@ -105,8 +132,9 @@ const AdminHeader = () => {
       <LoginModal
         className="admin-modal" // Add a unique class
         key={modalShow ? "modal-open" : "modal-closed"}
-        show={modalShow}
+        show={!isAuthenticated}
         onHide={handleModalClose}
+        onChange={onchange}
         onSave={handleSave} // Pass onSave handler to LoginModal
       />
       <AdminLoginAlert

@@ -14,6 +14,7 @@ const sellerAuthReducer = (state = initialState, action) => {
           console.log(action.payload.token);
           localStorage.setItem('sellertoken', action.payload.token);
           localStorage.setItem('sellername', action.payload.username);
+          localStorage.setItem('sellerimageSrc', action.payload.imageSrc);
           
           return {
             ...state,

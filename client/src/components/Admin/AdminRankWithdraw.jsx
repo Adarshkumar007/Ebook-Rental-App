@@ -1,11 +1,11 @@
 import AdminRankContainer from "./AdminRankContainer";
 import AdminWithdrawConatiner from "./AdminWithdrawContainer";
 
-const AdminRankWithdraw = () => {
+const AdminRankWithdraw = ({sellerId}) => {
   return (
     <div className="Admin-Rank-Withdraw">
-      <AdminRankContainer />
-      <AdminWithdrawConatiner />
+      <AdminRankContainer sellerId={sellerId}/>
+      <AdminWithdrawConatiner sellerId={sellerId}/>
     </div>
   );
 };

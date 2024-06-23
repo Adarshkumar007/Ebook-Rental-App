@@ -8,6 +8,7 @@ import bookIDReducer from './currentBookId';
 import isNewSubscribed from './isSubscribed';
 import currentReviewReducer from './currentReview';
 import bookInfoReducer from './currentBookInfo';
+import adminauthReducer from './adminauth';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   currentBookID:bookIDReducer,
   isNewSubscribed:isNewSubscribed,
   currentReviewReducer:currentReviewReducer,
-  bookInfoReducer:bookInfoReducer
+  bookInfoReducer:bookInfoReducer,
+  adminauthReducer:adminauthReducer
 });
 
 export default rootReducer;

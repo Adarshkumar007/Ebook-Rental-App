@@ -5,7 +5,7 @@ import axios from "axios";
 import { url } from "../../../url";
 import moment from "moment";
 import LoadingSpinner from "../LoadingSpinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const LibraryCard = ({ book }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [date, setDate] = useState(null);
@@ -26,6 +26,11 @@ const LibraryCard = ({ book }) => {
     };
     getImage();
   }, []);
+  const navigate=useNavigate();
+  const handleRead=()=>{
+    console.log(" book id" ,book.book)
+      navigate(`/read/${book.book}`);
+  }
   return (
     <div className="card cart-card">
       {loading ? (
@@ -38,9 +43,9 @@ const LibraryCard = ({ book }) => {
               <Expire end_date={date} />
             </div>
 
-            <Link to="/read" className="details btn btn-primary">
+            {/* <Link to= `/read/${book.book}` className="details btn btn-primary" >
               Read
-            </Link>
+            </Link> */}
           </div>
         </>
       )}

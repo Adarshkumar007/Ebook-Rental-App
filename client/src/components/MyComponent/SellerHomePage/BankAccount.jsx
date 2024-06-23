@@ -4,30 +4,24 @@ import AccountDetails from "./AccountDetails";
 import SellerVerifyBadge from "./SellerVerifyBadge";
 import { useState } from "react";
 
-const BankAccount = ({ editable, setWarning }) => {
-  const image = img1;
-
-  // const [status, setStatus] = useState("Account Verified");
-  const [status, setStatus] = useState("Account Verifying");
-  // const [status, setStatus] = useState("Account Blocked");
-
-
+const BankAccount = ({ editable,setData,hasData, setWarning, formValues, setFormValues }) => {
   return (
     <div className="BankAccount">
-      <div className="sellerphoto-status-container">
-        <img
-          src={image}
-          alt="Your Photo"
-          className="BankProfileImage SubContainer"
-        />
-        <div className="verification-status">
-          <SellerVerifyBadge status={status}/>
-        </div>
-      </div>
-
-      {/* <AccountDetails editable={editable}/> */}
-      <AccountDetails editable={editable} setWarning={setWarning} />
+      <img
+        src={localStorage.getItem("sellerimageSrc")}
+        alt="Your Photo"
+        className="BankProfileImage SubContainer"
+      />
+      <AccountDetails
+        editable={editable}
+        setData={setData}
+        formValues={formValues}
+        setFormValues={setFormValues}
+        setWarning={setWarning}
+        hasData={hasData}
+      />
     </div>
   );
 };
+
 export default BankAccount;

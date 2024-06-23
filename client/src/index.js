@@ -60,7 +60,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <Route path="/contactus" element={<ContactUs />} />
                   <Route path="/security" element={<Security />} />
                   <Route path="/help" element={<Help />} />
-                  <Route path="/read" element={<ReadBook />} />
+                  <Route path="/read/:key" element={<ReadBook />} />
                 </Routes>
                 <FooterComponent />
               </>
