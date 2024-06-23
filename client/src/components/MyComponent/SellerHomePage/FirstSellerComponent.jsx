@@ -5,6 +5,7 @@ const FirstSellerComponent = () => {
   return (
   <div className="FirstSellerComponent ">
     <Wallet/>
+    
     <Rank/>
   </div>
   );

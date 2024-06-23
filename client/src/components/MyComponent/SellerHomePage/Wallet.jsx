@@ -8,6 +8,7 @@ const Wallet = () => {
         <span>My Account</span>
       </div>
       <BankDetails />
+      
       <WithdrawalComponent />
     </div>
   );

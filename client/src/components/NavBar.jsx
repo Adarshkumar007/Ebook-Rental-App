@@ -141,7 +141,7 @@ const NavbarComponent = () => {
             className="  collapse navbar-collapse"
             id="navbarSupportedContent"
           >
-            <form className="d-flex mb-2 search-bar" role="search">
+            <form className="d-flex mb-2 search-bar" role="search" style={{visibility:"hidden",height:"0px"}}>
               <input
                 className="form-control me-2"
                 type="search"
