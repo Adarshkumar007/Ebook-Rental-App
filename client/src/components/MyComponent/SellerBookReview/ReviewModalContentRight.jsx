@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "../../../url";
 import ReviewModalIndividualReview from "./ReviewModalIndividualReview";
+import EmptyComponent from "../EmptyComponent";
 
 const ReviewModalContentRight = ({ setCommentLoading }) => {
   const [reviews, setReviews] = useState([]);
@@ -32,12 +33,15 @@ const ReviewModalContentRight = ({ setCommentLoading }) => {
 
   return (
     <div className="all-reviews">
-      {reviews.map((review, index) => (
-        <ReviewModalIndividualReview key={index} review={review} />
-      ))}
+      {reviews.length === 0 ? (
+        <EmptyComponent message="No Reviews Yet" />
+      ) : (
+        reviews.map((review, index) => (
+          <ReviewModalIndividualReview key={index} review={review} />
+        ))
+      )}
     </div>
   );
-  
 };
 
 export default ReviewModalContentRight;
