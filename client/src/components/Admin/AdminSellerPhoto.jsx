@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 const AdminSellerPhoto = ({image,seller,sStatus}) => {
-  const [status,setStatus] = useState(sStatus==="unblock"?"block":"unblock");
+  const [status,setStatus] = useState(sStatus==="verified"?"block":"unblock");
     console.log("status",status,sStatus);
   const handleOnClick=async ()=>{
     console.log("sdfsdfsdfsdfsdff",seller);

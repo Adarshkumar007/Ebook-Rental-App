@@ -29,15 +29,7 @@ export const adminlogin = async (req, res) => {
 }
 export const gettransferinfo=async(req,res) =>{
   try {
-     const uniquePublishers = await Transfer.aggregate([
-      { $match: { status: 'pending' } },
-      { $group: {
-          _id: "$publisherId",
-          doc: { $first: "$$ROOT" }
-        }
-      },
-      { $replaceRoot: { newRoot: "$doc" } }
-    ]);
+    const uniquePublishers = await Seller.find({ status: { $in: ["block", "verified"] } }).select('_id name');
     
     res.status(200).json({uniquePublishers})
   } catch (error) {
@@ -46,7 +38,7 @@ export const gettransferinfo=async(req,res) =>{
 }
 export const getnewseller=async(req,res) =>{
   try {
-      const uniquePublishers = await Seller.find({status:"verifing"}).select('_id');
+      const uniquePublishers = await Seller.find({status:"verifying"}).select('_id');
       if(uniquePublishers){
         console.log(uniquePublishers,"ASDsdfsdfsdf");
         // const imageBase64 = Buffer.from(uniquePublishers.profile_image.data).toString('base64');
@@ -67,7 +59,7 @@ export const getnewseller=async(req,res) =>{
 export const updateStatus=async(req,res)=>{
   const { Id } = req.body;
   const result = await Seller.updateMany(
-    { _id: Id, status: "verifing" },  // Filter condition using _id field
+    { _id: Id, status: "verifying" },  // Filter condition using _id field
     { $set: { status: "verified" } }  // Update operation
   );
   console.log(result,"result");

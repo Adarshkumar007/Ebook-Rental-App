@@ -20,7 +20,7 @@ useEffect(()=>{
     try {
       const response = await axios.get(`${url}/get_sellerinfo`, {
         params: {
-          sellerId: newseller.publisherId 
+          sellerId: newseller._id 
         }
       });      setSeller(response.data);
       console.log("response",response);
@@ -32,7 +32,7 @@ useEffect(()=>{
 
 },[]);
   const handleCardClick = () => {
-    navigate(`/admin/SellerDetails/${newseller.publisherId}`);
+    navigate(`/admin/SellerDetails/${newseller._id}`);
   };
 
   return (
