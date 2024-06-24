@@ -10,13 +10,18 @@ const AdminAccountForm = ({
   setConfirmPassword,
   passwordError,
   confirmPasswordError,
+  username,
+  setusername
 }) => {
   // Handle password change without validation on change
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
   };
-
+  const handleUsernameChange = (e) => {
+    const newusername = e.target.value;
+    setusername(newusername);
+  };
   // Handle confirm password change without validation on change
   const handleConfirmPasswordChange = (e) => {
     const newConfirmPassword = e.target.value;
@@ -37,11 +42,12 @@ const AdminAccountForm = ({
         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         <Form.Control
           type="text"
+          value={username}
+          onChange={handleUsernameChange}
           placeholder="Username"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          readOnly
-        />
+              />
       </InputGroup>
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon2">

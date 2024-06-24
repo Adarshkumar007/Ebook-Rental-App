@@ -8,7 +8,7 @@ import {bookChart, cEarnings, eBookDisplay, eBookPreImage, eBookSub, ebookFile, 
 import { delete_reviews, dislikes_Update, getReviews, getReviewsCount, likes_Update, ratings, update_reviews, userInfo, user_reviews } from '../controllers/ratings.js';
 import { getSellerStatus, order, setAccountInfo, subscribe, verifyPayment } from '../controllers/paymentController.js';
 import { orderDetails } from '../controllers/orderController.js';
-import { adminlogin, cEarningsadmin, getBookRankAdmin, getSellerInfo, getnewseller, gettransferinfo, gettransferrequests, handleRejection, handleTransfer, lEarningsadmin, updateStatus, updateStatusBlock } from '../controllers/admin.js';
+import { adminlogin, adminupdate, cEarningsadmin, getBookRankAdmin, getSellerInfo, getnewseller, gettransferinfo, gettransferrequests, handleRejection, handleTransfer, lEarningsadmin, updateStatus, updateStatusBlock } from '../controllers/admin.js';
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -62,7 +62,7 @@ router.get('/admin/learnings',lEarningsadmin);
 router.post('/reviewupdate',authenticateToken,update_reviews);
 router.post('/reviewdelete',authenticateToken,delete_reviews);
 router.post('/api/ebookupdate',authenticateToken,upload.fields([{ name: 'file', maxCount: 1 },{ name: 'prefile', maxCount: 1 }, { name: 'image', maxCount: 1 }]),eBookUpdate);
-router.post('/changepassadmin',);
+router.post('/changepassadmin',adminupdate);
 router.post('/api/admin/login',adminlogin);
 router.post('/withdraw',authenticateToken,withdraw);
 router.get('/transfer_request',gettransferinfo);

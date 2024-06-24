@@ -3,7 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import AdminAccountForm from "../../Admin/AdminAccountForm";
 import AdminLoginAlert from "../../Admin/AdminLoginAlert"; // Import AdminLoginAlert for displaying alerts
-
+import axios from 'axios';
+import { url } from "../../../url";
 const AdminAccountModel = (props) => {
   const [showAlert, setShowAlert] = useState(false); // State for showing alerts
   const [alertType, setAlertType] = useState("success"); // State for alert type (success or error)
@@ -14,12 +15,14 @@ const AdminAccountModel = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [username, setusername] = useState("");
 
   // Function to handle password update
-  const handlePasswordUpdate = () => {
+  const handlePasswordUpdate = async () => {
     const formValid = validateForm(); // Validate the form before proceeding
 
     if (formValid) {
+      const response=await axios.post(url+"/changepassadmin",{username:username,password:password})
       setAlertType("success");
       setAlertMessage("Password updated successfully.");
 
@@ -92,9 +95,11 @@ const AdminAccountModel = (props) => {
       <Modal.Body>
         <AdminAccountForm
           password={password}
+          username={username}
           confirmPassword={confirmPassword}
           setPassword={setPassword}
           setConfirmPassword={setConfirmPassword}
+          setusername={setusername}
           passwordError={passwordError}
           confirmPasswordError={confirmPasswordError}
         />

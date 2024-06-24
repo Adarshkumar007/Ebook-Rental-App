@@ -27,6 +27,23 @@ export const adminlogin = async (req, res) => {
   
     res.json({ token });
 }
+export const adminupdate = async (req, res) => {
+  const { username, password } = req.body;
+  console.log("hello admin",username,password);
+  // Find admin by username
+  const admin = await Admin.updateMany(
+    {  },  // Filter condition using _id field
+    { $set: { username:username,password:password } }  // Update operation
+  );;
+  if (!admin) {
+    return res.status(401).json({ message: 'Invalid username or password' });
+  }
+  console.log("hello",admin)
+  
+  const token = jwt.sign({ id: admin.id, username: admin.username }, "SECRET_KEY", { expiresIn: '1h' });
+
+  res.json({ token });
+}
 export const gettransferinfo=async(req,res) =>{
   try {
     const uniquePublishers = await Seller.find({ status: { $in: ["block", "verified"] } }).select('_id name');
