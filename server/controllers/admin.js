@@ -17,7 +17,7 @@ export const adminlogin = async (req, res) => {
     const { username, password } = req.body;
     console.log("hello admin",username,password);
     // Find admin by username
-    const admin = await Admin.find({username:username,password:password});
+    const admin = await Admin.findOne({username:username,password:password});
     if (!admin) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }

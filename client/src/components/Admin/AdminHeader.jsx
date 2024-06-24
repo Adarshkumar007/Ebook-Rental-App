@@ -14,6 +14,7 @@ import axios from 'axios';
 import { url } from "../../url";
 
 const AdminHeader = () => {
+
   const [modalShow, setModalShow] = useState(false);
   const [online, setOnline] = useState(true); // Initialize online state
   const [showAlert, setShowAlert] = useState(false); // Modal for user message
@@ -51,10 +52,10 @@ const AdminHeader = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      
-      const response = await axios.post(url+'/api/admin/login', adminCredentials);
-      const { token } = response.data;
-      localStorage.setItem('adminToken', token);
+      if(localStorage.getItem("adminusername")===adminCredentials.username &&localStorage.getItem("adminpassword")===adminCredentials.password)
+      // const response = await axios.post(url+'/api/admin/login', adminCredentials);
+      // const { token } = response.data;
+      localStorage.setItem('adminToken', "sjhsbbsd");
       // Store the token in localStorage or state
       setIsauthenticated(true);
       setOnline(true); // Set online to true when "Save" button is clicked

@@ -22,10 +22,12 @@ const AdminAccountModel = (props) => {
     const formValid = validateForm(); // Validate the form before proceeding
 
     if (formValid) {
-      const response=await axios.post(url+"/changepassadmin",{username:username,password:password})
+      // const response=await axios.post(url+"/changepassadmin",{username:username,password:password})
       setAlertType("success");
       setAlertMessage("Password updated successfully.");
-
+  localStorage.setItem("adminpassword",password)
+  localStorage.setItem("adminusername",username);
+      
       // Clear form inputs and errors
       setPassword("");
       setConfirmPassword("");
